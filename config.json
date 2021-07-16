@@ -1,0 +1,12 @@
+{
+    "token": "Discord token",
+    "prefix": ".",
+    "owners": ["Discord ids of the owners"],
+    "database": {
+        "mongoURL": "Mongodb url"
+    },
+    "handler": {
+        "commands": "./src/core/commands/**/**/*.js",
+        "events": "./src/core/events/**/**/*.js"
+    }
+}
