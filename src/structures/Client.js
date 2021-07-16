@@ -1,4 +1,5 @@
 const { Client: Discord, Collection, Message } = require("discord.js");
+const Database = require("./Database");
 const Handler = require("./Handler");
 
 const TypeConfig = {
@@ -32,19 +33,31 @@ module.exports = class Client extends Discord {
         this.aliases = new Collection();
 
         /**
+        * Cooldown
+        * @type {Map}
+        */
+        this.cooldowns = new Collection();
+
+        /**
          * Config
          */
-        this.config = require("../../config.json"); 
+        this.config = require("../../config.json");
 
         /**
          * Handler
          */
         this.handler = new Handler(this);
+
+        /**
+         * Database
+         */
+        this.db = new Database(this.config.database.mongoURL);
+
     };
 
-    login (token) {
+    login(token) {
 
-        if (!token || typeof(token) !== "string") {
+        if (!token || typeof (token) !== "string") {
             throw new TypeError("Token is missing");
         };
 
@@ -52,6 +65,9 @@ module.exports = class Client extends Discord {
             throw err;
         });
 
+        this.db.connect(true);
+
+        this.handler.loadCommands(this.config.handler.commands);
         this.handler.loadEvents(this.config.handler.events);
     };
 };
