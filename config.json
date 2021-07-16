@@ -1,12 +1,20 @@
 {
-    "token": "put yor bot token here", 
+    "token": "put your bot token here",
     "prefix": "prefix here",
-    "owners": ["00000000000000000, 00000000000000000, 00000000000000000"],
+    "developers": ["00000000000000000, 00000000000000000, 00000000000000000"],
     "database": {
         "mongoURL": "mongoDB database URL"
     },
     "handler": {
         "commands": "./src/core/commands/**/**/*.js",
         "events": "./src/core/events/**/**/*.js"
+    },
+    "embed": {
+        "color": "embed color"
+    },
+    "links": {
+        "support": "put your bot support server link here",
+        "github": "github link if open source",
+        "website": "website link"
     }
 }
