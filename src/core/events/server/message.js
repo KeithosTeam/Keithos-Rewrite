@@ -62,7 +62,7 @@ module.exports = class msage extends Event {
                     if (Date.now() < expire) {
                         const left = (expire - Date.now()) / 1000;
 
-                        return message.channel.send({ content: `The command is currently on \`${left.toFixed(1)}\` seconds cooldown`});
+                        return message.channel.send({ content: `The command is on cooldown for \`${left.toFixed(1)}\` seconds`});
                     };
                 };
 
