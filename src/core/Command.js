@@ -8,18 +8,24 @@ module.exports = class Command {
         name: "",
         description: "",
         aliases: [],
+        example: "",
         cooldown: 0,
-        owneronly: false,
-        toggleCooldown: false
+        devOnly: false,
+        toggleCooldown: false,
+        clientPermissions: [],
+        userPermissions: []
     }) {
 
         this.client = client;
         this.name = option.name;
         this.description = option.description || "";
         this.aliases = option.aliases || [];
+        this.example = option.example || "";
         this.cooldown = option.cooldown || 5;
-        this.owneronly = option.owneronly || false;
+        this.devOnly = option.devOnly || false;
         this.toggleCooldown = option.toggleCooldown || false;
+        this.clientPermissions = option.clientPermissions || [];
+        this.userPermissions = option.userPermissions || [];
     };
 
     async run (message, args) {
