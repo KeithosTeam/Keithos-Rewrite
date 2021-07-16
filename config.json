@@ -1,9 +1,9 @@
 {
-    "token": "Discord token",
-    "prefix": ".",
-    "owners": ["Discord ids of the owners"],
+    "token": "", //put yor bot token here
+    "prefix": ".",//prefix here
+    "owners": ["Discord ids of the owners"],//Ids of the bot owners, can have multiple if seperated with ',' like this : "owners": ["00000000000000000, 00000000000000000, 00000000000000000"]
     "database": {
-        "mongoURL": "Mongodb url"
+        "mongoURL": ""//mongoDB database URL
     },
     "handler": {
         "commands": "./src/core/commands/**/**/*.js",
