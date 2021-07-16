@@ -2,7 +2,7 @@ const { Message, Collection } = require("discord.js");
 const Event = require("../../Event");
 
 
-module.exports = class msage extends Event {
+module.exports = class msg extends Event {
     constructor(client) {
         super(client, {
             name: "messageCreate"
