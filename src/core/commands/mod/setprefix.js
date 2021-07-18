@@ -22,6 +22,7 @@ module.exports = class setprefix extends Command {
 
         let prefix = args[0];
 
+        const oldPrefix = schema.prefix
         const schema = await Schema.findOne({ _id: message.guild.id });
 
         const prefixEmbed = new MessageEmbed()
@@ -41,11 +42,11 @@ module.exports = class setprefix extends Command {
         };
 
         if (schema.prefix === prefix) {
-            return message.channel.send(this.emoji.cross + ` Prefix is already set to \`${schema.prefix}\``);
+            return message.channel.send(this.emoji.cross + ` Prefix is already \`${schema.prefix}\``);
         };
 
         return schema.updateOne({ _id: message.guild.id, prefix: prefix }).then(() => {
-            message.channel.send(this.emoji.tick + ` Prefix has been changed to \`${prefix}\``);
+            message.channel.send(this.emoji.tick + ` Prefix has been changed from \`${oldPrefix}\` to \`${prefix}\``);
         });
     };
 };
