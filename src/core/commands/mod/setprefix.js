@@ -9,7 +9,7 @@ module.exports = class setprefix extends Command {
             description: "Display the current prefix or change it",
             aliases: ["spref"],
             userPermissions: ["MANAGE_GUILD"],
-            example: ["prefix [prefix]"],
+            example: ["prefix !"],
             cooldown: 10,
             toggleCooldown: true
         });
