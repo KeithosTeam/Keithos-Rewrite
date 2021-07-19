@@ -23,7 +23,8 @@ module.exports = class test extends Command {
             .setTitle(`${member.displayName}'s avatar`)
             .setColor(this.client.config.embed.color)
             .setImage(member.user.displayAvatarURL({ dynamic: true, size: 2048 }))
-            .setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }));
+            .setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
+            .setTimestamp();
 
 
         return message.channel.send({ embeds: [avatar] });

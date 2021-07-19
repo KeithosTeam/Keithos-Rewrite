@@ -7,11 +7,11 @@ module.exports = class setprefix extends Command {
         super(client, {
             name: "setprefix",
             description: "Display the current prefix or change it",
-            aliases: ["spref"],
+            aliases: ["spref", "prefix"],
             userPermissions: ["MANAGE_GUILD"],
             example: ["prefix !"],
             cooldown: 10,
-            toggleCooldown: true
+            toggleCooldown: false
         });
     };
     /**
@@ -22,31 +22,32 @@ module.exports = class setprefix extends Command {
 
         let prefix = args[0];
 
-        const oldPrefix = schema.prefix
+        
         const schema = await Schema.findOne({ _id: message.guild.id });
-
+        const oldPrefix = schema.prefix
         const prefixEmbed = new MessageEmbed()
             .setTitle("Prefix")
-            .setDescription(`The current prefix of this guild is \`${schema.prefix}\`\nTo change \`${schema.prefix}prefix <new>\``)
             .setColor(this.client.config.embed.color)
+            .setThumbnail(this.client.user.displayAvatarURL())
             .setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
+            .setTimestamp();
 
         if (!prefix) {
             return message.channel.send({
-                embeds: [prefixEmbed]
+                embeds: [prefixEmbed.setDescription(`The current prefix of this guild is \`${schema.prefix}\`\nTo change use \`${schema.prefix}prefix <new>\``)]
             });
         };
 
         if (prefix.length > 4) {
-            return message.channel.send(this.emoji.cross + " Prefix cannot be more than `4` chars");
+            return message.channel.send({ embeds: [prefixEmbed.addField('Error:', `${this.emoji.cross} Prefix cannot be more than \`4\` chars!`)] });
         };
 
         if (schema.prefix === prefix) {
-            return message.channel.send(this.emoji.cross + ` Prefix is already \`${schema.prefix}\``);
+            return message.channel.send({ embeds: [prefixEmbed.addField('Error:', `${this.emoji.cross} Prefix is already \`${schema.prefix}\``)] });
         };
 
         return schema.updateOne({ _id: message.guild.id, prefix: prefix }).then(() => {
-            message.channel.send(this.emoji.tick + ` Prefix has been changed from \`${oldPrefix}\` to \`${prefix}\``);
+            message.channel.send({ embeds: [prefixEmbed.addField('Success!', `${this.emoji.tick} Prefix has been changed from \`${oldPrefix}\` to \`${prefix}\``)] });
         });
     };
 };

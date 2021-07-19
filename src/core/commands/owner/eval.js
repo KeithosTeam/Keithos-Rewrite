@@ -20,8 +20,15 @@ module.exports = class Eval extends Command {
 
         const code = args.join(" ");
 
+        const error = new MessageEmbed()
+            .setTitle(`${this.emoji.cross} Error:`)
+            .setColor("AQUA")
+            .setDescription("Please provide code to run")
+            .setFooter(message.member.displayName, message.author.displayAvatarURL({ dynamic: true }))
+            .setTimestamp();
+
         if (!code) {
-            return message.channel.send({ content: this.emoji.cross + " Please give a code to run" });
+            return message.channel.send({ embeds: [error] });
         };
         try {
 
@@ -38,11 +45,12 @@ module.exports = class Eval extends Command {
             };
 
             let embed = new MessageEmbed()
-                .setTitle("Eval")
+                .setTitle(`${this.emoji.tick}Eval`)
                 .setColor("AQUA")
                 .addField("Input", `\`\`\`js\n${code}\`\`\``)
                 .addField("Output", `\`\`\`\n${evaled || "Evaled"}\`\`\``)
-                .setFooter(message.member.displayName, message.author.displayAvatarURL({ dynamic: true }));
+                .setFooter(message.member.displayName, message.author.displayAvatarURL({ dynamic: true }))
+                .setTimestamp();
 
 
             message.channel.send({ embeds: [embed] });
@@ -50,8 +58,10 @@ module.exports = class Eval extends Command {
         } catch (error) {
 
             const err = new MessageEmbed()
-                .setTitle("Error")
-                .setDescription(String.apply(error));
+                .setTitle(`${this.emoji.cross}Error:`)
+                .setDescription(String.apply(error))
+                .setFooter(message.member.displayName, message.author.displayAvatarURL({ dynamic: true }))
+                .setTimestamp();
 
             message.channel.send({ embeds: [err] });
         };

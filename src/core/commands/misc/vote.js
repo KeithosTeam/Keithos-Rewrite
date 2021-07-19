@@ -16,7 +16,7 @@ module.exports = class Vote extends Command {
     async run(message) {
 
         const embed = new MessageEmbed()
-            .setTitle("Vote for Keihos!")
+            .setTitle("Vote for Keithos!")
             .setColor(this.client.config.embed.color)
             .addField("Thankyou!", 'We realy apretiate for voting for us!')
             .setThumbnail(this.client.user.displayAvatarURL())
