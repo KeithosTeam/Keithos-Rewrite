@@ -1,8 +1,9 @@
-const { Message, Collection } = require("discord.js");
 const Event = require("../../Event");
+const Schema = require("../../../models/config");
+const { Message, Collection } = require("discord.js");
 
 
-module.exports = class msg extends Event {
+module.exports = class msage extends Event {
     constructor(client) {
         super(client, {
             name: "messageCreate"
@@ -25,11 +26,32 @@ module.exports = class msg extends Event {
             return;
         };
 
-        if (!message.content.startsWith(this.client.config.prefix)) {
+        const schema = await Schema.findOne({ _id: message.guild.id });
+        /**
+         * @type {string}
+         */
+        let prefix = schema.prefix;
+
+        if (message.content === `<@!${this.client.user.id}>`) {
+            return message.channel.send({ embeds: [
+                {
+                    title: this.client.user.username,
+                    description: `My prefix for this server is \`${prefix}\``,
+                    color: this.client.config.embed.color,
+                    thumbnail: { url: this.client.user.displayAvatarURL()},
+                    fields: [{
+                        name: "** **",
+                        value: "[Support](https://discord.gg/M7nDZxKk24) | [Github](https://github.com/MCorange99/keithos) | [Website](http://keithos.tk/)"
+                    }]
+                }
+            ]})
+        };
+
+        if (!message.content.startsWith(prefix)) {
             return;
         };
 
-        const args = message.content.slice(this.client.config.prefix.length).trim().split(/ +/g)
+        const args = message.content.slice(prefix.length).trim().split(/ +/g)
         const cmd = args.shift().toLowerCase();
 
         let command = this.client.commands.get(cmd);
@@ -38,9 +60,9 @@ module.exports = class msg extends Event {
 
         if (command) {
 
-            if (command.devOnly === true) {
+            if (command.ownerOnly === true) {
 
-                if (message.author.id.includes(this.client.config.owners)) {
+                if (!message.author.id.includes(this.client.config.owners)) {
                     return;
                 };
 
@@ -63,6 +85,7 @@ module.exports = class msg extends Event {
                         const left = (expire - Date.now()) / 1000;
 
                         return message.channel.send({ content: `The command is on cooldown for \`${left.toFixed(1)}\` seconds`});
+                        
                     };
                 };
 
