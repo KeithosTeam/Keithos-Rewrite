@@ -5,7 +5,8 @@ module.exports = model(
     "config",
     new Schema({
         _id: String,
-        prefix: { type: String, default: prefix}
+        prefix: { type: String, default: prefix },
+        messageLog: { type: String, default: null}
     }, {
         versionKey: false
     })
