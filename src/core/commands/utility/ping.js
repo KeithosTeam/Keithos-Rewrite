@@ -16,11 +16,12 @@ module.exports = class ping extends Command {
     async run (message, args) {
 
         const embed = new MessageEmbed()
-            .setTitle("Pong!")
+            .setTitle("Pong! 🏓")
             .setColor("GREY")
-            .addField("Message", `\`\`\`${Date.now() - message.createdTimestamp}ms\`\`\``)
-            .addField("Keithos", `\`\`\`${this.client.ws.ping}ms\`\`\``)
-            .setFooter(`${message.author.displayName}`, message.author.displayAvatarURL({ dynamic: true}))
+            .setThumbnail(this.client.user.displayAvatarURL())
+            .addField("Message Latency", `\`\`\`${Date.now() - message.createdTimestamp}ms\`\`\``)
+            .addField("Keithos Latency", `\`\`\`${this.client.ws.ping}ms\`\`\``)
+            .setFooter(`${message.member.displayName}`, message.author.displayAvatarURL({ dynamic: true}))
 
         return message.channel.send({ embeds: [embed]});
     };
