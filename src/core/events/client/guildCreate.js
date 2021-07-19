@@ -1,6 +1,6 @@
 const Event = require("../../Event");
 const Schema = require("../../../models/config");
-const { Guild } = require("discord.js");
+const { Guild, MessageEmbed } = require("discord.js");
 
 module.exports = class guildCreate extends Event {
     constructor(client) {
@@ -24,6 +24,19 @@ module.exports = class guildCreate extends Event {
             };
         });
 
-        console.log("Data is created");
+        const embed = new MessageEmbed()
+            .setTitle("Joined Guild")
+            .setColor("GREEN")
+            .setThumbnail(`${guild.iconURL({ dynamic: true })}`)
+            .addField("Name & ID", `${guild.name} (${guild.id})`)
+            .addField("Owner", `<@${guild.ownerId}>`)
+            .addField("Members", `${guild.memberCount}`)
+            .setTimestamp(Date.now());
+
+        const channel = this.client.channels.cache.get(this.client.config.log.guild);
+
+        if (channel) {
+            channel.send({ embeds: [embed] }).catch(e => { return });
+        };
     };
 };
