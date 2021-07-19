@@ -10,7 +10,7 @@ module.exports = class Command {
         aliases: [],
         example: "",
         cooldown: 0,
-        devOnly: false,
+        ownerOnly: false,
         toggleCooldown: false,
         clientPermissions: [],
         userPermissions: []
@@ -22,7 +22,8 @@ module.exports = class Command {
         this.aliases = option.aliases || [];
         this.example = option.example || "";
         this.cooldown = option.cooldown || 5;
-        this.devOnly = option.devOnly || false;
+        this.emoji = require("../utils/emoji.json");
+        this.ownerOnly = option.ownerOnly || false;
         this.toggleCooldown = option.toggleCooldown || false;
         this.clientPermissions = option.clientPermissions || [];
         this.userPermissions = option.userPermissions || [];
