@@ -5,6 +5,7 @@ module.exports = class Command {
      * @param {Client} client 
      */
     constructor(client, option = {
+        type: "",
         name: "",
         description: "",
         aliases: [],
@@ -17,6 +18,7 @@ module.exports = class Command {
     }) {
 
         this.client = client;
+        this.type = option.type || "No type";
         this.name = option.name;
         this.description = option.description || "";
         this.aliases = option.aliases || [];
