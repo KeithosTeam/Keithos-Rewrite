@@ -19,23 +19,23 @@ module.exports = class GuildDelete extends Event {
             if (!data) {
                 return;
             } else {
-                return data.delete()
+                return data.delete();
             };
         });
 
         const embed = new MessageEmbed()
             .setTitle("Left Guild")
-            .setColor("DARK_RED")
+            .setColor("RED")
             .setThumbnail(`${guild.iconURL({ dynamic: true })}`)
             .addField("Name & ID", `${guild.name} (${guild.id})`)
             .addField("Owner", `<@${guild.ownerId}>`)
             .addField("Members", `${guild.memberCount}`)
             .setTimestamp(Date.now());
 
+        const channel = this.client.channels.cache.get(this.client.config.log.guild);
 
-        //this.client.channels.cache.get(this.client.config.log.guild).send({ embeds: [embed]}).catch(e => { return });
-        //this.client.channels.cache.get("866672081294590032").send({ embeds: [embed]})
-
-
+        if (channel) {
+            channel.send({ embeds: [embed] }).catch(e => { return });
+        };
     };
 };
