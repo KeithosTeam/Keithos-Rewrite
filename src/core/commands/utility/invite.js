@@ -1,4 +1,4 @@
-const { Message, MessageActionRow, MessageButton } = require("discord.js");
+const { MessageButton, MessageActionRow, MessageEmbed } = require("discord.js");
 const Command = require("../../Command");
 
 module.exports = class invite extends Command {
@@ -18,16 +18,24 @@ module.exports = class invite extends Command {
      */
     async run(message, args) {
 
+        const embed = new MessageEmbed()
+            .setTitle("Invite Keithos To Your Server!")
+            .setColor(this.client.config.embed.color)
+            .addField("Thanks!", 'We hope you like Keithos!')
+            .setThumbnail(this.client.user.displayAvatarURL())
+            .setFooter(`${message.member.displayName}`, message.author.displayAvatarURL({ dynamic: true}))
+            .setTimestamp();
+
         const invite = new MessageButton()
             .setStyle("LINK")
             .setURL(this.client.config.links.invite)
             .setLabel("Click Here")
-            .setEmoji("❤️");
+            .setEmoji("❤️")
 
 
         const row = new MessageActionRow()
             .addComponents(invite)
 
-        return message.channel.send({ content: `Invite ${this.client.user.username} to your discord server :)`, components: [row] });
+        return message.channel.send({ embeds: [embed], components: [row] });
     };
 };

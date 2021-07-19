@@ -5,11 +5,11 @@ const Command = require("../../Command");
 module.exports = class logMessage extends Command {
     constructor(client) {
         super(client, {
-            name: "logmessage",
-            description: "Setup message log channel",
-            aliases: ["messagelog"],
+            name: "setmessagelog",
+            description: "Set the message log channel",
+            aliases: ["sml"],
             cooldown: 8,
-            example: "logmessage <#channel>",
+            example: "setmessagelog <#channel>",
             toggleCooldown: false,
             userPermissions: ["MANAGE_GUILD"]
         });

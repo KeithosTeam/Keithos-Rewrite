@@ -13,15 +13,16 @@ module.exports = class ping extends Command {
         });
     };
 
-    async run (message, args) {
+    async run (message) {
 
         const embed = new MessageEmbed()
             .setTitle("Pong! 🏓")
-            .setColor("GREY")
+            .setColor(this.client.config.embed.color)
             .setThumbnail(this.client.user.displayAvatarURL())
-            .addField("Message Latency", `\`\`\`${Date.now() - message.createdTimestamp}ms\`\`\``)
-            .addField("Keithos Latency", `\`\`\`${this.client.ws.ping}ms\`\`\``)
+            .addField("Latency", `\`\`\`ini\n[ ${message.createdTimestamp - Date.now()}ms ] \`\`\``)
+            .addField("API Latency", `\`\`\`ini\n[ ${this.client.ws.ping}ms ] \`\`\``)
             .setFooter(`${message.member.displayName}`, message.author.displayAvatarURL({ dynamic: true}))
+            .setTimestamp();
 
         return message.channel.send({ embeds: [embed]});
     };
