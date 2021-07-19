@@ -29,6 +29,7 @@ module.exports = class Client extends Discord {
         UTILITY: 'utility',
         FUN: 'fun',
         COLOR: 'color',
+        INFO: 'info',
         POINTS: 'points',
         MISC: 'misc',
         MOD: 'mod',
