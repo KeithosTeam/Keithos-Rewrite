@@ -62,7 +62,7 @@ module.exports = class msage extends Event {
 
             if (command.ownerOnly === true) {
 
-                if (!message.author.id.includes(this.client.config.owners)) {
+                if (!this.client.config.owners.includes(message.author.id)) {
                     return;
                 };
 
