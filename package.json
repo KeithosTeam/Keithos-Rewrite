@@ -1,17 +1,14 @@
 {
   "name": "keithos",
   "version": "4.0.0",
-  "description": "A multipurpose discord bot.",
+  "description": "A fully customizable bot built with discord.js",
   "main": "index.js",
   "author": "Keithos Team",
   "license": "Apache-2.0",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./src/index.js"
-  },
   "dependencies": {
+    "@ayanaware/logger": "^2.2.1",
     "discord.js": "^13.0.0-dev.f200f14.1626436969",
     "glob": "^7.1.7",
-    "mongoose": "^5.13.3"
+    "mongoose": "^5.13.2"
   }
 }
