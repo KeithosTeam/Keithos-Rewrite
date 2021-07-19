@@ -20,6 +20,22 @@ module.exports = class Client extends Discord {
             }
         });
 
+
+        /**
+     * All possible command types
+     * @type {Object}
+     */
+    this.types = {
+        UTILITY: 'utility',
+        FUN: 'fun',
+        COLOR: 'color',
+        POINTS: 'points',
+        MISC: 'misc',
+        MOD: 'mod',
+        ADMIN: 'admin',
+        OWNER: 'owner'
+      };
+
         /**
          * Commands
          * @type {Map}

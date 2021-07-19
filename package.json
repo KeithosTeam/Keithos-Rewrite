@@ -10,7 +10,7 @@
     "start": "node ./src/index.js"
   },
   "dependencies": {
-    "discord.js": "^13.0.0-dev.f200f14.1626436969",
+    "discord.js": "^13.0.0-dev.63ce065.1626653031",
     "glob": "^7.1.7",
     "mongoose": "^5.13.3"
   }
