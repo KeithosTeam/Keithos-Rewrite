@@ -1,9 +1,9 @@
 {
-    "token": "",
+    "token": "ODU3OTUyMjgwNzg3MTU3MDQz.YNXEUw.cXuyi0hFrn6qMU_w0p5ziAFFfu0",
     "prefix": ".",
     "owners": ["290545409481244672","538627730921619486"],
     "database": {
-        "mongoURL": ""
+        "mongoURL": "mongodb+srv://MCorange:k3uYqtaDKQ93X5OI@keithoscluster.0mpbz.mongodb.net/Keithos?retryWrites=true&w=majority"
     },
     "handler": {
         "commands": "./src/core/commands/**/**/*.js",
@@ -20,5 +20,11 @@
         "github": "https://github.com/MCorange99/keithos",
         "website": "http://keithos.tk/",
         "invite": "https://discord.com/api/oauth2/authorize?client_id=837371090783174696&permissions=4294967287&redirect_uri=https%3A%2F%2Fdiscord.events.stdlib.com%2Fdiscord%2Fauth%2F&scope=bot%20applications.commands"
+    },
+    "channels": {
+      "bugReportChannelId": "bug_report_channel_ID_here",
+      "feedbackChannelId": "feedback_channel_ID_here",
+      "serverLogId": "866672081294590032"
+
     }
 }

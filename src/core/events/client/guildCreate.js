@@ -33,7 +33,7 @@ module.exports = class guildCreate extends Event {
             .addField("Members", `${guild.memberCount}`)
             .setTimestamp(Date.now());
 
-        const channel = this.client.channels.cache.get(this.client.config.log.guild);
+        const channel = this.client.channels.cache.get(this.client.config.channels.serverLogId);
 
         if (channel) {
             channel.send({ embeds: [embed] }).catch(e => { return });
