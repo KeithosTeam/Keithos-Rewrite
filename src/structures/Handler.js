@@ -14,6 +14,7 @@ module.exports = class Handler {
         this.glob = require("glob");
 
     };
+    
 
     /**
      * The path to the events folder
@@ -22,6 +23,8 @@ module.exports = class Handler {
     loadCommands (loc) {
 
         const commands = this.glob.sync(loc);
+        
+
 
         for (const cmd of commands) {
 

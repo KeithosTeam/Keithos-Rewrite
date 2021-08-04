@@ -10,9 +10,14 @@
     "common-tags": "^1.8.0",
     "discord.js": "^13.0.0-dev.63ce065.1626653031",
     "glob": "^7.1.7",
+    "moment": "^2.29.1",
+    "moment-duration-format": "^2.3.2",
     "mongoose": "^5.13.2",
     "node-schedule": "^2.0.0",
     "path": "^0.12.7",
     "winston": "^3.3.3"
+  },
+  "scripts": {
+    "start": "node index.js"
   }
 }
