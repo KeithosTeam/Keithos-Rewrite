@@ -1,16 +1,19 @@
 const Client = require("./src/structures/Client");
 const client = new Client();
 
-process.on("uncaughtException", (error) => {
-    require("./src/errors/uncaughtException")(error);
+
+client.logger.info('Loading index,js');
+
+process.on("uncaughtException", (err) => {
+    client.logger.error(err)
 });
 
-process.on("unhandledRejection", (error) => {
-    require("./src/errors/unhandledRejection")(error);
+process.on("unhandledRejection", (err) => {
+    client.logger.error(err)
 });
 
-process.on("uncaughtExceptionMonitor", (error) => {
-    require("./src/errors/uncaughtExceptionMonitor")(error);
-});
+// process.on("uncaughtExceptionMonitor", (err) => {
+//     client.logger.error(err)
+// });
 
 client.login(client.config.token);

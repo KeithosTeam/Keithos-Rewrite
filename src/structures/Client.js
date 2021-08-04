@@ -2,6 +2,7 @@ const { Client: Discord, Collection, Message } = require("discord.js");
 const Database = require("./Database");
 const Handler = require("./Handler");
 
+
 const TypeConfig = {
     token: "",
     prefix: "",
@@ -20,6 +21,10 @@ module.exports = class Client extends Discord {
             }
         });
 
+        /**
+     * Create logger
+     */
+     this.logger = require('../utils/logger.js');
 
         /**
      * All possible command types
@@ -42,6 +47,7 @@ module.exports = class Client extends Discord {
          * @type {Map}
          */
         this.commands = new Collection();
+
 
         /**
          * Aliases
@@ -70,16 +76,20 @@ module.exports = class Client extends Discord {
          */
         this.db = new Database(this.config.database.mongoURL);
 
+        this.logger.info('Loading Client.js');
+
     };
+
+        
 
     login(token) {
 
         if (!token || typeof (token) !== "string") {
-            throw new TypeError("Token is missing");
+            this.logger.error("Token is missing");
         };
 
         super.login(token).catch(err => {
-            throw err;
+            this.logger.error("err");
         });
 
         this.db.connect(true);

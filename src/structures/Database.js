@@ -1,3 +1,4 @@
+const logger = require('../utils/logger.js')
 module.exports = class Database {
     /**
      * The mongodb url
@@ -14,7 +15,6 @@ module.exports = class Database {
      * @param {boolean} log 
      */
     connect(log) {
-
         this.mongoose.connect(this.url, {
             useCreateIndex: true,
             useFindAndModify: false,
@@ -26,7 +26,9 @@ module.exports = class Database {
         this.mongoose.connection.on("connected", () => {
 
             if (log) {
-                console.log("Database connected");
+                this.connect()
+                // client.logger.info("Database connected");
+                console.log("Database connected")
             };
         });
     };
