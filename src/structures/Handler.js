@@ -1,6 +1,7 @@
 const Event = require("../core/Event");
 const Command = require("../core/Command");
 const Client = require("./Client");
+const AsciiTable = require('ascii-table');
 
 module.exports = class Handler {
     /**
@@ -25,10 +26,12 @@ module.exports = class Handler {
         const commands = this.glob.sync(loc);
         
 
-
+        this.client.logger.info('Loading commands...');
         for (const cmd of commands) {
 
             const command = new (require(this.path.resolve(cmd)))(this.client);
+            let table = new AsciiTable('Commands');
+            table.setHeading(`command.name`, 'Aliases', 'Type', 'Status');
 
             if (!command instanceof(Command) || !command.name) {
                 return;
@@ -41,6 +44,7 @@ module.exports = class Handler {
                 command.aliases.forEach(alias => this.client.aliases.set(alias, command));
 
             };
+            this.client.logger.info(`Loading command: ${command.name}`);
         };
     };
 
@@ -51,7 +55,8 @@ module.exports = class Handler {
     loadEvents (loc) {
 
         const events = this.glob.sync(loc);
-
+        this.client.logger.info('===================================')
+        this.client.logger.info(`${events.length} event(s) found...`);
         for (const evt of events) {
 
             const event = new (require(this.path.resolve(evt)))(this.client);
@@ -59,6 +64,9 @@ module.exports = class Handler {
             if (!event instanceof(Event)) {
                 return;
             };
+            
+            this.client.logger.info(`Loading event: ${event.name}`);
+            if (events.length == 0) return this.logger.warn('No events found');
             
             if (event.once) {
                 this.client.once(event.name, (...args) => event.run(...args));

@@ -1,5 +1,8 @@
-const logger = require('../utils/logger.js')
+const Client = require('./Client')
+const Event = require("../core/Event");
+const Command = require("../core/Command");
 module.exports = class Database {
+
     /**
      * The mongodb url
      * @param {string} url 
@@ -10,6 +13,7 @@ module.exports = class Database {
         this.url = url || null;
 
     };
+
     /**
      * If you wish to log or not
      * @param {boolean} log 
@@ -27,8 +31,9 @@ module.exports = class Database {
 
             if (log) {
                 this.connect()
-                // client.logger.info("Database connected");
-                console.log("Database connected")
+                // this.url.logger.info("Database connected");
+                // this.connected()
+                // console.log("Database connected")
             };
         });
     };

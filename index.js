@@ -2,7 +2,7 @@ const Client = require("./src/structures/Client");
 const client = new Client();
 
 
-client.logger.info('Loading index,js');
+client.logger.info('Loading index.js');
 
 process.on("uncaughtException", (err) => {
     client.logger.error(err)

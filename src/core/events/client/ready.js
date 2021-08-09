@@ -10,8 +10,7 @@ module.exports = class ready extends Event {
 
     async run() {
 
-        console.log(this.client.user.tag + " is online");
-        // this.logger.info(this.client.user.tag + " is online");
+        this.client.logger.info(this.client.user.tag + " is online");
 
         const activityArray = {
             1: this.client.users.cache.size + " Users",
