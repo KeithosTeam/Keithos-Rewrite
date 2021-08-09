@@ -7,6 +7,7 @@ module.exports = class logMessage extends Command {
         super(client, {
             name: "setmessagelog",
             description: "Set the message log channel",
+            type: "admin",
             aliases: ["sml"],
             cooldown: 8,
             example: "setmessagelog <#channel>",

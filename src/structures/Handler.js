@@ -27,11 +27,13 @@ module.exports = class Handler {
         
 
         this.client.logger.info('Loading commands...');
+        let table = new AsciiTable('Commands');
         for (const cmd of commands) {
 
             const command = new (require(this.path.resolve(cmd)))(this.client);
-            let table = new AsciiTable('Commands');
-            table.setHeading(`command.name`, 'Aliases', 'Type', 'Status');
+            table.setHeading('Name', 'Aliases', 'Type', 'Status');
+
+            if (command.name && !command.disabled) {
 
             if (!command instanceof(Command) || !command.name) {
                 return;
@@ -44,8 +46,17 @@ module.exports = class Handler {
                 command.aliases.forEach(alias => this.client.aliases.set(alias, command));
 
             };
-            this.client.logger.info(`Loading command: ${command.name}`);
+
+            table.addRow(command.name, command.aliases, command.type, 'pass');
+            // this.client.logger.info(`Loading command: ${command.name}`);
+            // this.client.logger.info(`Alias: ${command.aliases}`);
+            } else {
+            this.client.logger.warn(`${command.name} failed to load`);
+            table.addRow(command.name, '', '', 'fail');
+            return;
+            }
         };
+        this.client.logger.info(`\n${table.toString()}`);
     };
 
     /**
@@ -55,7 +66,6 @@ module.exports = class Handler {
     loadEvents (loc) {
 
         const events = this.glob.sync(loc);
-        this.client.logger.info('===================================')
         this.client.logger.info(`${events.length} event(s) found...`);
         for (const evt of events) {
 

@@ -94,8 +94,8 @@ module.exports = class Client extends Discord {
 
         this.db.connect(true);
 
-        this.handler.loadCommands(this.config.handler.commands);
         this.handler.loadEvents(this.config.handler.events);
+        this.handler.loadCommands(this.config.handler.commands);
         this.logger.info("Database connected");
     };
 };
