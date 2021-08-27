@@ -1,6 +1,6 @@
 node_modules/
 config.json
 dev/
-logs/
-logs/*
+logs/full.log
+logs/error.log
 

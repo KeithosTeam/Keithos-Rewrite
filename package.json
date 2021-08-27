@@ -14,6 +14,7 @@
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
     "mongoose": "^5.13.2",
+    "node": "^16.6.1",
     "node-schedule": "^2.0.0",
     "path": "^0.12.7",
     "winston": "^3.3.3",
@@ -25,7 +26,6 @@
     "scfix": "npx eslint ./ --fix",
     "sctofile": "npx eslint ./ --o ./dev/Style_Check.html --f html && start ./dev/Style_Check.html",
     "sctofilel": "npx eslint ./ --o ./dev/Style_Check.html --f html && xdg-open ./dev/Style_Check.html"
-
   },
   "devDependencies": {
     "eslint": "^7.32.0",
