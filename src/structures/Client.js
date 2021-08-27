@@ -89,7 +89,7 @@ module.exports = class Client extends Discord {
         };
 
         super.login(token).catch(err => {
-            this.logger.error("err");
+            this.logger.error(err);
         });
 
         this.db.connect(true);
