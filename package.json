@@ -20,6 +20,16 @@
     "winston-console-formatter": "^1.0.0-beta.3"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "sc": "npx eslint ./",
+    "scfix": "npx eslint ./ --fix",
+    "sctofile": "npx eslint ./ --o ./dev/Style_Check.html --f html && start ./dev/Style_Check.html",
+    "sctofilel": "npx eslint ./ --o ./dev/Style_Check.html --f html && xdg-open ./dev/Style_Check.html"
+
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.24.2"
   }
 }

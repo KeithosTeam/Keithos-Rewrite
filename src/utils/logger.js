@@ -34,14 +34,14 @@ const logger = createLogger({
     }),
     // Logging info and up to file
     new transports.File({ 
-      filename: './logs/full.log', 
+      filename: path.join(__basedir, 'logs/full.log'), 
       level: 'info',
       format: logFormat,
       options: { flags: 'w' } 
     }),
     // Logging only warns and errors to file
     new transports.File({ 
-      filename: './logs/error.log',
+      filename: path.join(__basedir, 'logs/error.log'),
       level: 'warn',
       format: logFormat,
       options: { flags: 'w' }

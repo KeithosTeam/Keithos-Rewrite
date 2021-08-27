@@ -1,6 +1,7 @@
 const Client = require("./src/structures/Client");
 const client = new Client();
 
+global.__basedir = __dirname;
 
 client.logger.info('Loading index.js');
 
