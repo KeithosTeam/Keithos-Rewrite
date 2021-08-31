@@ -1,15 +1,15 @@
-2021-08-09 15:02:55 - info [index.js]: Loading Client.js
-2021-08-09 15:02:55 - info [index.js]: Loading index.js
-2021-08-09 15:02:55 - info [index.js]: 7 event(s) found...
-2021-08-09 15:02:55 - info [index.js]: Loading event: guildCreate
-2021-08-09 15:02:55 - info [index.js]: Loading event: guildDelete
-2021-08-09 15:02:55 - info [index.js]: Loading event: ready
-2021-08-09 15:02:55 - info [index.js]: Loading event: warn
-2021-08-09 15:02:55 - info [index.js]: Loading event: messageCreate
-2021-08-09 15:02:55 - info [index.js]: Loading event: messageDelete
-2021-08-09 15:02:55 - info [index.js]: Loading event: messageUpdate
-2021-08-09 15:02:55 - info [index.js]: Loading commands...
-2021-08-09 15:02:55 - info [index.js]: 
+2021-08-31 10:11:00 - info [index.js]: Loading Client.js
+2021-08-31 10:11:00 - info [index.js]: Loading index.js
+2021-08-31 10:11:00 - info [index.js]: 7 event(s) found...
+2021-08-31 10:11:00 - info [index.js]: Loading event: guildCreate
+2021-08-31 10:11:00 - info [index.js]: Loading event: guildDelete
+2021-08-31 10:11:00 - info [index.js]: Loading event: ready
+2021-08-31 10:11:00 - info [index.js]: Loading event: warn
+2021-08-31 10:11:00 - info [index.js]: Loading event: messageCreate
+2021-08-31 10:11:00 - info [index.js]: Loading event: messageDelete
+2021-08-31 10:11:00 - info [index.js]: Loading event: messageUpdate
+2021-08-31 10:11:00 - info [index.js]: Loading commands...
+2021-08-31 10:11:00 - info [index.js]: 
 .---------------------------------------------------.
 |                     Commands                      |
 |---------------------------------------------------|
@@ -29,12 +29,5 @@
 | error         | err            | info    | pass   |
 | eval          | coderun        | No type | pass   |
 '---------------------------------------------------'
-2021-08-09 15:02:55 - info [index.js]: Database connected
-2021-08-09 15:02:56 - info [index.js]: Keithos Dev#7116 is online
-2021-08-09 15:02:57 - error [index.js]: Cannot read property 'command' of undefined
-{
-  "stack": "TypeError: Cannot read property 'command' of undefined
-    at setprefix.run (C:\\__Projects\\keithos\\Keithos-Rewrite\\src\\core\\commands\\info\\help.js:22:41)
-    at msage.run (C:\\__Projects\\keithos\\Keithos-Rewrite\\src\\core\\events\\server\\message.js:137:21)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)"
-}
+2021-08-31 10:11:00 - info [index.js]: Database connected
+2021-08-31 10:11:01 - info [index.js]: Keithos Dev#7116 is online

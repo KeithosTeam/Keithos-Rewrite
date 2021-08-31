@@ -74,7 +74,13 @@ module.exports = class Client extends Discord {
         /**
          * Database
          */
+				if (this.config.devMode == false){
         this.db = new Database(this.config.database.mongoURL);
+				} else {
+					this.db = new Database(process.env['mongoURL']);
+
+				}
+
 
         this.logger.info('Loading Client.js');
 

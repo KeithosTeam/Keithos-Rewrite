@@ -32,7 +32,7 @@ module.exports = class msage extends Event {
          */
         let prefix = schema.prefix;
 
-        if (message.content === `<@${this.client.user.id}>`) {
+        if (message.content === `<@${this.client.user.id}>` || message.content === `<@!${this.client.user.id}>`) {
             return message.channel.send({ embeds: [
                 {
                     title: this.client.user.username,

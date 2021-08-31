@@ -1,7 +1,0 @@
-2021-08-09 15:02:57 - error [index.js]: Cannot read property 'command' of undefined
-{
-  "stack": "TypeError: Cannot read property 'command' of undefined
-    at setprefix.run (C:\\__Projects\\keithos\\Keithos-Rewrite\\src\\core\\commands\\info\\help.js:22:41)
-    at msage.run (C:\\__Projects\\keithos\\Keithos-Rewrite\\src\\core\\events\\server\\message.js:137:21)
-    at processTicksAndRejections (internal/process/task_queues.js:95:5)"
-}
