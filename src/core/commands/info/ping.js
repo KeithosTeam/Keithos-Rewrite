@@ -19,7 +19,7 @@ module.exports = class ping extends Command {
             .setTitle("Pong! 🏓")
             .setColor(this.client.config.embed.color)
             .setThumbnail(this.client.user.displayAvatarURL())
-            .addField("Latency", `\`\`\`ini\n[ ${message.createdTimestamp - Date.now()}ms ] \`\`\``)
+            .addField("Latency", `\`\`\`ini\n[ ${Date.now() - message.createdTimestamp}ms ] \`\`\``)
             .addField("API Latency", `\`\`\`ini\n[ ${this.client.ws.ping}ms ] \`\`\``)
             .setFooter(`${message.member.displayName}`, message.author.displayAvatarURL({ dynamic: true}))
             .setTimestamp();
