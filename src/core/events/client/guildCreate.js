@@ -24,6 +24,8 @@ module.exports = class guildCreate extends Event {
             };
         });
 
+        this.client.logger.warn(`Keithos has joined ${guild.name}`);
+
         const embed = new MessageEmbed()
             .setTitle("Joined Guild")
             .setColor("GREEN")
