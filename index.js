@@ -18,7 +18,7 @@ process.on("unhandledRejection", (err) => {
 // });
 
 if (client.config.devMode == false){
-			client.login(client.config.token);
+			client.login(client.config.bot.token);
 				} else {
 					client.login(process.env['token']);
 				}
