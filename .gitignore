@@ -3,4 +3,3 @@ config.json
 dev/
 logs/full.log
 logs/error.log
-
