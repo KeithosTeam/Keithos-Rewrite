@@ -1,6 +1,6 @@
 {
   "name": "keithos",
-  "version": "4.0.0",
+  "version": "DEV-4.0.1",
   "description": "A fully customizable bot built with discord.js",
   "main": "index.js",
   "author": "Keithos Team",

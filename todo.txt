@@ -1,0 +1,10 @@
+Events:
+  * guildMemberAdd
+  * guildMemberRemove
+  * guildMemberUpdate
+  * guildUpdate
+  * messageDeleteBulk
+  * messageReactionAdd
+  * messageReactionRemove
+  * userUpdate
+  * voiceStateUpdate

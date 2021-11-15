@@ -1,107 +1,112 @@
-const { Client: Discord, Collection, Message } = require("discord.js");
-const Database = require("./Database");
-const Handler = require("./Handler");
+const { Client: Discord, Collection, Message } = require('discord.js');
+const Database = require('./Database');
+const Handler = require('./Handler');
 
 
 const TypeConfig = {
-    token: "",
-    prefix: "",
-    owners: [],
-    database: {
-        mongoURL: ""
-    }
+	token: '',
+	prefix: '',
+	owners: [],
+	database: {
+		mongoURL: ''
+	}
 };
 
 module.exports = class Client extends Discord {
-    constructor() {
-        super({
-            intents: ["GUILDS", "GUILD_MEMBERS", "GUILD_MESSAGES", "GUILD_MESSAGE_REACTIONS"],
-            allowedMentions: {
-                parse: ["everyone"]
-            }
-        });
+	constructor() {
+		super({
+			intents: ['GUILDS', 'GUILD_MEMBERS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS'],
+			allowedMentions: {
+				parse: ['everyone']
+			}
+		});
 
-        /**
+		/**
      * Create logger
      */
-     this.logger = require('../utils/logger.js');
+		this.logger = require('../utils/logger.js');
 
-        /**
+		/**
      * All possible command types
      * @type {Object}
      */
-    this.types = {
-        UTILITY: 'utility',
-        FUN: 'fun',
-        COLOR: 'color',
-        INFO: 'info',
-        POINTS: 'points',
-        MISC: 'misc',
-        MOD: 'mod',
-        ADMIN: 'admin',
-        OWNER: 'owner'
-      };
+		this.types = {
+			UTILITY: 'utility',
+			FUN: 'fun',
+			COLOR: 'color',
+			INFO: 'info',
+			POINTS: 'points',
+			MISC: 'misc',
+			MOD: 'mod',
+			ADMIN: 'admin',
+			OWNER: 'owner'
+		};
 
-        /**
+		/**
          * Commands
          * @type {Map}
          */
-        this.commands = new Collection();
+		this.commands = new Collection();
 
 
-        /**
+		/**
          * Aliases
          * @type {Map}
          */
-        this.aliases = new Collection();
+		this.aliases = new Collection();
 
-        /**
+		/**
         * Cooldown
         * @type {Map}
         */
-        this.cooldowns = new Collection();
+		this.cooldowns = new Collection();
 
-        /**
+		/**
          * Config
          */
-        this.config = require("../../config.json");
+		this.config = require('../../config.json');
 
-        /**
+		/**
+		 * Package.json
+		 */
+		this.pkg = require('../../package.json');
+
+		/**
          * Handler
          */
-        this.handler = new Handler(this);
+		this.handler = new Handler(this);
 
-        /**
+		/**
          * Database
          */
-				if (this.config.devMode == false){
-        this.db = new Database(this.config.database.mongoURL);
-				} else {
-					this.db = new Database(process.env['mongoURL']);
+		if (this.config.devMode == false){
+			this.db = new Database(this.config.database.mongoURL);
+		} else {
+			this.db = new Database(process.env['mongoURL']);
 
-				}
+		}
 
 
-        this.logger.info('Loading Client.js');
+		this.logger.info('Loading Client.js');
 
-    };
+	}
 
         
 
-    login(token) {
+	login(token) {
 
-        if (!token || typeof (token) !== "string") {
-            this.logger.error("Token is missing");
-        };
+		if (!token || typeof (token) !== 'string') {
+			this.logger.error('Token is missing');
+		}
 
-        super.login(token).catch(err => {
-            this.logger.error(err);
-        });
+		super.login(token).catch(err => {
+			this.logger.error(err);
+		});
 
-        this.db.connect(true);
+		this.db.connect(true);
 
-        this.handler.loadEvents(this.config.handler.events);
-        this.handler.loadCommands(this.config.handler.commands);
-        this.logger.info("Database connected");
-    };
+		this.handler.loadEvents(this.config.handler.events);
+		this.handler.loadCommands(this.config.handler.commands);
+		this.logger.info('Database connected');
+	}
 };

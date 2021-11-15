@@ -8,6 +8,7 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
+    "ignorePatterns": ["testing.js"],
     "rules": {
         "indent": [
             "warn",
@@ -15,7 +16,9 @@
         ],
         "linebreak-style": [ "off", "windows" ],
         "quotes": [ "warn", "single" ],
-        "semi": [ "warn", "never" ]
+        "semi": [ "warn", "always" ],
+        "no-unused-vars": [ "off", { "args": "all" } ],
+        "no-unsafe-negation": ["off"]
     },
     "globals": {
         "__basedir": "false"
