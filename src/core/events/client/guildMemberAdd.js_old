@@ -1,0 +1,47 @@
+const { MessageEmbed, GuildMember } = require("discord.js");
+const Schema = require("../../../models/config");
+const Event = require("../../Event");
+
+module.exports = class guildMemberAdd extends Event {
+    constructor(client, ) {
+        super(client, {
+            name: "guildMemberAdd"
+        });
+    };
+    /**
+     * 
+     * @param {GuildMember} guildMember 
+     */
+    async run(guildMember) {
+        console.log('user joined\n' + guildMember.user.id + '\n' + guildMember.user.name )
+
+        Schema.findOne({ _id: guildMember.guild.id }, async (err, data) => {
+
+			if (data) {
+				return;
+			} else {
+				data = new Schema({ _id: guildMember.guild.id });
+				data.save();
+			}
+		});
+
+		this.client.logger.warn(`${guildMember.user.tag}(${guildMember.user.id}) has joined ${guildMember.guild.name}`);
+
+		const embed = new MessageEmbed()
+			.setTitle('Joined Guild')
+			.setColor('GREEN')
+			.setThumbnail(`${guildMember.user.avatarURL({ dynamic: true })}`)
+			.addField('Name & ID', `${guildMember.user.username} (${guildMember.user.id})`)
+			.setTimestamp(Date.now());
+
+
+        Schema.findOne({ _id: guildMember.guild.id }, async (e, data) => {
+			if (!data || data.joinLog === null) {
+				return;
+			} else {
+				return guildMember.guild.channels.cache.get(data.joinLog).send({ embeds: [embed]}).catch(e => { return; });
+			}
+        })
+        
+     };
+};
