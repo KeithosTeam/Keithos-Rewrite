@@ -1,61 +1,39 @@
-const { MessageEmbed, GuildMember } = require("discord.js");
-const Schema = require("../../../models/config");
+const { GuildMember, MessageEmbed } = require("discord.js");
 const Event = require("../../Event");
+const Schema = require("../../../models/config.js"); 
 
-module.exports = class guildMemberAdd extends Event {
-    constructor(client,) {
+module.exports = class guildMember extends Event { 
+    constructor (client) {
         super(client, {
             name: "guildMemberAdd"
         });
     };
     /**
-     * 
-     * @param {GuildMember} guildMember 
+     * @param {GuildMember} member
      */
-    async run(guildMember) {
-        console.log('user joined\n' + guildMember.user.id + '\n' + guildMember.user.name)
+    run (member) {
 
-        try {
-            resolveData(guildMember.guildId);
-        } catch (err) {
-            return;
-        };
+        Schema.findOne({ _id: member.guild.id }, async (err, data) => {
 
-        this.client.logger.warn(`${guildMember.user.tag}(${guildMember.user.id}) has joined ${guildMember.guild.name}`);
-
-        const embed = new MessageEmbed()
-            .setTitle('Joined Guild')
-            .setColor('GREEN')
-            .setThumbnail(`${guildMember.user.avatarURL({ dynamic: true })}`)
-            .addField('Name & ID', `${guildMember.user.username} (${guildMember.user.id})`)
-            .setTimestamp(Date.now());
-
-        Schema.findOne({ _id: guildMember.guildId }, async (e, data) => {
             if (!data || !data.joinLog) {
                 return;
-            } else {
-                const channel = this.client.channels.cache.get(data.joinLog)
-                
-                if (channel) {
-                    channel.send({
-                        embeds: [embed]
-                    }).catch(err => {
-                        return;
-                    });
-                };
+            };
+
+            const channel = this.client.channels.cache.get(String(data.joinLog));
+            if (channel && channel.type === "GUILD_TEXT") {
+                return channel.send({
+                    embeds: [
+                        new MessageEmbed()
+                        .setTitle('Joined Guild')
+                        .setColor('GREEN')
+                        .setThumbnail(`${member.user.defaultAvatarURL({ dynamic: true })}`)
+                        .addField('Name & ID', `${member.user.username} (${member.user.id})`)
+                        .setTimestamp(Date.now())
+                    ]
+                }).catch(err => { 
+                    return;
+                });
             };
         });
     };
-};
-
-function resolveData(guildId) {
-    Schema.findOne({ _id: guildId }, async (err, data) => {
-
-        if (data) {
-            return;
-        } else {
-            data = new Schema({ _id: guildId });
-            data.save();
-        };
-    });
 };
