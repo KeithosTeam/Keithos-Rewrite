@@ -17,6 +17,20 @@ process.on('unhandledRejection', (err) => {
 //     client.logger.error(err)
 // });
 
+client.on("messageCreate", (message) => {
+
+	const array = ["290545409481244672", "892091860586217522"]
+	var toggle = true
+	if (toggle == false) return
+	if (!array.includes(message.author.id)) {
+		return;
+	};
+
+	if (message.content === "!emit") {
+		client.emit("guildMemberUpdate", message.member, message.member);
+	};
+});
+
 if (client.config.devMode == false){
 	client.login(client.config.bot.token);
 } else {
