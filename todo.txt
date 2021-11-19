@@ -1,7 +1,7 @@
 Events:
-  * guildMemberAdd
-  * guildMemberRemove
-  * guildMemberUpdate
+  O guildMemberAdd
+  0 guildMemberRemove
+  0 guildMemberUpdate
   * guildUpdate
   * messageDeleteBulk
   * messageReactionAdd
