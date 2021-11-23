@@ -7,7 +7,7 @@ module.exports = class joinLog extends Command {
 		super(client, {
 			name: 'config',
 			description: 'edit the settings',
-			type: 'admin',
+			type: client.types.ADMIN,
 			aliases: ['cfg', 'settings'],
 			cooldown: 8,
 			example: 'config prefix .',
