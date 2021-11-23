@@ -1,10 +1,10 @@
 Events:
-  O guildMemberAdd
+  0 guildMemberAdd
   0 guildMemberRemove
   0 guildMemberUpdate
-  * guildUpdate
-  * messageDeleteBulk
-  * messageReactionAdd
+  0 guildUpdate
+  0 messageDeleteBulk
+  0 messageReactionAdd
   * messageReactionRemove
   * userUpdate
-  * voiceStateUpdate
+  * voiceStateUpdated
