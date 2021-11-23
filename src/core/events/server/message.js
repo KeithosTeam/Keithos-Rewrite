@@ -13,19 +13,15 @@ module.exports = class msage extends Event {
      * @param {Message} message 
      */
 	async run(message) {
-
 		if (!message.guild.me.permissions.has('SEND_MESSAGES')) {
 			return;
 		}
-
 		if (message.author.bot) {
 			return;
 		}
-
 		if (message.channel.type !== 'GUILD_TEXT') {
 			return;
 		}
-
 		const schema = await Schema.findOne({ _id: message.guild.id });
 		/**
          * @type {string}
@@ -47,12 +43,17 @@ module.exports = class msage extends Event {
 			]});
 		}
 
-		if (!message.content.startsWith(prefix)) {
+		const prefixRegex = new RegExp(`^(<@!?${this.client.user.id}>|${prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})\\s*`);
+		if (!prefixRegex.test(message.content)) {
 			return;
 		}
-
-		const args = message.content.slice(prefix.length).trim().split(/ +/g);
+		const [, match] = message.content.match(prefixRegex);
+		const args = message.content.slice(match.length).trim().split(/ +/g);
 		const cmd = args.shift().toLowerCase();
+
+		
+		//const args = message.content.slice(match.length).trim().split(/ +/g);
+		//const cmd = args.shift().toLowerCase();
 
 		let command = this.client.commands.get(cmd);
 

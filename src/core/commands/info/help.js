@@ -10,7 +10,8 @@ module.exports = class setprefix extends Command {
 			name: 'help',
 			description: 'Displays the help dialog',
 			aliases: ['?', 'h'],
-			example: ['help']
+			example: ['help'],
+			type: client.types.INFO
 		});
 	}
 	/**

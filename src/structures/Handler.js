@@ -48,8 +48,6 @@ module.exports = class Handler {
 				}
 
 				table.addRow(command.name, command.aliases, command.type, 'pass');
-				// this.client.logger.info(`Loading command: ${command.name}`);
-				// this.client.logger.info(`Alias: ${command.aliases}`);
 			} else {
 				this.client.logger.warn(`${command.name} failed to load`);
 				table.addRow(command.name, '', '', 'fail');

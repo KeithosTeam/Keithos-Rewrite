@@ -10,6 +10,7 @@ module.exports = class Vote extends Command {
 			aliases: [],
 			cooldown: 10,
 			toggleCooldown: true,
+			type: client.types.MISC
 		});
 	}
 

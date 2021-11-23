@@ -8,7 +8,8 @@ module.exports = class test extends Command {
 			description: 'Displays your avatar or a user\'s avatar if mentioned',
 			aliases: ['pfp', 'av'],
 			cooldown: 5,
-			toggleCooldown: true
+			toggleCooldown: true,
+			type: client.types.INFO
 		});
 	}
 	/**

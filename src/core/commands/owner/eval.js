@@ -9,7 +9,8 @@ module.exports = class Eval extends Command {
 			description: 'Literally run a whole code using this command',
 			aliases: ['coderun'],
 			example: 'eval <code>',
-			ownerOnly: true
+			ownerOnly: true,
+			type: client.types.OWNER
 		});
 	}
 	/**
@@ -34,8 +35,11 @@ module.exports = class Eval extends Command {
 
 			let evaled = eval(code);
 
-			if (code.toLowerCase().includes('process.exit()') || code.toLowerCase().includes('this.client.token') || code.toLowerCase().includes('this.config') || code.toLowerCase().includes('message.client.token')) {
-				evaled = 'No token for you';
+			if (code.toLowerCase().includes('process.exit()') || code.toLowerCase().includes('this.client.token') || code.toLowerCase().includes('this.config') || code.toLowerCase().includes('message.client.token') || code.toLowerCase().includes('token')) {
+				evaled = '(╯°□°）╯︵ ┻━┻ MY TOKEN **MINE**';
+				message.channel.send({ content: evaled });
+				return;
+				
 			} else {
 				evaled = eval(code);
 			}

@@ -10,7 +10,7 @@ module.exports = class credit extends Command {
 			aliases: ['err'],
 			cooldown: 8, 
 			toggleCooldown: false,
-			type: client.types.INFO
+			type: client.types.OWNER
 		});
 	}
 

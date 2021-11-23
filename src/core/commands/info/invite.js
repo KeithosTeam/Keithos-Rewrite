@@ -7,7 +7,7 @@ module.exports = class invite extends Command {
 			name: 'invite',
 			description: 'Invite our bot to the server.',
 			aliases: ['inv'],
-			type: client.types.UTILITY,
+			type: client.types.INFO,
 			cooldown: 5,
 			toggleCooldown: true
 		});

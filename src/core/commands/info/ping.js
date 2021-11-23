@@ -8,7 +8,7 @@ module.exports = class ping extends Command {
 			description: 'Ping of Keithos',
 			aliases: ['pong'],
 			cooldown: 5,
-			type: client.types.UTILITY,
+			type: client.types.INFO,
 			toggleCooldown: true
 		});
 	}

@@ -10,12 +10,17 @@ module.exports = class ping extends Command {
 			description: 'Total uptime of Keithos',
 			aliases: ['up'],
 			cooldown: 5,
-			type: client.types.UTILITY,
+			type: client.types.INFO,
 			toggleCooldown: true
 		});
 	}
 
-	async run(message) {
+	async run(message, args) {
+
+		if (args[0] = 'moo'){
+			message.channel.send({ content: '.               (__) \n                (oo) \n     /------\\\\/ \n  / |            ||   \n *  /\\\\-----/\\ \n    \~\~           \\~\\~   \n...."Have you mooed today?"...'})
+			return;
+		}
 
 		const uptime = new MessageEmbed()
 			.setAuthor(this.client.user.username, this.client.user.displayAvatarURL())
