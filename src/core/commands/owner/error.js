@@ -16,5 +16,6 @@ module.exports = class credit extends Command {
 
 	async run (message, args) {
 		this.client.logger.error('test');
+		this.utils.sendErrorMessage(message, this, 'testing')
 	}
 };

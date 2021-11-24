@@ -4,11 +4,11 @@ const { stripIndent } = require('common-tags');
 const { cross } = require('./emoji.json');
 const Schema = require('../models/config')
 	
-	function sendErrorMessage(message, command, errorType, reason, errorMessage) {
+	function sendErrorMessage(message, command, reason, errorMessage) {
 		Schema.findOne({ _id: message.guild.id }, async (e, data) => {	
 			const embed = new MessageEmbed()
 				.setTitle(`${cross} Error: \`${command.name}\``)
-				.setDescription(`**Error Type:**\`\`\`\n- ${errorType}\`\`\`\ \n**Reason:**\`\`\`\n+ ${reason}\`\`\``)
+				.setDescription(/** `**Error Type:**\`\`\`\n- ${errorType}\`\`\`\ \n*/`**Reason:**\`\`\`\n+ ${reason}\`\`\``)
 				.addField('Usage:', `\`\`\`${data.prefix}${command.example}\`\`\``)
 				.setTimestamp()
 				.setThumbnail(message.member.displayAvatarURL())
@@ -20,7 +20,6 @@ const Schema = require('../models/config')
 			message.channel.send({ embeds: [embed] });
 		});
 	};
-
 module.exports = {
 	sendErrorMessage
 };

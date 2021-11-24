@@ -19,7 +19,7 @@ module.exports = class Command {
 	}) {
 
 		this.client = client;
-		this.type = option.type || 'No type';
+		this.type = option.type || 'None';
 		this.name = option.name;
 		this.description = option.description || '';
 		this.aliases = option.aliases || [];
@@ -30,6 +30,7 @@ module.exports = class Command {
 		this.toggleCooldown = option.toggleCooldown || false;
 		this.clientPermissions = option.clientPermissions || [];
 		this.userPermissions = option.userPermissions || [];
+		this.utils = require('../utils/utils');
 	}
 
 	async run (message, args) {
