@@ -8,3 +8,13 @@ Events:
   * messageReactionRemove
   * userUpdate
   * voiceStateUpdated
+
+Automod:
+
+
+
+
+Commands:
+
+
+Autoresponder:

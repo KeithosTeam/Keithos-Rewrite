@@ -21,7 +21,7 @@ module.exports = class guildMember extends Event {
 
             const channel = this.client.channels.cache.get(String(data.leaveLog));
             if (channel && channel.type === "GUILD_TEXT") {
-                return channel.send({
+                channel.send({
                     embeds: [
                         new MessageEmbed()
                         .setTitle('Member Left Guild')
@@ -34,6 +34,27 @@ module.exports = class guildMember extends Event {
                     return;
                 });
             };
+
+            const channel1 = this.client.channels.cache.get(String(data.welcomeLog));
+            const msgDirty = data.joinMsg
+            const msg = msgDirty
+                        .replace(/`?\$member`?/g, member)
+                        .replace(/`?\$tag`?/g, member.user.tag)
+                        .replace(/`?\$user`?/g, `<@!${member.user.id}>`)
+                        .replace(/`?\$nickname`?/g, member.user.nickname)
+                        .replace(/`?\$size`?/g, member.guild.memberCount)
+
+            channel1.send({
+                embeds: [
+                    new MessageEmbed()
+                    .setDescription(msg)
+                    .setTimestamp(Date.now())
+                    .setColor('GREEN')
+                    .setFooter(member.displayName, member.user.avatarURL({ dynamic: true }))
+                    //.setThumbnail(`${member.user.avatarURL({ dynamic: true })}`)
+                ]
+            });
+            return
         });
     };
 };

@@ -27,7 +27,8 @@ client.on("messageCreate", (message) => {
 	};
 
 	if (message.content === "!emit") {
-		client.emit("guildMemberUpdate", message.member, message.member);
+		client.emit("guildMemberRemove", message.member);
+		console.log('emitted!')
 	};
 });
 

@@ -10,7 +10,12 @@ module.exports = model(
 		joinLog: { type: String, default: null},
 		leaveLog: { type: String, default: null},
 		nickLog: { type: String, default: null},
-		roleLog: { type: String, default: null}
+		roleLog: { type: String, default: null},
+		welcomeLog: { type: String, default: null},
+		farewellLog: { type: String, default: null},
+		joinMsg: { type: String, default: null},
+		leaveMsg: { type: String, default: null},
+		ip: { type: String, default: null}
 	}, {
 		versionKey: false
 	})
