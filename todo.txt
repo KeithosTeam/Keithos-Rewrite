@@ -5,8 +5,8 @@ Events:
   0 guildUpdate
   0 messageDeleteBulk
   0 messageReactionAdd
-  * messageReactionRemove
-  * userUpdate
+  0 messageReactionRemove
+  0 userUpdate
   * voiceStateUpdated
 
 Automod:
@@ -18,3 +18,11 @@ Commands:
 
 
 Autoresponder:
+
+Points_system:
+      api
+      global leaderbord only
+
+API:
+    bot_status
+

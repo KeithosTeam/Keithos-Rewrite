@@ -10,7 +10,6 @@ module.exports = class joinLog extends Command {
 			type: client.types.ADMIN,
 			aliases: ['cfg', 'settings'],
 			cooldown: 8,
-			example: 'config prefix .',
 			toggleCooldown: false,
 			userPermissions: ['MANAGE_GUILD']
 		});
