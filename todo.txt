@@ -15,6 +15,7 @@ Automod:
 
 
 Commands:
+      0 public eval with https://tio.run/
 
 
 Autoresponder:
@@ -25,4 +26,6 @@ Points_system:
 
 API:
     bot_status
+
+using_discord_/_commands:
 
