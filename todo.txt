@@ -26,6 +26,120 @@ Points_system:
 
 API:
     bot_status
+    get database data with token (GET)
+    send data to database (POST)
 
 using_discord_/_commands:
+
+All commands:
+            colors:
+                  color.js
+                  colors.js
+                  createcolor.js
+                  createdefaultcolors.js
+                  randomcolor.js
+
+               fun:
+                  8ball.js
+                  annoy.js
+                  bird.js
+                  cat.js
+                  catfact.js
+                  coinflip.js
+                  dog.js
+                  dogfact.js
+                  duck.js
+                  emojify.js
+                  fox.js
+                  meme.js
+                  roll.js
+                  rps.js
+                  say.js
+                  shibe.js
+                  solotrivia.js
+                  thouart.js
+                  topic.js
+                  trivia.js
+                  trumptweet.js
+                  yesno.js
+                  yomama.js
+                  youtube.js
+
+              info:
+                  admins.js
+                  aliases.js
+                  avatar.js
+                  botinfo.js
+                  channelinfo.js
+                  emojis.js
+                  findid.js
+                  gallery.js
+                  github.js
+                  help.js
+                  invite.js
+                  ip.js
+                  member.js
+                  mods.js
+                  permissions.js
+                  ping.js
+                  prefix.js
+                  roleinfo.js
+                  servercount.js
+                  servericon.js
+                  serverinfo.js
+                  serverstaff.js
+                  stats.js
+                  supportserver.js
+                  uptime.js
+                  userinfo.js
+                  version.js
+
+              misc:
+                  feedback.js
+                  nickname.js
+                  reportbug.js
+                  vote.js
+
+               mod:
+                  addrole.js
+                  ban.js
+                  clearwarns.js
+                  kick.js
+                  mute.js
+                  poll.js
+                  purge.js
+                  purgebot.js
+                  removerole.js
+                  setnickname.js
+                  slowmode.js
+                  softban.js
+                  unban.js
+                  unmute.js
+                  warn.js
+                  warnpurge.js
+                  warns.js
+
+             owner:
+                  blast.js
+                  eval.js
+                  leaveguild.js
+                  members.js
+                  servers.js
+                  wipeallpoints.js
+                  wipealltotalpoints.js
+                  wipepoints.js
+                  wipetotalpoints.js
+            
+            points:
+                  crown.js
+                  explainpoints.js
+                  givepoints.js
+                  leaderboard.js
+                  points.js
+                  pointsper.js
+                  position.js
+                  totalpoints.js
+
+
+
 

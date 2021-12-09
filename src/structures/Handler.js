@@ -83,4 +83,8 @@ module.exports = class Handler {
 			}
 		}
 	}
+
+	loadApi = (loc) => {
+		const api = require("../core/api/api")
+	}
 };

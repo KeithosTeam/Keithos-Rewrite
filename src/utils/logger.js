@@ -1,6 +1,11 @@
 const { createLogger, format, transports } = require('winston');
 const path = require('path');
 
+let today = new Date();
+let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+const dateTime = date+'_'+time;
+
 // Custom log formatting
 const logFormat = format.printf((info) => {
 	const { timestamp, level, label, message, ...rest } = info;
@@ -34,14 +39,14 @@ const logger = createLogger({
 		}),
 		// Logging info and up to file
 		new transports.File({ 
-			filename: 'logs/full.log',
+			filename: `logs/${dateTime}_full.log`,
 			level: 'info',
 			format: logFormat,
 			options: { flags: 'w' } 
 		}),
 		// Logging only warns and errors to file
 		new transports.File({ 
-			filename: 'logs/error.log',
+			filename: `logs/${dateTime}_error.log`,
 			level: 'warn',
 			format: logFormat,
 			options: { flags: 'w' }

@@ -1,6 +1,5 @@
 node_modules/
 config.json
 dev/
-logs/full.log
-logs/error.log
+logs/*
 testing.js

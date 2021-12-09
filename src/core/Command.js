@@ -1,5 +1,4 @@
 const Client = require('../structures/Client');
-const pkg = require('../../package.json')
 
 module.exports = class Command {
 	/**

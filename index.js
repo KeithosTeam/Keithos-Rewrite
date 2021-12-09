@@ -27,7 +27,7 @@ client.on("messageCreate", (message) => {
 	};
 
 	if (message.content === "!emit") {
-		client.emit("guildMemberRemove", message.member);
+		client.emit("guildCreate", message.guild.id);
 		console.log('emitted!')
 	};
 });
@@ -37,4 +37,12 @@ if (client.config.devMode == false){
 } else {
 	client.login(process.env['token']);
 }
+
+let api_init = (client)=>{
+	const api = require("./src/core/api/api")
+}
+
+
+
+//api_init(client)
 //client.login(client.config.token);

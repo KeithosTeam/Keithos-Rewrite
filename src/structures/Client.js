@@ -84,6 +84,7 @@ module.exports = class Client extends Discord {
      */
     if (this.config.devMode == false) {
       this.db = new Database(this.config.database.mongoURL);
+      //console.log(this.config.database.mongoURL)
     } else {
       this.db = new Database(process.env["mongoURL"]);
     }
@@ -104,6 +105,10 @@ module.exports = class Client extends Discord {
 
     this.handler.loadEvents(this.config.handler.events);
     this.handler.loadCommands(this.config.handler.commands);
+    //const api = require('../core/api/api')
+    if(this.config.api.enabled == true) this.handler.loadApi("../core/api/api", this)
     this.logger.info("Database connected");
+
+    
   }
 };
