@@ -15,7 +15,8 @@ module.exports = model(
 		farewellLog: { type: String, default: null},
 		joinMsg: { type: String, default: null},
 		leaveMsg: { type: String, default: null},
-		ip: { type: String, default: null}
+		ip: { type: String, default: null},
+		modLog: { type: String, default: null}
 	}, {
 		versionKey: false
 	})

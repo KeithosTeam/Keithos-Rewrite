@@ -1,9 +1,17 @@
 {
-    "token": "",
+    "bot": {
+        "token": ""
+    },
+    "api": {
+        "enabled": false,
+        "token": "",
+        "port": 3000
+    },
+    "devMode": false,
     "prefix": ".",
     "owners": ["290545409481244672","538627730921619486"],
     "database": {
-        "mongoURL": ""
+        "mongoURL": "mongodb://localhost:27017/Keithos"
     },
     "handler": {
         "commands": "./src/core/commands/**/**/*.js",

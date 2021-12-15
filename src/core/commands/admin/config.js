@@ -27,8 +27,12 @@ module.exports = class joinLog extends Command {
 
 			if (!data) {
 				message.channel.send({ content: 'Data for this server does not exist. please kick and reinvite the bot.'})
-			}
-            
+			}      
+ /**
+ * --------------------------------------
+ * Help Tab
+ * --------------------------------------
+ */          
         if ( args[0] == 'help' || args[0] == 'h' || args[0] == '?' || !args[0]) {
             message.channel.send({
                 embeds: [
@@ -37,18 +41,24 @@ module.exports = class joinLog extends Command {
                     .setColor('BLUE')
                     .setThumbnail(`${message.member.user.displayAvatarURL({ dynamic: true })}`)
                     .addField('Main', `\`1 Setting\``, true)
-					.addField('Logging', `\`5 Settings\``, true)
+					.addField('Logging', `\`6 Settings\``, true)
 					.addField('Welcomes and farewells', `\`4 Settings\``, true)
                     .setTimestamp(Date.now())
                 ]
             }).catch(err => { 
                 return;
             });
-
+/**
+ * --------------------------------------
+ * Main Tab
+ * --------------------------------------
+ */
         } else if (args[0] == 'Main' || args[0] == 'main') {
 
-			if(!args[1]){
 			const oldPrefix = data.prefix;
+
+			if(!args[1]){
+			
 
 			const Embed = new MessageEmbed()
 			.setTitle('Main settings')
@@ -69,7 +79,7 @@ module.exports = class joinLog extends Command {
 				.setTimestamp();
 				
 				
-				let prefix = args[1];
+				let prefix = args[2];
 				
 
 				if (!args[2]) {
@@ -78,7 +88,7 @@ module.exports = class joinLog extends Command {
 				}
 
 				if (prefix.length > 4) {
-					message.channel.send({ embeds: [prefixEmbed.addField('Error:', `${this.emoji.cross} Prefix cannot be more than \`4\` chars!`)] });
+					return message.channel.send({ embeds: [prefixEmbed.addField('Error:', `${this.emoji.cross} Prefix cannot be more than \`4\` chars!`)] });
 				}
 		
 				if (data.prefix === prefix) {
@@ -88,9 +98,49 @@ module.exports = class joinLog extends Command {
 				return data.updateOne({ _id: message.guild.id, prefix: prefix }).then(() => {
 					message.channel.send({ embeds: [prefixEmbed.addField('Success!', `${this.emoji.tick} Prefix has been changed from \`${oldPrefix}\` to \`${prefix}\``)] });
 				});
+
+/**
+ * --------------------------------------
+ * Ip
+ * --------------------------------------
+ */
+			} else if(args[1] == 'ip') {
+				const prefixEmbed = new MessageEmbed()
+				.setTitle('Prefix')
+				.setColor(this.client.config.embed.color)
+				.setThumbnail(this.client.user.displayAvatarURL())
+				.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
+				.setTimestamp();
+
+				let oldIp = data.ip;
+				let ip = args[2];
+				
+
+				if (!args[2]) {
+					message.channel.send({ embeds: [prefixEmbed.addField('Hey!', `The ip for this guild is \`${data.ip}\``)] });
+					return;
+				}
+
+				if (args[2] == 'none'){
+					return data.updateOne({ _id: message.guild.id, ip: undefined  }).then(() => {
+						message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Message Log Channel has been changed from ${oldmlc} to \`None\``)] });
+					});
+					}
+		
+				if (data.prefix === prefix) {
+					message.channel.send({ embeds: [prefixEmbed.addField('Error:', `${this.emoji.cross} Prefix is already \`${data.prefix}\``)] });
+				}
+
+				return data.updateOne({ _id: message.guild.id, ip: ip }).then(() => {
+					message.channel.send({ embeds: [prefixEmbed.addField('Success!', `${this.emoji.tick} Ip has been changed from \`${oldIp}\` to \`${ip}\``)] });
+				});
 			}
 
-
+/**
+ * --------------------------------------
+ * Logging Tab
+ * --------------------------------------
+ */
 
 		} else if(args[0] == 'Logging' || args[0] == 'logging' || args[0] == 'log' || args[0] == 'logs'){
 
@@ -101,6 +151,7 @@ module.exports = class joinLog extends Command {
 				const roleLog = message.guild.channels.cache.get(data.roleLog) || '`None`';
 				const joinLog = message.guild.channels.cache.get(data.joinLog) || '`None`';
 				const leaveLog = message.guild.channels.cache.get(data.leaveLog) || '`None`';
+				const modLog = message.guild.channels.cache.get(data.modLog) || '`None`';
 		
 					const Embed = new MessageEmbed()
 					.setTitle('Logging settings')
@@ -110,6 +161,7 @@ module.exports = class joinLog extends Command {
 					.addField('Role log', `${roleLog}`, true)
 					.addField('Join log', `${joinLog}`, true)
 					.addField('Leave log', `${leaveLog}`, true)
+					.addField('Mod log', `${modLog}`, true)
 					.setThumbnail(this.client.user.displayAvatarURL())
 					.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
 					.setTimestamp();
@@ -118,6 +170,12 @@ module.exports = class joinLog extends Command {
 
 			}
 
+
+/**
+ * --------------------------------------
+ * MsgLog
+ * --------------------------------------
+ */
 
 			if (args[1] == 'messagelog' || args[1] == 'msg' || args[1] == 'message' || args[1] == 'msglog' || args[1] == 'mlc') {
 
@@ -157,6 +215,12 @@ module.exports = class joinLog extends Command {
 				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Message Log Channel has been changed from ${oldmlc} to ${mlc}`)] });
 			});
 
+
+/**
+ * --------------------------------------
+ * NickLog
+ * --------------------------------------
+ */
 		} else if (args[1] == 'nicklog' || args[1] == 'nick' || args[1] == 'nickname' || args[1] == 'nicknamelog' || args[1] == 'nlc') {
 
 			const Embed = new MessageEmbed()
@@ -194,7 +258,11 @@ module.exports = class joinLog extends Command {
 			return data.updateOne({ _id: message.guild.id, nickLog: nlc  }).then(() => {
 				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Nickname Log Channel has been changed from ${oldnlc} to ${nlc}`)] });
 			});
-
+/**
+ * --------------------------------------
+ * RoleLog
+ * --------------------------------------
+ */
 		} else if (args[1] == 'rolelog' || args[1] == 'role' || args[1] == 'rlc') {
 
 			const Embed = new MessageEmbed()
@@ -232,7 +300,11 @@ module.exports = class joinLog extends Command {
 			return data.updateOne({ _id: message.guild.id, nickLog: rlc  }).then(() => {
 				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Nickname Log Channel has been changed from ${oldrlc} to ${rlc}`)] });
 			});
-
+/**
+ * --------------------------------------
+ * joinLog
+ * --------------------------------------
+ */
 		}	else if (args[1] == 'joinlog' || args[1] == 'joinchannel' || args[1] == 'welcome' || args[1] == 'join' || args[1] == 'welcomechannel') {
 
 			const Embed = new MessageEmbed()
@@ -271,6 +343,12 @@ module.exports = class joinLog extends Command {
 				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Join Log Channel has been changed from ${oldjlc} to ${jlc}`)] });
 			});
 
+
+/**
+ * --------------------------------------
+ * leaveLog
+ * --------------------------------------
+ */
 		} else if (args[1] == 'leavelog' || args[1] == 'leavechannel' || args[1] == 'farewell' || args[1] == 'leave' || args[1] == 'farewellchannel') {
 
 			const Embed = new MessageEmbed()
@@ -308,9 +386,60 @@ module.exports = class joinLog extends Command {
 			return data.updateOne({ _id: message.guild.id, leaveLog: llc  }).then(() => {
 				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Leave Channel has been changed from ${oldllc} to ${llc}`)] });
 			});
-		}  
 
-	} if (args[0] == 'join' || args[0] == 'leave' || args[0] == 'welcome' || args[0] == 'user' || args[0] == 'farewell') {
+/**
+ * --------------------------------------
+ * modLogs
+ * --------------------------------------
+ */
+		}  if (args[1] == 'modlogs' || args[1] == 'modlog' || args[1] == 'ml' || args[1] == 'mlc' || args[1] == 'modlogchannel') {
+
+			const Embed = new MessageEmbed()
+			.setTitle('Mod Log Channel')
+			.setColor(this.client.config.embed.color)
+			.setThumbnail(this.client.user.displayAvatarURL())
+			.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
+			.setTimestamp();
+			
+			//let lm = args.shift.shift.join(' ') || '`None`';
+            let lm = message.mentions.channels.first() || message.guild.channels.cache.get(args[2]) || '`None`';
+			
+			const oldlm = dmessage.guild.channels.cache.get(data.modLog) || '`None`';
+
+			if (!args[2]) {
+				message.channel.send({ embeds: [Embed.addField('Hey!', `The Mod Log channel for this guild is ${oldlm}`)] });
+				return;
+			}
+
+			if (args[2] == 'none'){
+				return data.updateOne({ _id: message.guild.id, modLog: undefined  }).then(() => {
+					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Mod Log Channel has been changed from ${oldlm}\` to \`None\``)] });
+				});
+				}
+
+			if (lm.type !== 'GUILD_TEXT') {
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Only guild text channel is allowed`)] });
+				return;
+			}
+
+	
+			if (oldlm === lm) {
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Mod Log Channel is already ${lm}`)] });
+				return
+			}
+
+			return data.updateOne({ _id: message.guild.id, modLog: lm  }).then(() => {
+				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Mod Log Channel has been changed from ${oldlm} to ${lm}`)] });
+			});
+		}
+
+/**
+ * --------------------------------------
+ * Joins and leaves tab
+ * --------------------------------------
+ */
+
+	} else if (args[0] == 'join' || args[0] == 'leave' || args[0] == 'welcome' || args[0] == 'user' || args[0] == 'farewell') {
 
 		if(!args[1]){
 			
@@ -329,10 +458,12 @@ module.exports = class joinLog extends Command {
 			.setTimestamp();
 			
 			message.channel.send({ embeds: [Embed] })
-
-	} else
-	
-		if (args[1] == 'welcomelog' || args[1] == 'welcomechannel' || args[1] == 'welcome' || args[1] == 'wlcm' || args[1] == 'wcc') {
+/**
+ * --------------------------------------
+ * welcomeLog
+ * --------------------------------------
+ */
+	} else if (args[1] == 'welcomelog' || args[1] == 'welcomechannel' || args[1] == 'welcome' || args[1] == 'wlcm' || args[1] == 'wcc') {
 
 			const Embed = new MessageEmbed()
 			.setTitle('Welcome Channel')
@@ -370,7 +501,11 @@ module.exports = class joinLog extends Command {
 			return data.updateOne({ _id: message.guild.id, welcomeLog: jlc  }).then(() => {
 				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Welcome Log Channel has been changed from ${oldjlc} to ${jlc}`)] });
 			});
-
+/**
+ * --------------------------------------
+ * farewellLog
+ * --------------------------------------
+ */
 		} else if (args[1] == 'farewelllog' || args[1] == 'farewellchannel' || args[1] == 'farewell' || args[1] == 'bye' || args[1] == 'fwc') {
 
 			const Embed = new MessageEmbed()
@@ -408,6 +543,12 @@ module.exports = class joinLog extends Command {
 			return data.updateOne({ _id: message.guild.id, farewellLog: llc  }).then(() => {
 				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Farewell Channel has been changed from ${oldllc} to ${llc}`)] });
 			});
+
+/**
+ * --------------------------------------
+ * joinMsg
+ * --------------------------------------
+ */
 		} else if (args[1] == 'joingmessage' || args[1] == 'joinmsg' || args[1] == 'welcomemessage' || args[1] == 'wm' || args[1] == 'wmsg') {
             
 			const Embed = new MessageEmbed()
@@ -430,7 +571,7 @@ module.exports = class joinLog extends Command {
 			}
 
 			if (args[2] == 'none'){
-				return data.updateOne({ _id: message.guild.id, welcomeLog: undefined  }).then(() => {
+				return data.updateOne({ _id: message.guild.id, joinMsg: undefined  }).then(() => {
 					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Welcome message has been changed from \`${oldjm}\` to \`None\``)] });
 				});
 				}
@@ -444,7 +585,12 @@ module.exports = class joinLog extends Command {
 			return data.updateOne({ _id: message.guild.id, joinMsg: jm  }).then(() => {
 				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Welcome Message has been changed from \`${oldjm}\` to \`${jm}\``)] });
 			});
-		} else if (args[1] == 'farewellmessage' || args[1] == 'farewellmsg' || args[1] == 'farewellm' || args[1] == 'fm' || args[1] == 'fmsg') {
+/**
+ * --------------------------------------
+ * leavemsg
+ * --------------------------------------
+ */
+		} else if (args[1] == 'farewellmessage' || args[1] == 'leavemessage' || args[1] == 'leavemsg' || args[1] == 'lm' || args[1] == 'lmsg') {
 
 			const Embed = new MessageEmbed()
 			.setTitle('Farewell Message')
@@ -464,7 +610,7 @@ module.exports = class joinLog extends Command {
 			}
 
 			if (args[2] == 'none'){
-				return data.updateOne({ _id: message.guild.id, farewellLog: undefined  }).then(() => {
+				return data.updateOne({ _id: message.guild.id, leaveMsg: undefined  }).then(() => {
 					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Farewell message has been changed from \`${oldlm}\` to \`None\``)] });
 				});
 				}

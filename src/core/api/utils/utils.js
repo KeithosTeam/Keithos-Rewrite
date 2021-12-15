@@ -1,15 +1,22 @@
+const fs = require('fs');
+const hash = require('pbkdf2-password')()
+const logger = require('../../../utils/logger');
+const config = require('../../../../config.json')
+const pkg = require('../../../../package.json')
+const Schema = require('../../../models/config')
+const apiSchema = require('../../../models/api')
+const { mem, cpu, os } = require('node-os-utils');
+const token = config.api.token
+
+
 function auth(req){
     if (req.query.token === token) {
-      console.log('OK')
-      console.log(token)
-      console.log(req.query.token)
+      logger.info('OK')
       return 'OK'
   
   
     } else {
-      console.log('fail')
-      console.log(token)
-      console.log(req.query.token)
+      logger.info('fail')
       return 'ERROR: Auth Fail. Code 0 '
       
     }
@@ -34,12 +41,24 @@ function auth(req){
     apiSchema.findOne({ _id: nick }, async (e, data) => {
       
     if (!data){
+
+      data = new apiSchema({ _id: nick });
+      data.save();
+      console.log('nodata')
+    }
       apiSchema.updateOne({ _id: nick, hash: hash })
       apiSchema.updateOne({ _id: nick, token: pass })
       apiSchema.updateOne({ _id: nick, salt: salt })
-    }
+      data.save();
+      console.log('data')
     if (err) throw err;
     return
     });
   });
   }
+
+module.exports = {
+  auth,
+  authenticate,
+  newToken
+}

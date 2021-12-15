@@ -38,11 +38,6 @@ if (client.config.devMode == false){
 	client.login(process.env['token']);
 }
 
-let api_init = (client)=>{
-	const api = require("./src/core/api/api")
-}
-
-
 
 //api_init(client)
 //client.login(client.config.token);

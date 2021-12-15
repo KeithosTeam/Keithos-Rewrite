@@ -5,11 +5,12 @@ const Schema = require('../../../models/config')
 const apiSchema = require('../../../models/api')
 const { mem, cpu, os } = require('node-os-utils');
 const token = config.api.token
-const router = express.Router;
+const router = express.Router();
+
+const { auth, authenticate, newToken} = require("../utils/utils")
 
 router.get("/", async (req, res) => {
-    //if (!auth(req) === 'OK') {return res.end("Auth failure\ncode 0")} else {
-  
+    if (auth(req) === 'OK') {
         const { totalMemMb, usedMemMb } = mem.info();
         const data = {
         "version": pkg.version,
@@ -27,10 +28,15 @@ router.get("/", async (req, res) => {
         "ramUsage": usedMemMb
   
   
-  
+          
       }
+      
       res.json(data)
-    //}
+  
+
+    } else {
+      res.end("Auth failure\ncode 0")
+    }
   });
 
 module.exports = router;

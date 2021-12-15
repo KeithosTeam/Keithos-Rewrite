@@ -20,7 +20,41 @@ const Schema = require('../models/config')
 			message.channel.send({ embeds: [embed] });
 		});
 	};
+
+	  /**
+   * Creates and sends mod log embed
+   * @param {Message} message
+   * @param {string} reason 
+   * @param {Object} fields
+   */
+	   async function sendModLogMessage(message, reason, action, fields = {}) {
+		   console.log(this.name)
+		Schema.findOne({ _id: message.guild.id }, async (e, data) => {
+		const modLogId = data.modLog
+		const modLog = message.guild.channels.cache.get(modLogId); 
+		if (
+		  modLog &&
+		  modLog.viewable &&
+		  modLog.permissionsFor(message.guild.me).has(['SEND_MESSAGES', 'EMBED_LINKS'])
+		) {
+		  const embed = new MessageEmbed()
+			.setTitle(`Action: \`${action}\``)
+			.addField('Moderator', message.member, true)
+			.setTimestamp()
+			.setThumbnail(message.member.displayAvatarURL())
+			.setFooter(message.member.displayName, message.author.displayAvatarURL({ dynamic: true }))
+			.setColor(message.guild.me.displayHexColor);
+		  for (const field in fields) {
+			console.log('lul')
+			embed.addField(field, fields[field], true);
+		  }
+		  embed.addField('Reason', reason);
+		  modLog.send({ embeds: [embed]})
+		}
+	})
+	  }
 module.exports = {
-	sendErrorMessage
+	sendErrorMessage,
+	sendModLogMessage
 };
 

@@ -5,7 +5,9 @@ module.exports = model(
 	'api',
 	new Schema({
 		_id: String,
-        token: String
+        token: String,
+		hash: String,
+		salt: String
 	}, {
 		versionKey: false
 	})

@@ -1,4 +1,5 @@
 const { Client: Discord, Collection, Message } = require("discord.js");
+const logger = require("../utils/logger.js");
 const Database = require("./Database");
 const Handler = require("./Handler");
 
@@ -106,9 +107,9 @@ module.exports = class Client extends Discord {
     this.handler.loadEvents(this.config.handler.events);
     this.handler.loadCommands(this.config.handler.commands);
     //const api = require('../core/api/api')
-    if(this.config.api.enabled == true) this.handler.loadApi("../core/api/api", this)
+    if(this.config.api.enabled == true) { this.handler.loadApi("../core/api/api", this) } else { this.logger.warn('API is disabled. This might be an intended change but also could be a bug.') }
     this.logger.info("Database connected");
 
-    
+  
   }
 };
