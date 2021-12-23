@@ -4,7 +4,7 @@ const Command = require('../../Command');
 const { oneLine, stripIndent } = require('common-tags');
 const emojis = require('../../../utils/emoji.json');
 
-module.exports = class setprefix extends Command {
+module.exports = class help extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'help',

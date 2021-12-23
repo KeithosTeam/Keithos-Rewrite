@@ -4,7 +4,7 @@ const Schema = require('../../../models/config')
 
 const rgx = /^(?:<@!?)?(\d+)>?$/;
 
-module.exports = class credit extends Command {
+module.exports = class unban extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'unban',

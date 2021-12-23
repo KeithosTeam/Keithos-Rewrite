@@ -4,7 +4,7 @@ const tio = require('tio.js');
 var stringSimilarity = require('string-similarity');
 
 
-module.exports = class Eval extends Command {
+module.exports = class publiceval extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'publiceval',

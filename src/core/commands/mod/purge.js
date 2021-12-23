@@ -1,7 +1,7 @@
 const { Message, MessageEmbed} = require('discord.js');
 const Command = require('../../Command');
 //Not rl done so help pls
-module.exports = class test extends Command {
+module.exports = class purge extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'purge',

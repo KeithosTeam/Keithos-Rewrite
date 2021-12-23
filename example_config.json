@@ -7,6 +7,10 @@
         "token": "",
         "port": 3000
     },
+    "apiKeys": {
+        "catApi": "your_API_key_here",
+        "googleApi": "your_API_key_here"
+    },
     "devMode": false,
     "prefix": ".",
     "owners": ["290545409481244672","538627730921619486"],

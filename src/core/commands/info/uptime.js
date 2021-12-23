@@ -3,7 +3,7 @@ const Command = require('../../Command');
 const moment = require('moment');
 require('moment-duration-format');
 
-module.exports = class ping extends Command {
+module.exports = class uptime extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'uptime',

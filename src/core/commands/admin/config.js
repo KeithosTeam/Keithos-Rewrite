@@ -2,7 +2,7 @@ const { Message, MessageEmbed } = require('discord.js');// hey
 const Schema = require('../../../models/config');
 const Command = require('../../Command');
 
-module.exports = class joinLog extends Command {
+module.exports = class config extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'config',
@@ -25,8 +25,11 @@ module.exports = class joinLog extends Command {
 
 		Schema.findOne({ _id: message.guild.id }, async (e, data) => {
 
-			if (!data) {
-				message.channel.send({ content: 'Data for this server does not exist. please kick and reinvite the bot.'})
+			if (data) {
+				return;
+			} else {
+				data = new Schema({ _id: guild.id });
+				data.save();
 			}      
  /**
  * --------------------------------------
@@ -123,12 +126,12 @@ module.exports = class joinLog extends Command {
 
 				if (args[2] == 'none'){
 					return data.updateOne({ _id: message.guild.id, ip: undefined  }).then(() => {
-						message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Message Log Channel has been changed from ${oldmlc} to \`None\``)] });
+						message.channel.send({ embeds: [prefixEmbed.addField('Success!', `${this.emoji.tick} Message Log Channel has been changed from ${oldIp} to \`None\``)] });
 					});
 					}
 		
-				if (data.prefix === prefix) {
-					message.channel.send({ embeds: [prefixEmbed.addField('Error:', `${this.emoji.cross} Prefix is already \`${data.prefix}\``)] });
+				if (data.ip === ip) {
+					message.channel.send({ embeds: [prefixEmbed.addField('Error:', `${this.emoji.cross} Ip is already \`${data.Ip}\``)] });
 				}
 
 				return data.updateOne({ _id: message.guild.id, ip: ip }).then(() => {

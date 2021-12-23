@@ -37,6 +37,7 @@ module.exports = class Client extends Discord {
      */
     this.types = {
       UTILITY: "utility",
+      MINECRAFT: "minecraft",
       FUN: "fun",
       COLOR: "color",
       INFO: "info",

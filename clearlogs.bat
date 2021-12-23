@@ -12,6 +12,9 @@ if /i "%~1"=="/f" force = 1
 if /i "%~1"=="-f" force = 1
 if /i "%~1"=="--force" force = 1
 
+
+echo "this script is not done and will not run for now i have a script for linux systems but not windows. Sorry ¯\_(ツ)_/¯"
+exit 0
 echo %force%
 
 if %force==1 del .\logs\*
