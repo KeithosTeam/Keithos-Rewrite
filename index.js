@@ -1,5 +1,32 @@
 const Client = require('./src/structures/Client');
 const client = new Client();
+const { exec } = require("child_process");
+const config = require('./config.json')
+
+const startupScripts = (check) => { 
+	if (check == true) {
+		client.logger.info('Scripts enabled');
+
+		if (config.database.verbose == true){
+			
+			exec('./startdb.sh', (error, stdout, stderr) => {  //executes a local os command. In this case starts the script startdb.sh
+				if (error) {
+					console.log(`[DB] error: ${error.message}`);
+					return;
+				}
+				if (stderr) {
+					console.log(`[DB] stderr: ${stderr}`);
+					return;
+				}
+				console.log(`[DB] stdout: ${stdout}`);
+			});
+		} else {
+			exec('./startdb.sh')
+		}
+	}
+}
+
+startupScripts(true);
 
 global.__basedir = __dirname;
 
@@ -29,12 +56,8 @@ client.on("messageCreate", (message) => {
 
 
 });
+client.login(client.config.bot.token);
 
-if (client.config.devMode == false){
-	client.login(client.config.bot.token);
-} else {
-	client.login(process.env['token']);
-}
 
 
 //api_init(client)
