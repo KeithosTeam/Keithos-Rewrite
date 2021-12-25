@@ -17,6 +17,7 @@ module.exports = class Client extends Discord {
     super({
       intents: [
         "GUILDS",
+        'GUILD_VOICE_STATES',
         "GUILD_MEMBERS",
         "GUILD_MESSAGES",
         "GUILD_MESSAGE_REACTIONS",
@@ -46,6 +47,7 @@ module.exports = class Client extends Discord {
       MOD: "mod",
       ADMIN: "admin",
       OWNER: "owner",
+      MUSIC: "music"
     };
 
     /**
@@ -84,12 +86,7 @@ module.exports = class Client extends Discord {
     /**
      * Database
      */
-    if (this.config.devMode == false) {
-      this.db = new Database(this.config.database.mongoURL);
-      //console.log(this.config.database.mongoURL)
-    } else {
-      this.db = new Database(process.env["mongoURL"]);
-    }
+    this.db = new Database(this.config.database.mongoURL);
 
     this.logger.info("Loading Client.js");
   }
