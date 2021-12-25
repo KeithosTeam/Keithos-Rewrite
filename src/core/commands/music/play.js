@@ -1,6 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const Command = require('../../Command');
 const DisTube = require('distube')
+const Schema = require('../../../models/config');
 
 
 module.exports = class Vote extends Command {
@@ -18,9 +19,12 @@ module.exports = class Vote extends Command {
         Schema.findOne({ _id: message.guild.id }, async (e, data) => {
         const prefix = data.prefix
         const x = message.content.replace(prefix, "").split(" ")[0]
-        const distube = new DisTube.default(message.client)
+        const distube = new DisTube.default(message.client,{
+            updateYouTubeDL: false
+        })
 
         if (['play', 'p'].includes(x)){
+            message.channel.send('Loading... This could take a second')
             distube.play(message, args.join(' '))
 
             distube.on("playSong", (queue, song) => queue.textChannel.send(

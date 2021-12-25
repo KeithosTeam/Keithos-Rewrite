@@ -60,12 +60,12 @@ All commands:
                   + roll.js
                   + rps.js
                   + say.js
-                  - shibe.js
-                  - solotrivia.js
-                  - thouart.js
-                  - topic.js
-                  - trivia.js //needs more topics
-                  - trumptweet.js
+                  + shibe.js
+                  - solotrivia.js // to be removed
+                  + thouart.js
+                  - topic.js // to be removed
+                  - trivia.js // needs more topics UPDATE: to be removed
+                  + trumptweet.js
                   - yesno.js
                   - yomama.js
                   - youtube.js
