@@ -91,15 +91,15 @@ module.exports = class config extends Command {
 				}
 
 				if (prefix.length > 4) {
-					return message.channel.send({ embeds: [prefixEmbed.addField('Error:', `${this.emoji.cross} Prefix cannot be more than \`4\` chars!`)] });
+					return message.channel.send({ embeds: [prefixEmbed.addField('Error:', `${this.emoji.fail} Prefix cannot be more than \`4\` chars!`)] });
 				}
 		
 				if (data.prefix === prefix) {
-					message.channel.send({ embeds: [prefixEmbed.addField('Error:', `${this.emoji.cross} Prefix is already \`${data.prefix}\``)] });
+					message.channel.send({ embeds: [prefixEmbed.addField('Error:', `${this.emoji.fail} Prefix is already \`${data.prefix}\``)] });
 				}
 
 				return data.updateOne({ _id: message.guild.id, prefix: prefix }).then(() => {
-					message.channel.send({ embeds: [prefixEmbed.addField('Success!', `${this.emoji.tick} Prefix has been changed from \`${oldPrefix}\` to \`${prefix}\``)] });
+					message.channel.send({ embeds: [prefixEmbed.addField('Success!', `${this.emoji.success} Prefix has been changed from \`${oldPrefix}\` to \`${prefix}\``)] });
 				});
 
 /**
@@ -126,16 +126,16 @@ module.exports = class config extends Command {
 
 				if (args[2] == 'none'){
 					return data.updateOne({ _id: message.guild.id, ip: undefined  }).then(() => {
-						message.channel.send({ embeds: [prefixEmbed.addField('Success!', `${this.emoji.tick} Message Log Channel has been changed from ${oldIp} to \`None\``)] });
+						message.channel.send({ embeds: [prefixEmbed.addField('Success!', `${this.emoji.success} Message Log Channel has been changed from ${oldIp} to \`None\``)] });
 					});
 					}
 		
 				if (data.ip === ip) {
-					message.channel.send({ embeds: [prefixEmbed.addField('Error:', `${this.emoji.cross} Ip is already \`${data.Ip}\``)] });
+					message.channel.send({ embeds: [prefixEmbed.addField('Error:', `${this.emoji.fail} Ip is already \`${data.Ip}\``)] });
 				}
 
 				return data.updateOne({ _id: message.guild.id, ip: ip }).then(() => {
-					message.channel.send({ embeds: [prefixEmbed.addField('Success!', `${this.emoji.tick} Ip has been changed from \`${oldIp}\` to \`${ip}\``)] });
+					message.channel.send({ embeds: [prefixEmbed.addField('Success!', `${this.emoji.success} Ip has been changed from \`${oldIp}\` to \`${ip}\``)] });
 				});
 			}
 
@@ -200,22 +200,22 @@ module.exports = class config extends Command {
 
 			if (args[2] == 'none'){
 				return data.updateOne({ _id: message.guild.id, messageLog: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Message Log Channel has been changed from ${oldmlc} to \`None\``)] });
+					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Message Log Channel has been changed from ${oldmlc} to \`None\``)] });
 				});
 				}
 
 			if (mlc.type !== 'GUILD_TEXT') {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Only guild text channel is allowed`)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Only guild text channel is allowed`)] });
 				return;
 			}
 	
 			if (oldmlc === mlc) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Message Log Channel is already ${oldmlc}`)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Message Log Channel is already ${oldmlc}`)] });
 				return
 			}
 
 			return data.updateOne({ _id: message.guild.id, messageLog: nlc  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Message Log Channel has been changed from ${oldmlc} to ${mlc}`)] });
+				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Message Log Channel has been changed from ${oldmlc} to ${mlc}`)] });
 			});
 
 
@@ -244,22 +244,22 @@ module.exports = class config extends Command {
 
 			if (args[2] == 'none'){
 				return data.updateOne({ _id: message.guild.id, nickLog: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Nickname Log Channel has been changed from ${oldnlc} to \`None\``)] });
+					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Nickname Log Channel has been changed from ${oldnlc} to \`None\``)] });
 				});
 				}
 
 			if (nlc.type !== 'GUILD_TEXT') {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Only guild text channel is allowed`)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Only guild text channel is allowed`)] });
 				return;
 			}
 	
 			if (oldnlc === nlc) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Nickname Log Channel is already ${oldnlc}`)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Nickname Log Channel is already ${oldnlc}`)] });
 				return
 			}
 
 			return data.updateOne({ _id: message.guild.id, nickLog: nlc  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Nickname Log Channel has been changed from ${oldnlc} to ${nlc}`)] });
+				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Nickname Log Channel has been changed from ${oldnlc} to ${nlc}`)] });
 			});
 /**
  * --------------------------------------
@@ -286,22 +286,22 @@ module.exports = class config extends Command {
 
 			if (args[2] == 'none'){
 				return data.updateOne({ _id: message.guild.id, roleLog: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Role Log Channel has been changed from ${oldrlc} to \`None\``)] });
+					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Role Log Channel has been changed from ${oldrlc} to \`None\``)] });
 				});
 				}
 
 			if (rlc.type !== 'GUILD_TEXT') {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Only guild text channel is allowed`)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Only guild text channel is allowed`)] });
 				return;
 			}
 	
 			if (oldrlc === rlc) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Role Log Channel is already ${olrlc}`)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Role Log Channel is already ${olrlc}`)] });
 				return
 			}
 
 			return data.updateOne({ _id: message.guild.id, nickLog: rlc  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Nickname Log Channel has been changed from ${oldrlc} to ${rlc}`)] });
+				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Nickname Log Channel has been changed from ${oldrlc} to ${rlc}`)] });
 			});
 /**
  * --------------------------------------
@@ -328,22 +328,22 @@ module.exports = class config extends Command {
 
 			if (args[2] == 'none'){
 				return data.updateOne({ _id: message.guild.id, joinLog: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Join Log Channel has been changed from ${oldjlc} to \`None\``)] });
+					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Join Log Channel has been changed from ${oldjlc} to \`None\``)] });
 				});
 				}
 
 			if (jlc.type !== 'GUILD_TEXT') {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Only guild text channel is allowed`)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Only guild text channel is allowed`)] });
 				return;
 			}
 	
 			if (oldjlc === jlc) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Join Log Channel is already ${oldjlc}`)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Join Log Channel is already ${oldjlc}`)] });
 				return
 			}
 
 			return data.updateOne({ _id: message.guild.id, joinLog: jlc  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Join Log Channel has been changed from ${oldjlc} to ${jlc}`)] });
+				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Join Log Channel has been changed from ${oldjlc} to ${jlc}`)] });
 			});
 
 
@@ -372,22 +372,22 @@ module.exports = class config extends Command {
 
 			if (args[2] == 'none'){
 				return data.updateOne({ _id: message.guild.id, leaveLog: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Leave Channel has been changed from ${oldllc} to \`None\``)] });
+					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Leave Channel has been changed from ${oldllc} to \`None\``)] });
 				});
 				}
 
 			if (llc.type !== 'GUILD_TEXT') {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Only guild text channel is allowed`)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Only guild text channel is allowed`)] });
 				return;
 			}
 	
 			if (oldllc === llc) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Leave Channel is already ${oldllc}`)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Leave Channel is already ${oldllc}`)] });
 				return
 			}
 
 			return data.updateOne({ _id: message.guild.id, leaveLog: llc  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Leave Channel has been changed from ${oldllc} to ${llc}`)] });
+				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Leave Channel has been changed from ${oldllc} to ${llc}`)] });
 			});
 
 /**
@@ -416,23 +416,23 @@ module.exports = class config extends Command {
 
 			if (args[2] == 'none'){
 				return data.updateOne({ _id: message.guild.id, modLog: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Mod Log Channel has been changed from ${oldlm}\` to \`None\``)] });
+					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Mod Log Channel has been changed from ${oldlm}\` to \`None\``)] });
 				});
 				}
 
 			if (lm.type !== 'GUILD_TEXT') {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Only guild text channel is allowed`)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Only guild text channel is allowed`)] });
 				return;
 			}
 
 	
 			if (oldlm === lm) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Mod Log Channel is already ${lm}`)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Mod Log Channel is already ${lm}`)] });
 				return
 			}
 
 			return data.updateOne({ _id: message.guild.id, modLog: lm  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Mod Log Channel has been changed from ${oldlm} to ${lm}`)] });
+				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Mod Log Channel has been changed from ${oldlm} to ${lm}`)] });
 			});
 		}
 
@@ -487,22 +487,22 @@ module.exports = class config extends Command {
 
 			if (args[2] == 'none'){
 				return data.updateOne({ _id: message.guild.id, welcomeLog: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Welcome Log Channel has been changed from ${oldjlc} to \`None\``)] });
+					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Welcome Log Channel has been changed from ${oldjlc} to \`None\``)] });
 				});
 				}
 
 			if (jlc.type !== 'GUILD_TEXT') {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Only guild text channel is allowed`)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Only guild text channel is allowed`)] });
 				return;
 			}
 	
 			if (oldjlc === jlc) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Welcome Log Channel is already ${oldjlc}`)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Welcome Log Channel is already ${oldjlc}`)] });
 				return
 			}
 
 			return data.updateOne({ _id: message.guild.id, welcomeLog: jlc  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Welcome Log Channel has been changed from ${oldjlc} to ${jlc}`)] });
+				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Welcome Log Channel has been changed from ${oldjlc} to ${jlc}`)] });
 			});
 /**
  * --------------------------------------
@@ -529,22 +529,22 @@ module.exports = class config extends Command {
 
 			if (args[2] == 'none'){
 				return data.updateOne({ _id: message.guild.id, farewellLog: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Farewell Channel has been changed from ${oldllc} to \`None\``)] });
+					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Farewell Channel has been changed from ${oldllc} to \`None\``)] });
 				});
 				}
 
 			if (llc.type !== 'GUILD_TEXT') {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Only guild text channel is allowed`)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Only guild text channel is allowed`)] });
 				return;
 			}
 	
 			if (oldllc === llc) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Farewell Channel is already ${oldllc}`)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Farewell Channel is already ${oldllc}`)] });
 				return
 			}
 
 			return data.updateOne({ _id: message.guild.id, farewellLog: llc  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Farewell Channel has been changed from ${oldllc} to ${llc}`)] });
+				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Farewell Channel has been changed from ${oldllc} to ${llc}`)] });
 			});
 
 /**
@@ -575,18 +575,18 @@ module.exports = class config extends Command {
 
 			if (args[2] == 'none'){
 				return data.updateOne({ _id: message.guild.id, joinMsg: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Welcome message has been changed from \`${oldjm}\` to \`None\``)] });
+					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Welcome message has been changed from \`${oldjm}\` to \`None\``)] });
 				});
 				}
 
 	
 			if (oldjm === jm) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Welcome message is already \`${jm}\``)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Welcome message is already \`${jm}\``)] });
 				return
 			}
 
 			return data.updateOne({ _id: message.guild.id, joinMsg: jm  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Welcome Message has been changed from \`${oldjm}\` to \`${jm}\``)] });
+				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Welcome Message has been changed from \`${oldjm}\` to \`${jm}\``)] });
 			});
 /**
  * --------------------------------------
@@ -614,18 +614,18 @@ module.exports = class config extends Command {
 
 			if (args[2] == 'none'){
 				return data.updateOne({ _id: message.guild.id, leaveMsg: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Farewell message has been changed from \`${oldlm}\` to \`None\``)] });
+					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Farewell message has been changed from \`${oldlm}\` to \`None\``)] });
 				});
 				}
 
 	
 			if (oldlm === lm) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.cross} Farewell message is already \`${lm}\``)] });
+				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Farewell message is already \`${lm}\``)] });
 				return
 			}
 
 			return data.updateOne({ _id: message.guild.id, leaveMsg: lm  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.tick} Farewell Message has been changed from \`${oldlm}\` to \`${lm}\``)] });
+				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Farewell Message has been changed from \`${oldlm}\` to \`${lm}\``)] });
 			});
 		}
 		}

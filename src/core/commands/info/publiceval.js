@@ -38,7 +38,7 @@ module.exports = class publiceval extends Command {
             }
             //console.log(getSimilar)
             let embed = new MessageEmbed()
-            .setTitle(`${this.emoji.tick}Languages found:`)
+            .setTitle(`${this.emoji.success}Languages found:`)
             .setColor('AQUA')
             .addField('Input', `\`\`\`js\n${args[0]}\`\`\``)
             .addField('Similar languages', `\`\`\`\n${getSimilar}\`\`\``)
@@ -54,7 +54,7 @@ module.exports = class publiceval extends Command {
         //console.log(code)
 
 		const error = new MessageEmbed()
-			.setTitle(`${this.emoji.cross} Error:`)
+			.setTitle(`${this.emoji.fail} Error:`)
 			.setColor('AQUA')
 			.setDescription('Please provide code to run')
 			.setFooter(message.member.displayName, message.author.displayAvatarURL({ dynamic: true }))
@@ -76,7 +76,7 @@ module.exports = class publiceval extends Command {
 
 
 			let embed = new MessageEmbed()
-				.setTitle(`${this.emoji.tick}Eval`)
+				.setTitle(`${this.emoji.success}Eval`)
 				.setColor('AQUA')
 				.addField('Input', `\`\`\`js\n${code}\`\`\``)
                 .addField('Output', `\`\`\`\n${evaled.output}\`\`\``)
@@ -90,7 +90,7 @@ module.exports = class publiceval extends Command {
 		} catch (error) {
             console.log(error)
 			const err = new MessageEmbed()
-				.setTitle(`${this.emoji.cross}Error:`)
+				.setTitle(`${this.emoji.fail}Error:`)
 				.setDescription(String.apply(error))
 				.setFooter(message.member.displayName, message.author.displayAvatarURL({ dynamic: true }))
 				.setTimestamp();
