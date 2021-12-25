@@ -1,14 +1,12 @@
 const { Message, MessageEmbed} = require('discord.js');
 const Command = require('../../Command');
-const fetch = require('node-fetch');
 
 module.exports = class catfact extends Command {
 	constructor(client) {
 		super(client, {
-			name: 'coinflip',
-			description: 'Flips a coin',
-            example: 'coinflip',
-			aliases: ['cointoss', 'coin', 'flip'],
+			name: 'rps',
+			description: 'plays rock paper scisors',
+      example: 'rps',
 			type: client.types.FUN 
 	    });
     }
@@ -25,10 +23,10 @@ module.exports = class catfact extends Command {
         const botChoice = Math.floor(Math.random()*3);
         let result;
         if (userChoice === botChoice) result = 'It\'s a draw!';
-        else if (botChoice > userChoice || botChoice === 0 && userChoice === 2) result = '**Calypso** wins!';
+        else if (botChoice > userChoice || botChoice === 0 && userChoice === 2) result = '**Keithos** wins!';
         else result = `**${message.member.displayName}** wins!`;
         const embed = new MessageEmbed()
-          .setTitle(`${message.member.displayName} vs. Calypso`)
+          .setTitle(`${message.member.displayName} vs. Keith`)
           .addField('Your Choice:', res[userChoice], true)
           .addField('Keith\'s Choice', res[botChoice], true)
           .addField('Result', result, true)

@@ -1,13 +1,12 @@
 const { Message, MessageEmbed} = require('discord.js');
 const Command = require('../../Command');
-const fetch = require('node-fetch');
 
 module.exports = class catfact extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'coinflip',
 			description: 'Flips a coin',
-            example: 'coinflip',
+      example: 'coinflip',
 			aliases: ['cointoss', 'coin', 'flip'],
 			type: client.types.FUN 
 	    });

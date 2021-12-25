@@ -1,15 +1,14 @@
 const { Message, MessageEmbed} = require('discord.js');
 const Command = require('../../Command');
+const fetch = require('node-fetch');
 
 module.exports = class duck extends Command {
 	constructor(client) {
 		super(client, {
-            name: 'emojify',
-            aliases: ['sayemoji'],
-            usage: 'emojify <message>',
-            description: 'Swaps every letter within the provided message with an emoji.',
-            type: client.types.FUN,
-            examples: ['emojify hello world']
+      name: 'meme',
+      usage: 'meme',
+      description: 'Displays a random meme from the `memes`, `dankmemes`, or `me_irl` subreddits.',
+      type: client.types.FUN
 		});
 	}
 	/**

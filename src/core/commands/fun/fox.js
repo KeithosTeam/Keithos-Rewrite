@@ -1,5 +1,6 @@
 const { Message, MessageEmbed} = require('discord.js');
 const Command = require('../../Command');
+const fetch = require('node-fetch');
 
 module.exports = class duck extends Command {
 	constructor(client) {

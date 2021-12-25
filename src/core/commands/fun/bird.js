@@ -1,12 +1,13 @@
 const { Message, MessageEmbed} = require('discord.js');
 const Command = require('../../Command');
+const fetch = require('node-fetch');
 
 module.exports = class bird extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'bird',
 			description: 'Gets a random bird picture',
-            example: 'bird',
+      example: 'bird',
 			aliases: ['birb', 'chirp'],
 			type: client.types.FUN 
 		});
@@ -28,7 +29,7 @@ module.exports = class bird extends Command {
               message.channel.send({ embeds: [embed] });
           } catch (err) {
             this.client.logger.error(err.stack);
-            this.utils.sendErrorMessage(message, 1, 'Please try again in a few seconds', err.message);
+            this.utils.sendErrorMessage(message, this, 'Please try again in a few seconds', err.message);
           }
 
 	}
