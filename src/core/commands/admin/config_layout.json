@@ -1,0 +1,32 @@
+{
+    "config": [
+        {
+            "names": ["prefix"],
+            "tab": "main",
+            "title": "Prefix",
+            "type": "string",
+            "dbname": "prefix"
+        },
+        {
+            "names": ["ip"],
+            "tab": "main",
+            "title": "ip",
+            "type": "string",
+            "dbname": "ip"
+        },
+        {
+            "names": ["messagelog", "msg", "message", "msglog", "mlc"],
+            "tab": "logging",
+            "title": "Message Log Channel",
+            "type": "channel",
+            "dbname": "messageLog"
+        },
+        {
+            "names": ["modrole"],
+            "tab": "main",
+            "title": "Moderator Role",
+            "type": "role",
+            "dbname": "modRole"
+        }
+    ]
+}
