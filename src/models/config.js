@@ -23,6 +23,8 @@ module.exports = model(
 		modRole: { type: String, default: null},
 		adminRole: { type: String, default: null},
 		autoRole: { type: String, default: null},
+
+		autoModList: { type: String, default: null},
 		
 	}, {
 		versionKey: false

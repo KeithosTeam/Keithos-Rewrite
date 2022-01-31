@@ -18,7 +18,7 @@ const { auth, authenticate, newToken} = require("./utils/utils")
 const botStatsRoute = require('./routes/bot_stats')
 logger.info('Loading API ');
 
-app.use('/bot_stats', botStatsRoute)
+app.use('/bot_stats', './routes/bot_stats')
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');

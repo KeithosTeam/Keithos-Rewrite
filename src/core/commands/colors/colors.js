@@ -22,8 +22,8 @@ module.exports = class colors extends Command {
   Schema.findOne({ _id: message.guild.id }, async (e, data) => {
    
      const colors = message.guild.roles.cache.filter(c => c.name.startsWith('#'))
-       .sort((a, b) => b.position - a.position).array();
-
+       .sort((a, b) => b.position - a.position)//.array();
+       //console.log(colors)
     // console.log(message.guild.roles.cache.filter(c => c.name.startsWith('#')))
     
     const embed = new MessageEmbed()
@@ -45,52 +45,68 @@ module.exports = class colors extends Command {
       
     // Reaction Menu
     } else {
-
-      let n = 0;
-      const { getRange } = message.client.utils;
+      let desc, toggle;
+      const range = (colors.length == 1) ? '[1]' : `[1 - ${colors.length}]`;
+      embed.setTitle(`Available Colors ${range}`)
+        colors.forEach((value, key) => {
+          if (!toggle) {
+            desc = `${colors.get(key)}  `
+            toggle = true;
+          } else {
+            desc = desc + `${colors.get(key)}  `
+          }
+        });
       embed
-        .setTitle('Available Colors ' + getRange(colors, n, interval))
-        .setThumbnail(message.guild.iconURL({ dynamic: true }))
-        .setFooter(
-          'Expires after two minutes.\n' + message.member.displayName,  
-          message.author.displayAvatarURL({ dynamic: true })
-        )
-        .setDescription(`
-          ${colors.slice(n, n + interval).join(' ')}\n\nType \`${prefix}color <color name>\` to choose one.
-        `);
+        .setDescription(`${desc}\n\nType \`${prefix}color <color name>\` to choose one.`)
+      message.channel.send({ embeds: [embed]});
 
-      const json = embed.toJSON();
 
-      const previous = () => {
-        if (n === 0) return;
-        n -= interval;
-        return new MessageEmbed(json)
-          .setTitle('Available Colors ' + getRange(colors, n, interval))
-          .setDescription(`
-            ${colors.slice(n, n + interval).join(' ')}\n\nType \`${prefix}color <color name>\` to choose one.
-          `);
-      };
 
-      const next = () => {
-        const cap = colors.length - (colors.length % interval);
-        if (n === cap || n + interval === colors.length) return;
-        n += interval;
-        if (n >= colors.length) n = cap;
-        const max = (colors.length > n + interval) ? n + interval : colors.length;
-        return new MessageEmbed(json)
-          .setTitle('Available Colors ' + getRange(colors, n, interval))
-          .setDescription(`${colors.slice(n, max).join(' ')}\n\nType \`${prefix}color <color name>\` to choose one.`);
-      };
+      // let n = 0;
+      // const { getRange } = this.utils;
+      // embed
+      //   .setTitle('Available Colors ' + getRange(colors, n, interval))
+      //   .setThumbnail(message.guild.iconURL({ dynamic: true }))
+      //   .setFooter(
+      //     'Expires after two minutes.\n' + message.member.displayName,  
+      //     message.author.displayAvatarURL({ dynamic: true })
+      //   )
+      //   .setDescription(`
+      //     ${colors.toString().slice(n, n + interval).join(' ')}\n\nType \`${prefix}color <color name>\` to choose one.
+      //   `);
 
-      const reactions = {
-        '◀️': previous,
-        '▶️': next,
-        '⏹️': null,
-      };
+      // const json = embed.toJSON();
 
-      const menu = new ReactionMenu(message.client, message.channel, message.member, embed, null, null, reactions);
+      // const previous = () => {
+      //   if (n === 0) return;
+      //   n -= interval;
+      //   return new MessageEmbed(json)
+      //     .setTitle('Available Colors ' + getRange(colors, n, interval))
+      //     .setDescription(`
+      //       ${colors.toString().slice(n, n + interval).join(' ')}\n\nType \`${prefix}color <color name>\` to choose one.
+      //     `);
+      // };
+
+      // const next = () => {
+      //   const cap = colors.length - (colors.length % interval);
+      //   if (n === cap || n + interval === colors.length) return;
+      //   n += interval;
+      //   if (n >= colors.length) n = cap;
+      //   const max = (colors.length > n + interval) ? n + interval : colors.length;
+      //   return new MessageEmbed(json)
+      //     .setTitle('Available Colors ' + getRange(colors, n, interval))
+      //     .setDescription(`${colors.toString().slice(n, max).join(' ')}\n\nType \`${prefix}color <color name>\` to choose one.`);
+      // };
+
+      // const reactions = {
+      //   '◀️': previous,
+      //   '▶️': next,
+      //   '⏹️': null,
+      // };
+
+      // const menu = new ReactionMenu(message.client, message.channel, message.member, embed, null, null, reactions);
       
-      menu.reactions['⏹️'] = menu.stop.bind(menu);
+      // menu.reactions['⏹️'] = menu.stop.bind(menu);
     }
 
         })

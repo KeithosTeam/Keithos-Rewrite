@@ -38,10 +38,10 @@ using_discord_/_commands:
 All commands:
             colors:
                   + color.js
-                  - colors.js
-                  - createcolor.js
-                  - createdefaultcolors.js
-                  - randomcolor.js
+                  + colors.js
+                  + createcolor.js
+                  + createdefaultcolors.js
+                  + randomcolor.js
 
                fun:
                   + 8ball.js

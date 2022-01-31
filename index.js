@@ -11,14 +11,14 @@ const startupScripts = (check) => {
 			
 			exec('./startdb.sh', (error, stdout, stderr) => {  //executes a local os command. In this case starts the script startdb.sh
 				if (error) {
-					console.log(`[DB] error: ${error.message}`);
+					client.logger.error(`[DB] error: ${error.message}`);
 					return;
 				}
 				if (stderr) {
-					console.log(`[DB] stderr: ${stderr}`);
+					client.logger.error(`[DB] stderr: ${stderr}`);
 					return;
 				}
-				console.log(`[DB] stdout: ${stdout}`);
+				client.logger.info(`[DB] stdout: ${stdout}`);
 			});
 		} else {
 			exec('./startdb.sh')

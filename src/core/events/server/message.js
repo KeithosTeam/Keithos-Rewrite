@@ -1,7 +1,7 @@
 const Event = require('../../Event');
 const Schema = require('../../../models/config');
 const { Message, Collection } = require('discord.js');
-
+const automod = require("../../automod/automod")
 
 module.exports = class msage extends Event {
 	constructor(client) {
@@ -42,6 +42,8 @@ module.exports = class msage extends Event {
 				}
 			]});
 		}
+
+		automod.main(message, Schema)
 
 		const prefixRegex = new RegExp(`^(<@!?${this.client.user.id}>|${prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})\\s*`);
 		if (!prefixRegex.test(message.content)) {

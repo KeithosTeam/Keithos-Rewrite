@@ -1,13 +1,13 @@
 const { MessageEmbed } = require('discord.js');
 const schedule = require('node-schedule');
 const { stripIndent } = require('common-tags');
-const { cross } = require('./emoji.json');
+const { fail } = require('./emoji.json');
 const Schema = require('../models/config')
 	
 	function sendErrorMessage(message, command, reason, errorMessage) {
 		Schema.findOne({ _id: message.guild.id }, async (e, data) => {	
 			const embed = new MessageEmbed()
-				.setTitle(`${cross} Error: \`${command.name}\``)
+				.setTitle(`${fail} Error: \`${command.name}\``)
 				.setDescription(/** `**Error Type:**\`\`\`\n- ${errorType}\`\`\`\ \n*/`**Reason:**\`\`\`\n+ ${reason}\`\`\``)
 				.addField('Usage:', `\`\`\`${data.prefix}${command.example}\`\`\``)
 				.setTimestamp()
@@ -92,6 +92,25 @@ const Schema = require('../models/config')
     const id = matches[1];
     return message.guild.channels.cache.get(id);
   }
+
+
+
+
+
+	  /**
+	 * Gets current array window range
+	 * @param {Array} arr
+	 * @param {int} current
+	 * @param {int} interval
+	 */
+	function getRange(arr, current, interval) {
+	  const max = (arr.length > current + interval) ? current + interval : arr.length;
+	  current = current + 1;
+	  const range = (arr.length == 1 || arr.length == current || interval == 1) ? `[${current}]` : `[${current} - ${max}]`;
+	  return range;
+	}
+
+
 
   /**
    * Keith's Reaction Menu class
@@ -309,6 +328,7 @@ module.exports = {
 	getMemberFromMention,
 	getRoleFromMention,
 	getChannelFromMention,
-	ReactionMenu
+	ReactionMenu,
+	getRange
 };
 
