@@ -4,11 +4,11 @@ const { stripIndent } = require('common-tags');
 const { fail } = require('./emoji.json');
 const Schema = require('../models/config')
 	
-	function sendErrorMessage(message, command, reason, errorMessage) {
+	function sendErrorMessage(message, command, reason="None", errorMessage="None", errorType="Command Failure") {
 		Schema.findOne({ _id: message.guild.id }, async (e, data) => {	
 			const embed = new MessageEmbed()
 				.setTitle(`${fail} Error: \`${command.name}\``)
-				.setDescription(/** `**Error Type:**\`\`\`\n- ${errorType}\`\`\`\ \n*/`**Reason:**\`\`\`\n+ ${reason}\`\`\``)
+				.setDescription(`**Reason:**\`\`\`diff\n- ${errorType}\n+ ${reason}\`\`\``) /** `**Error Type:**\`\`\`\n- ${errorType}\`\`\`\ \n*/
 				.addField('Usage:', `\`\`\`${data.prefix}${command.example}\`\`\``)
 				.setTimestamp()
 				.setThumbnail(message.member.displayAvatarURL())
@@ -322,6 +322,11 @@ class ReactionMenu {
   };
 
 
+function capitalize(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+
 module.exports = {
 	sendErrorMessage,
 	sendModLogMessage,
@@ -329,6 +334,7 @@ module.exports = {
 	getRoleFromMention,
 	getChannelFromMention,
 	ReactionMenu,
-	getRange
+	getRange,
+	capitalize
 };
 

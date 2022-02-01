@@ -19,7 +19,7 @@ module.exports = class catfact extends Command {
 	async run(message, args) {
         try {
             const res = await (await fetch('http://yesno.wtf/api/')).json();
-            let answer = message.client.utils.capitalize(res.answer);
+            let answer = this.utils.capitalize(res.answer);
             if (answer === 'Yes') answer = '👍  ' + answer + '!  👍';
             else if (answer === 'No') answer = '👎  ' + answer + '!  👎';
             else answer = '👍  ' + answer + '...  👎';

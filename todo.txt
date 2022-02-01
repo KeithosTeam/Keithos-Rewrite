@@ -45,7 +45,7 @@ All commands:
 
                fun:
                   + 8ball.js
-                  - annoy.js //to be removed
+                  + annoy.js //to be removed
                   + bird.js
                   + cat.js
                   + catfact.js
@@ -61,14 +61,14 @@ All commands:
                   + rps.js
                   + say.js
                   + shibe.js
-                  - solotrivia.js // to be removed
+                  + solotrivia.js // to be removed
                   + thouart.js
-                  - topic.js // to be removed
-                  - trivia.js // needs more topics UPDATE: to be removed
+                  + topic.js // to be removed
+                  + trivia.js // needs more topics UPDATE: to be removed
                   + trumptweet.js
-                  - yesno.js
-                  - yomama.js
-                  - youtube.js
+                  + yesno.js
+                  + yomama.js
+                  + youtube.js // removed: Dead API
 
               info:
                   - admins.js
