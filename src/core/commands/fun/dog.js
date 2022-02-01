@@ -29,7 +29,7 @@ module.exports = class catfact extends Command {
               message.channel.send({ embeds: [embed] });
           } catch (err) {
             this.client.logger.error(err.stack);
-            this.utils.sendErrorMessage(message, 1, 'Please try again in a few seconds', err.message);
+            this.utils.sendErrorMessage(message, this, 'Please try again in a few seconds', err.message);
           }
 	}
 };

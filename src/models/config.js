@@ -17,8 +17,8 @@ module.exports = model(
 
 		welcomeLog: { type: String, default: null},
 		farewellLog: { type: String, default: null},
-		joinMsg: { type: String, default: null},
-		leaveMsg: { type: String, default: null},
+		welcomeMsg: { type: String, default: null},
+		farewellMsg: { type: String, default: null},
 		
 		modRole: { type: String, default: null},
 		adminRole: { type: String, default: null},

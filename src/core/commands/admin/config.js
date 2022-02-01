@@ -27,7 +27,7 @@ module.exports = class oldconfig extends Command {
 		Schema.findOne({ _id: message.guild.id }, async (e, data) => {
 
 			if (data) {
-				return;
+				//return;
 			} else {
 				data = new Schema({ _id: guild.id });
 				data.save();

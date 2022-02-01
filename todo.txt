@@ -86,8 +86,8 @@ All commands:
                   - member.js
                   - mods.js
                   - permissions.js
-                  - ping.js
-                  - prefix.js //to be removed, reason: useless, use @ping
+                  + ping.js
+                  + prefix.js //to be removed, reason: useless, use @ping
                   - roleinfo.js
                   - servercount.js
                   - servericon.js

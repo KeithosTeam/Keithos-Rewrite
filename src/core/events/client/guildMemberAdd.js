@@ -35,7 +35,7 @@ module.exports = class guildMember extends Event {
             };
             // join msg
             const channel1 = this.client.channels.cache.get(String(data.welcomeLog));
-            const msgDirty = data.joinMsg
+            const msgDirty = data.welcomeMsg
             const msg = msgDirty
                         .replace(/`?\$member`?/g, member)
                         .replace(/`?\$tag`?/g, member.user.tag)

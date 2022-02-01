@@ -59,54 +59,6 @@ module.exports = class colors extends Command {
       embed
         .setDescription(`${desc}\n\nType \`${prefix}color <color name>\` to choose one.`)
       message.channel.send({ embeds: [embed]});
-
-
-
-      // let n = 0;
-      // const { getRange } = this.utils;
-      // embed
-      //   .setTitle('Available Colors ' + getRange(colors, n, interval))
-      //   .setThumbnail(message.guild.iconURL({ dynamic: true }))
-      //   .setFooter(
-      //     'Expires after two minutes.\n' + message.member.displayName,  
-      //     message.author.displayAvatarURL({ dynamic: true })
-      //   )
-      //   .setDescription(`
-      //     ${colors.toString().slice(n, n + interval).join(' ')}\n\nType \`${prefix}color <color name>\` to choose one.
-      //   `);
-
-      // const json = embed.toJSON();
-
-      // const previous = () => {
-      //   if (n === 0) return;
-      //   n -= interval;
-      //   return new MessageEmbed(json)
-      //     .setTitle('Available Colors ' + getRange(colors, n, interval))
-      //     .setDescription(`
-      //       ${colors.toString().slice(n, n + interval).join(' ')}\n\nType \`${prefix}color <color name>\` to choose one.
-      //     `);
-      // };
-
-      // const next = () => {
-      //   const cap = colors.length - (colors.length % interval);
-      //   if (n === cap || n + interval === colors.length) return;
-      //   n += interval;
-      //   if (n >= colors.length) n = cap;
-      //   const max = (colors.length > n + interval) ? n + interval : colors.length;
-      //   return new MessageEmbed(json)
-      //     .setTitle('Available Colors ' + getRange(colors, n, interval))
-      //     .setDescription(`${colors.toString().slice(n, max).join(' ')}\n\nType \`${prefix}color <color name>\` to choose one.`);
-      // };
-
-      // const reactions = {
-      //   '◀️': previous,
-      //   '▶️': next,
-      //   '⏹️': null,
-      // };
-
-      // const menu = new ReactionMenu(message.client, message.channel, message.member, embed, null, null, reactions);
-      
-      // menu.reactions['⏹️'] = menu.stop.bind(menu);
     }
 
         })

@@ -27,16 +27,16 @@ const answers = [
 module.exports = class eightball extends Command {
 	constructor(client) {
 		super(client, {
-			name: '8ball',
-			description: '',
-            example: '',
-			aliases: ['', ''],
-			cooldown: 5,
-			toggleCooldown: false,
-            ownerOnly: false,
-            clientPemissions: [],
-            userPermissions: [],
-			type: client.types.INFO //can be UTILITY, MINECRAFT, FUN, COLOR, INFO, POINTS, MISC, MOD, ADMIN, OWNER,
+  			name: '8ball',
+  			description: '',
+        example: '',
+  			aliases: ['', ''],
+  			cooldown: 5,
+  			toggleCooldown: false,
+        ownerOnly: false,
+        clientPemissions: [],
+        userPermissions: [],
+  			type: client.types.FUN//can be UTILITY, MINECRAFT, FUN, COLOR, INFO, POINTS, MISC, MOD, ADMIN, OWNER,
 		});
 	}
 	/**

@@ -15,6 +15,27 @@
             "dbname": "ip"
         },
         {
+            "names": ["modrole"],
+            "tab": "main",
+            "title": "Moderator Role",
+            "type": "role",
+            "dbname": "modRole"
+        },
+        {
+            "names": ["adminrole"],
+            "tab": "main",
+            "title": "Admin Role",
+            "type": "role",
+            "dbname": "adminRole"
+        },
+        {
+            "names": ["autorole"],
+            "tab": "main",
+            "title": "Auto Role",
+            "type": "role",
+            "dbname": "autoRole"
+        },
+        {
             "names": ["messagelog", "msg", "message", "msglog", "mlc"],
             "tab": "logging",
             "title": "Message Log Channel",
@@ -22,11 +43,67 @@
             "dbname": "messageLog"
         },
         {
-            "names": ["modrole"],
-            "tab": "main",
-            "title": "Moderator Role",
-            "type": "role",
-            "dbname": "modRole"
+            "names": ["joinlog", "join", "jl"],
+            "tab": "logging",
+            "title": "Join Log Channel",
+            "type": "channel",
+            "dbname": "joinLog"
+        },
+        {
+            "names": ["leavelog", "leave", "ll"],
+            "tab": "logging",
+            "title": "Leave Log Channel",
+            "type": "channel",
+            "dbname": "leaveLog"
+        },
+        {
+            "names": ["nicklog", "nick", "nickl", "nlog", "nlc"],
+            "tab": "logging",
+            "title": "Nick Log Channel",
+            "type": "channel",
+            "dbname": "nickLog"
+        },
+        {
+            "names": ["rolelog", "role", "rolel", "rlog", "rlc"],
+            "tab": "logging",
+            "title": "Role Log Channel",
+            "type": "channel",
+            "dbname": "roleLog"
+        },
+        {
+            "names": ["modlog", "ml", "mod", "mlog", "mdlc"],
+            "tab": "logging",
+            "title": "Mod Log Channel",
+            "type": "channel",
+            "dbname": "modLog"
+        },
+        {
+            "names": ["welcomelog", "join", "joinlog", "joinchannel", "wc"],
+            "tab": "welcomes",
+            "title": "Welcome Channel",
+            "type": "channel",
+            "dbname": "welcomeLog"
+        },
+        {
+            "names": ["farewelllog", "bye", "byelog", "leavechannel", "leavelog"],
+            "tab": "welcomes",
+            "title": "Farewell Channel",
+            "type": "channel",
+            "dbname": "farewellLog"
+        },
+        {
+            "names": ["welcomemsg", "joinmsg", "wmsg", "joinmsg", "wm"],
+            "tab": "welcomes",
+            "title": "Welcome Message",
+            "type": "string",
+            "dbname": "welcomeMsg"
+        },
+        {
+            "names": ["farewellmsg", "byemsg", "bmsg", "leavemsg", "lm"],
+            "tab": "welcomes",
+            "title": "Farewell Message",
+            "type": "string",
+            "dbname": "farewellMsg"
         }
     ]
 }

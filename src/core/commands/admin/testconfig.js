@@ -23,28 +23,78 @@ module.exports = class config extends Command {
      */
 	async run(message, args) {
 
-        console.log('very start')
-
-        let tmp = args.join('~').toLowerCase()
+        if (args) {
+            let tmp = args.join('~').toLowerCase()
             args = tmp.split('~')
-
+        }
         let config = cfg.config
 
         Schema.findOne({ _id: message.guild.id }, async (e, data) => {
-
-            console.log('past mongodb')
 
             if (!data) {
 				data = new Schema({ _id: guild.id });
 				data.save();
             }
-            console.log('past data check')
             let x = 0;
+            let tabs = {
+                "main": [],
+                "logging": [],
+                "welcomes": []
+            }
+
+            while (x < config.length){
+                eval(`tabs.${config[x].tab}.push("${config[x].names[0]}")`)
+                x++
+            }
+            x=0
             while (x + 1 <= config.length){
-                console.log(x)
-                console.log(config[x].names)
-                console.log(args)
-                if (args[1].includes(config[x].names)) {
+                if (!args[0]){
+                    const embed = new MessageEmbed()
+                        .setTitle('Keithos configs')
+                        .setColor('BLUE')
+                        .setThumbnail(`${message.member.user.displayAvatarURL({ dynamic: true })}`)
+                        .addField('Main', `\`${tabs.main.length} Settings\``, true)
+                        .addField('Logging', `\`${tabs.logging.length} Settings\``, true)
+                        .addField('Welcomes and farewells', `\`${tabs.welcomes.length} Settings\``, true)
+                        
+
+                    return message.channel.send({embeds: [embed]})
+                } 
+
+                if (args[0] && !args[1]) {
+
+                    let embed = new MessageEmbed()
+                        .setTitle(`Keithos ${args[0]}`)
+                        .setColor('BLUE')
+                        .setThumbnail(`${message.member.user.displayAvatarURL({ dynamic: true })}`)
+                        .setTimestamp(Date.now())
+                    let z=0;
+                    const len = config.length
+                    console.log(args)
+                    while(z < len){
+                        console.log(`${z} <= ${len}`)
+                        if (config[z].tab == args[0]){
+                            let value = eval(`data.${config[z].dbname}`)
+                            const type = config[z].type
+                            console.log(type)
+                            if ( type == "string" ) {
+                                value = `\`${value}\``
+                            } else
+                            if ( type == "channel" ){
+                                value = message.guild.channels.cache.get(value) || '`None`';
+                            } else
+                            if ( type == "role" ){
+                                value = message.guild.roles.cache.get(value) || '`None`';
+                            }
+
+                            eval(`embed.addField(\`\${config[z].names[0]}\`, \`\${value}\`, true)` )
+                        }
+                        z++
+                    }
+                    return message.channel.send({embeds: [embed]})
+                }
+
+                if (config[x].tab == args[0] && config[x].names.includes(args[1])) {
                     console.log("A: " + config[x].names)
 
                     const Embed = new MessageEmbed()
@@ -55,16 +105,27 @@ module.exports = class config extends Command {
                     .setTimestamp();
                     
                     let value;
-                    let oldValue;
+                    let oldValue = eval(`data.${config[x].dbname}`);
+                    console.log(oldValue)
                     let type;
 
                     if (!args[2]) {
-                        return message.channel.send({ embeds: [Embed.addField('Hey!', `The ${config[x].title} for this guild is ${oldValue}`)] });
-                        
+                        if(config[x].type === "string"){
+                            return message.channel.send({ embeds: [Embed.addField('Hey!', `The ${config[x].title} for this guild is \`${oldValue || "None"}\``)] });
+                        } else if(config[x].type === "channel") {
+                            const oldChannel = message.guild.channels.cache.get(oldValue) || '`None`';
+                            return message.channel.send({ embeds: [Embed.addField('Hey!', `The ${config[x].title} for this guild is ${oldChannel}`)] });
+                        } else if(config[x].type === "role") {
+                            const oldRole = message.guild.roles.cache.get(oldValue) || '`None`';
+                            return message.channel.send({ embeds: [Embed.addField('Hey!', `The ${config[x].title} for this guild is ${oldRole}`)] });
+                        }
                     }
         
                     if (args[2] == 'none'){
-                        return eval(`data.updateOne({ _id: message.guild.id, ${config[x].dbname}: undefined  }).then(() => {
+                        if (config[x].dbname == "prefix") {
+                            this.utils.sendErrorMessage(message, this, 'The prefix cant be \`None\`', err.message);
+                        }
+                        return eval(`Schema.updateOne({ _id: message.guild.id, ${config[x].dbname}: undefined  }).then(() => {
                             message.channel.send({ embeds: [Embed.addField('Success!', '${this.emoji.success} ${config[x].title} has been changed from ${oldValue} to ${none}')] });
                         });`)
                         }
@@ -122,6 +183,16 @@ module.exports = class config extends Command {
                     return eval(`data.updateOne({ _id: message.guild.id, ${config[x].dbname}: value  })`).then(() => {
                         message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} ${config[x].title} has been changed from \`${oldValue}\` to \`${value}\``)] });
                     });
+
+                    if(config[x].type ==="string"){
+                        return eval(`data.updateOne({ _id: message.guild.id, ${config[x].dbname}: value  })`).then(() => {
+                        message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} ${config[x].title} has been changed from \`${oldValue}\` to \`${value}\``)] });
+                        });
+                    } else {
+                        return eval(`data.updateOne({ _id: message.guild.id, ${config[x].dbname}: value  })`).then(() => {
+                        message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} ${config[x].title} has been changed from ${oldValue} to ${value}`)] });
+                        });
+                    }
                 } else {
                     x++;
                 }
