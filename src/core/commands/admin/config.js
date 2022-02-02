@@ -8,12 +8,12 @@ const none = '\`None\`';
 module.exports = class config extends Command {
 	constructor(client) {
 		super(client, {
-			name: 'testconfig',
+			name: 'config',
 			description: 'edit the settings',
 			type: client.types.ADMIN,
             usage: 'config <tab> <setting> <value>',
             examples: ['config main prefix k.', 'config main prefix','config main','config'],
-			aliases: ['tcfg', 'tsettings'],
+			aliases: ['cfg', 'settings'],
 			cooldown: 8,
 			toggleCooldown: false,
 			userPermissions: ['MANAGE_GUILD']
@@ -34,7 +34,7 @@ module.exports = class config extends Command {
         Schema.findOne({ _id: message.guild.id }, async (e, data) => {
 
             if (!data) {
-				data = new Schema({ _id: guild.id });
+				data = new Schema({ _id: message.guild.id });
 				data.save();
             }
             let x = 0;

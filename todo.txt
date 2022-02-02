@@ -36,6 +36,10 @@ API:
 using_discord_/_commands:
 
 All commands:
+             admin:        
+                  + config.js
+                  - old config style for backwards compatibility
+
             colors:
                   + color.js
                   + colors.js
@@ -136,14 +140,14 @@ All commands:
                   - wipetotalpoints.js
             
             points:
-                  crown.js  //to be removed
-                  explainpoints.js
-                  givepoints.js
-                  leaderboard.js
-                  points.js
-                  pointsper.js
-                  position.js
-                  totalpoints.js
+                  - crown.js  //to be removed
+                  - explainpoints.js
+                  - givepoints.js
+                  - leaderboard.js
+                  - points.js
+                  - pointsper.js
+                  - position.js
+                  - totalpoints.js
 
 
 

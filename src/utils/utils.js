@@ -29,7 +29,6 @@ const Schema = require('../models/config')
    * @param {Object} fields
    */
 	   async function sendModLogMessage(message, reason, action, fields = {}) {
-		   console.log(this.name)
 		Schema.findOne({ _id: message.guild.id }, async (e, data) => {
 		const modLogId = data.modLog
 		const modLog = message.guild.channels.cache.get(modLogId); 

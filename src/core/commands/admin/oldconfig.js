@@ -5,11 +5,11 @@ const Command = require('../../Command');
 module.exports = class oldconfig extends Command {
 	constructor(client) {
 		super(client, {
-			name: 'config',
+			name: 'oconfig',
 			description: 'edit the settings',
 			example: 'config main prefix k.',
 			type: client.types.ADMIN,
-			aliases: ['cfg', 'settings'],
+			aliases: ['ocfg', 'osettings'],
 			cooldown: 8,
 			toggleCooldown: false,
 			userPermissions: ['MANAGE_GUILD']
