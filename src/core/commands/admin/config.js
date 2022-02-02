@@ -1,15 +1,19 @@
-const { Message, MessageEmbed } = require('discord.js');// hey
-const Schema = require('../../../models/config');
+const { Message, MessageEmbed} = require('discord.js');
 const Command = require('../../Command');
+const Schema = require('../../../models/config');
+const cfg = require('./config_layout.json')
+const none = '\`None\`';
+//console.log(cfg.config[0].names)
 
-module.exports = class oldconfig extends Command {
+module.exports = class config extends Command {
 	constructor(client) {
 		super(client, {
-			name: 'config',
+			name: 'testconfig',
 			description: 'edit the settings',
-			example: 'config main prefix k.',
 			type: client.types.ADMIN,
-			aliases: ['cfg', 'settings'],
+            usage: 'config <tab> <setting> <value>',
+            examples: ['config main prefix k.', 'config main prefix','config main','config'],
+			aliases: ['tcfg', 'tsettings'],
 			cooldown: 8,
 			toggleCooldown: false,
 			userPermissions: ['MANAGE_GUILD']
@@ -19,627 +23,154 @@ module.exports = class oldconfig extends Command {
      * @param {Message} message 
      * @param {string[]} args 
      */
-	async run (message, args) {
+	async run(message, args) {
 
-		let tmp = args.join('~').toLowerCase()
-		args = tmp.split('~')
-		console.log(args)
+        if (args) {
+            let tmp = args.join('~').toLowerCase()
+            args = tmp.split('~')
+        }
+        let config = cfg.config
 
-		Schema.findOne({ _id: message.guild.id }, async (e, data) => {
+        Schema.findOne({ _id: message.guild.id }, async (e, data) => {
 
-			if (data) {
-				//return;
-			} else {
+            if (!data) {
 				data = new Schema({ _id: guild.id });
 				data.save();
-			}      
- /**
- * --------------------------------------
- * Help Tab
- * --------------------------------------
- */          
-        if (args[0] == 'help' || args[0] == 'h' || args[0] == '?' || !args[0]) {
-			console.log('here')
-            message.channel.send({
-                embeds: [
-                    new MessageEmbed()
-                    .setTitle('Keithos configs')
-                    .setColor('BLUE')
-                    .setThumbnail(`${message.member.user.displayAvatarURL({ dynamic: true })}`)
-                    .addField('Main', `\`1 Setting\``, true)
-					.addField('Logging', `\`6 Settings\``, true)
-					.addField('Welcomes and farewells', `\`4 Settings\``, true)
-                    .setTimestamp(Date.now())
-                ]
-            }).catch(err => { 
-				console.log(err)
-                return;
-            });
-		
-/**
- * --------------------------------------
- * Main Tab
- * --------------------------------------
- */
-        } else if (args[0] === 'main') {
-
-			const oldPrefix = data.prefix;
-			console.log('yaaaaaa')
-
-			if(!args[1]){
-			
-
-			const Embed = new MessageEmbed()
-			.setTitle('Main settings')
-			.setColor(this.client.config.embed.color)
-			.addField('Prefix', `\`${oldPrefix}\``)
-			.setThumbnail(this.client.user.displayAvatarURL())
-			.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
-			.setTimestamp();
-			
-			message.channel.send({ embeds: [Embed] })
-
-			} else if(args[1] == 'prefix') {
-				const prefixEmbed = new MessageEmbed()
-				.setTitle('Prefix')
-				.setColor(this.client.config.embed.color)
-				.setThumbnail(this.client.user.displayAvatarURL())
-				.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
-				.setTimestamp();
-				
-				
-				let prefix = args[2];
-				
-
-				if (!args[2]) {
-					message.channel.send({ embeds: [prefixEmbed.addField('Hey!', `The prefix for this guild is \`${data.prefix}\``)] });
-					return;
-				}
-
-				if (prefix.length > 4) {
-					return message.channel.send({ embeds: [prefixEmbed.addField('Error:', `${this.emoji.fail} Prefix cannot be more than \`4\` chars!`)] });
-				}
-		
-				if (data.prefix === prefix) {
-					message.channel.send({ embeds: [prefixEmbed.addField('Error:', `${this.emoji.fail} Prefix is already \`${data.prefix}\``)] });
-				}
-
-				return data.updateOne({ _id: message.guild.id, prefix: prefix }).then(() => {
-					message.channel.send({ embeds: [prefixEmbed.addField('Success!', `${this.emoji.success} Prefix has been changed from \`${oldPrefix}\` to \`${prefix}\``)] });
-				});
-
-/**
- * --------------------------------------
- * Ip
- * --------------------------------------
- */
-			} else if(args[1] == 'ip') {
-				const prefixEmbed = new MessageEmbed()
-				.setTitle('Prefix')
-				.setColor(this.client.config.embed.color)
-				.setThumbnail(this.client.user.displayAvatarURL())
-				.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
-				.setTimestamp();
-
-				let oldIp = data.ip;
-				let ip = args[2];
-				
-
-				if (!args[2]) {
-					message.channel.send({ embeds: [prefixEmbed.addField('Hey!', `The ip for this guild is \`${data.ip}\``)] });
-					return;
-				}
-
-				if (args[2] == 'none'){
-					return data.updateOne({ _id: message.guild.id, ip: undefined  }).then(() => {
-						message.channel.send({ embeds: [prefixEmbed.addField('Success!', `${this.emoji.success} Message Log Channel has been changed from ${oldIp} to \`None\``)] });
-					});
-					}
-		
-				if (data.ip === ip) {
-					message.channel.send({ embeds: [prefixEmbed.addField('Error:', `${this.emoji.fail} Ip is already \`${data.Ip}\``)] });
-				}
-
-				return data.updateOne({ _id: message.guild.id, ip: ip }).then(() => {
-					message.channel.send({ embeds: [prefixEmbed.addField('Success!', `${this.emoji.success} Ip has been changed from \`${oldIp}\` to \`${ip}\``)] });
-				});
-			}
-
-/**
- * --------------------------------------
- * Logging Tab
- * --------------------------------------
- */
-
-		} else if(args[0] == 'Logging' || args[0] == 'logging' || args[0] == 'log' || args[0] == 'logs'){
-
-			if(!args[1]){
-
-				const messageLog = message.guild.channels.cache.get(data.messageLog) || '`None`';
-				const nickLog = message.guild.channels.cache.get(data.nickLog) || '`None`';
-				const roleLog = message.guild.channels.cache.get(data.roleLog) || '`None`';
-				const joinLog = message.guild.channels.cache.get(data.joinLog) || '`None`';
-				const leaveLog = message.guild.channels.cache.get(data.leaveLog) || '`None`';
-				const modLog = message.guild.channels.cache.get(data.modLog) || '`None`';
-		
-					const Embed = new MessageEmbed()
-					.setTitle('Logging settings')
-					.setColor(this.client.config.embed.color)
-					.addField('Message log', `${messageLog}`, true)
-					.addField('Nickname log', `${nickLog}`, true)
-					.addField('Role log', `${roleLog}`, true)
-					.addField('Join log', `${joinLog}`, true)
-					.addField('Leave log', `${leaveLog}`, true)
-					.addField('Mod log', `${modLog}`, true)
-					.setThumbnail(this.client.user.displayAvatarURL())
-					.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
-					.setTimestamp();
-					
-					message.channel.send({ embeds: [Embed] })
-
-			}
-
-
-/**
- * --------------------------------------
- * MsgLog
- * --------------------------------------
- */
-
-			if (args[1] == 'messagelog' || args[1] == 'msg' || args[1] == 'message' || args[1] == 'msglog' || args[1] == 'mlc') {
-
-			const Embed = new MessageEmbed()
-			.setTitle('Message Log Channel')
-			.setColor(this.client.config.embed.color)
-			.setThumbnail(this.client.user.displayAvatarURL())
-			.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
-			.setTimestamp();
-			
-			let mlc =  message.mentions.channels.first() || message.guild.channels.cache.get(args[2]) || '`None`';
-			
-			const oldmlc = message.guild.channels.cache.get(data.messageLog) || '`None`';
-
-			if (!args[2]) {
-				message.channel.send({ embeds: [Embed.addField('Hey!', `The Message Log Channel for this guild is ${oldmlc}`)] });
-				return;
-			}
-
-			if (args[2] == 'none'){
-				return data.updateOne({ _id: message.guild.id, messageLog: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Message Log Channel has been changed from ${oldmlc} to \`None\``)] });
-				});
-				}
-
-			if (mlc.type !== 'GUILD_TEXT') {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Only guild text channel is allowed`)] });
-				return;
-			}
-	
-			if (oldmlc === mlc) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Message Log Channel is already ${oldmlc}`)] });
-				return
-			}
-
-			return data.updateOne({ _id: message.guild.id, messageLog: nlc  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Message Log Channel has been changed from ${oldmlc} to ${mlc}`)] });
-			});
-
-
-/**
- * --------------------------------------
- * NickLog
- * --------------------------------------
- */
-		} else if (args[1] == 'nicklog' || args[1] == 'nick' || args[1] == 'nickname' || args[1] == 'nicknamelog' || args[1] == 'nlc') {
-
-			const Embed = new MessageEmbed()
-			.setTitle('Nickname Log Channel')
-			.setColor(this.client.config.embed.color)
-			.setThumbnail(this.client.user.displayAvatarURL())
-			.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
-			.setTimestamp();
-			
-			let nlc =  message.mentions.channels.first() || message.guild.channels.cache.get(args[2]) || '`None`';
-			
-			const oldnlc = message.guild.channels.cache.get(data.nickLog) || '`None`';
-
-			if (!args[2]) {
-				message.channel.send({ embeds: [Embed.addField('Hey!', `The Nickname Log Channel for this guild is ${oldnlc}`)] });
-				return;
-			}
-
-			if (args[2] == 'none'){
-				return data.updateOne({ _id: message.guild.id, nickLog: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Nickname Log Channel has been changed from ${oldnlc} to \`None\``)] });
-				});
-				}
-
-			if (nlc.type !== 'GUILD_TEXT') {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Only guild text channel is allowed`)] });
-				return;
-			}
-	
-			if (oldnlc === nlc) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Nickname Log Channel is already ${oldnlc}`)] });
-				return
-			}
-
-			return data.updateOne({ _id: message.guild.id, nickLog: nlc  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Nickname Log Channel has been changed from ${oldnlc} to ${nlc}`)] });
-			});
-/**
- * --------------------------------------
- * RoleLog
- * --------------------------------------
- */
-		} else if (args[1] == 'rolelog' || args[1] == 'role' || args[1] == 'rlc') {
-
-			const Embed = new MessageEmbed()
-			.setTitle('Role Log Channel')
-			.setColor(this.client.config.embed.color)
-			.setThumbnail(this.client.user.displayAvatarURL())
-			.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
-			.setTimestamp();
-			
-			let rlc =  message.mentions.channels.first() || message.guild.channels.cache.get(args[2]) || '`None`';
-			
-			const oldrlc = message.guild.channels.cache.get(data.roleLog) || '`None`';
-
-			if (!args[2]) {
-				message.channel.send({ embeds: [Embed.addField('Hey!', `The Role Log Channel for this guild is ${oldrlc}`)] });
-				return;
-			}
-
-			if (args[2] == 'none'){
-				return data.updateOne({ _id: message.guild.id, roleLog: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Role Log Channel has been changed from ${oldrlc} to \`None\``)] });
-				});
-				}
-
-			if (rlc.type !== 'GUILD_TEXT') {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Only guild text channel is allowed`)] });
-				return;
-			}
-	
-			if (oldrlc === rlc) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Role Log Channel is already ${olrlc}`)] });
-				return
-			}
-
-			return data.updateOne({ _id: message.guild.id, nickLog: rlc  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Nickname Log Channel has been changed from ${oldrlc} to ${rlc}`)] });
-			});
-/**
- * --------------------------------------
- * joinLog
- * --------------------------------------
- */
-		}	else if (args[1] == 'joinlog' || args[1] == 'joinchannel' || args[1] == 'welcome' || args[1] == 'join' || args[1] == 'welcomechannel') {
-
-			const Embed = new MessageEmbed()
-			.setTitle('Welcome Channel')
-			.setColor(this.client.config.embed.color)
-			.setThumbnail(this.client.user.displayAvatarURL())
-			.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
-			.setTimestamp();
-			
-			let jlc =  message.mentions.channels.first() || message.guild.channels.cache.get(args[2]) || '`None`';
-			
-			const oldjlc = message.guild.channels.cache.get(data.joinLog) || '`None`';
-
-			if (!args[2]) {
-				message.channel.send({ embeds: [Embed.addField('Hey!', `The Join Log Channel for this guild is ${oldjlc}`)] });
-				return;
-			}
-
-			if (args[2] == 'none'){
-				return data.updateOne({ _id: message.guild.id, joinLog: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Join Log Channel has been changed from ${oldjlc} to \`None\``)] });
-				});
-				}
-
-			if (jlc.type !== 'GUILD_TEXT') {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Only guild text channel is allowed`)] });
-				return;
-			}
-	
-			if (oldjlc === jlc) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Join Log Channel is already ${oldjlc}`)] });
-				return
-			}
-
-			return data.updateOne({ _id: message.guild.id, joinLog: jlc  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Join Log Channel has been changed from ${oldjlc} to ${jlc}`)] });
-			});
-
-
-/**
- * --------------------------------------
- * leaveLog
- * --------------------------------------
- */
-		} else if (args[1] == 'leavelog' || args[1] == 'leavechannel' || args[1] == 'farewell' || args[1] == 'leave' || args[1] == 'farewellchannel') {
-
-			const Embed = new MessageEmbed()
-			.setTitle('Leave Log Channel')
-			.setColor(this.client.config.embed.color)
-			.setThumbnail(this.client.user.displayAvatarURL())
-			.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
-			.setTimestamp();
-			
-			let llc =  message.mentions.channels.first() || message.guild.channels.cache.get(args[2]) || '`None`';
-			
-			const oldllc = message.guild.channels.cache.get(data.joinLog) || '`None`';
-
-			if (!args[2]) {
-				message.channel.send({ embeds: [Embed.addField('Hey!', `The Leave Channel for this guild is ${oldjlc}`)] });
-				return;
-			}
-
-			if (args[2] == 'none'){
-				return data.updateOne({ _id: message.guild.id, leaveLog: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Leave Channel has been changed from ${oldllc} to \`None\``)] });
-				});
-				}
-
-			if (llc.type !== 'GUILD_TEXT') {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Only guild text channel is allowed`)] });
-				return;
-			}
-	
-			if (oldllc === llc) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Leave Channel is already ${oldllc}`)] });
-				return
-			}
-
-			return data.updateOne({ _id: message.guild.id, leaveLog: llc  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Leave Channel has been changed from ${oldllc} to ${llc}`)] });
-			});
-
-/**
- * --------------------------------------
- * modLogs
- * --------------------------------------
- */
-		}  if (args[1] == 'modlogs' || args[1] == 'modlog' || args[1] == 'ml' || args[1] == 'mlc' || args[1] == 'modlogchannel') {
-
-			const Embed = new MessageEmbed()
-			.setTitle('Mod Log Channel')
-			.setColor(this.client.config.embed.color)
-			.setThumbnail(this.client.user.displayAvatarURL())
-			.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
-			.setTimestamp();
-			
-			//let lm = args.shift.shift.join(' ') || '`None`';
-            let lm = message.mentions.channels.first() || message.guild.channels.cache.get(args[2]) || '`None`';
-			
-			const oldlm = dmessage.guild.channels.cache.get(data.modLog) || '`None`';
-
-			if (!args[2]) {
-				message.channel.send({ embeds: [Embed.addField('Hey!', `The Mod Log channel for this guild is ${oldlm}`)] });
-				return;
-			}
-
-			if (args[2] == 'none'){
-				return data.updateOne({ _id: message.guild.id, modLog: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Mod Log Channel has been changed from ${oldlm}\` to \`None\``)] });
-				});
-				}
-
-			if (lm.type !== 'GUILD_TEXT') {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Only guild text channel is allowed`)] });
-				return;
-			}
-
-	
-			if (oldlm === lm) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Mod Log Channel is already ${lm}`)] });
-				return
-			}
-
-			return data.updateOne({ _id: message.guild.id, modLog: lm  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Mod Log Channel has been changed from ${oldlm} to ${lm}`)] });
-			});
-		}
-
-/**
- * --------------------------------------
- * Joins and leaves tab
- * --------------------------------------
- */
-
-	} else if (args[0] == 'join' || args[0] == 'leave' || args[0] == 'welcome' || args[0] == 'user' || args[0] == 'farewell') {
-
-		if(!args[1]){
-			
-			const welcomeLog = message.guild.channels.cache.get(data.welcomeLog) || '`None`';
-			const farewellLog = message.guild.channels.cache.get(data.farewellLog) || '`None`';
-
-			const Embed = new MessageEmbed()
-			.setTitle('Join and leave settings')
-			.setColor(this.client.config.embed.color)
-			.addField('Welcome channel', `${welcomeLog}`, true)
-			.addField('Join message', `\`${data.joinMsg || 'none'}\``, true)
-			.addField('Farewell channel', `${farewellLog}`, true)
-			.addField('Leave message', `\`${data.leaveMsg || 'none'}\``, true)
-			.setThumbnail(this.client.user.displayAvatarURL())
-			.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
-			.setTimestamp();
-			
-			message.channel.send({ embeds: [Embed] })
-/**
- * --------------------------------------
- * welcomeLog
- * --------------------------------------
- */
-	} else if (args[1] == 'welcomelog' || args[1] == 'welcomechannel' || args[1] == 'welcome' || args[1] == 'wlcm' || args[1] == 'wcc') {
-
-			const Embed = new MessageEmbed()
-			.setTitle('Welcome Channel')
-			.setColor(this.client.config.embed.color)
-			.setThumbnail(this.client.user.displayAvatarURL())
-			.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
-			.setTimestamp();
-			
-			let jlc =  message.mentions.channels.first() || message.guild.channels.cache.get(args[2]) || '`None`';
-			
-			const oldjlc = message.guild.channels.cache.get(data.welcomeLog) || '`None`';
-
-
-			if (!args[2]) {
-				message.channel.send({ embeds: [Embed.addField('Hey!', `The Welcome Log Channel for this guild is ${oldjlc}`)] });
-				return;
-			}
-
-			if (args[2] == 'none'){
-				return data.updateOne({ _id: message.guild.id, welcomeLog: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Welcome Log Channel has been changed from ${oldjlc} to \`None\``)] });
-				});
-				}
-
-			if (jlc.type !== 'GUILD_TEXT') {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Only guild text channel is allowed`)] });
-				return;
-			}
-	
-			if (oldjlc === jlc) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Welcome Log Channel is already ${oldjlc}`)] });
-				return
-			}
-
-			return data.updateOne({ _id: message.guild.id, welcomeLog: jlc  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Welcome Log Channel has been changed from ${oldjlc} to ${jlc}`)] });
-			});
-/**
- * --------------------------------------
- * farewellLog
- * --------------------------------------
- */
-		} else if (args[1] == 'farewelllog' || args[1] == 'farewellchannel' || args[1] == 'farewell' || args[1] == 'bye' || args[1] == 'fwc') {
-
-			const Embed = new MessageEmbed()
-			.setTitle('Farewell Log Channel')
-			.setColor(this.client.config.embed.color)
-			.setThumbnail(this.client.user.displayAvatarURL())
-			.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
-			.setTimestamp();
-			
-			let llc =  message.mentions.channels.first() || message.guild.channels.cache.get(args[2]) || '`None`';
-			
-			const oldllc = message.guild.channels.cache.get(data.farewellLog) || '`None`';
-
-			if (!args[2]) {
-				message.channel.send({ embeds: [Embed.addField('Hey!', `The Farewell Channel for this guild is ${oldllc}`)] });
-				return;
-			}
-
-			if (args[2] == 'none'){
-				return data.updateOne({ _id: message.guild.id, farewellLog: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Farewell Channel has been changed from ${oldllc} to \`None\``)] });
-				});
-				}
-
-			if (llc.type !== 'GUILD_TEXT') {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Only guild text channel is allowed`)] });
-				return;
-			}
-	
-			if (oldllc === llc) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Farewell Channel is already ${oldllc}`)] });
-				return
-			}
-
-			return data.updateOne({ _id: message.guild.id, farewellLog: llc  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Farewell Channel has been changed from ${oldllc} to ${llc}`)] });
-			});
-
-/**
- * --------------------------------------
- * joinMsg
- * --------------------------------------
- */
-		} else if (args[1] == 'joingmessage' || args[1] == 'joinmsg' || args[1] == 'welcomemessage' || args[1] == 'wm' || args[1] == 'wmsg') {
+            }
+            let x = 0;
+            let tabs = {
+                "main": [],
+                "logging": [],
+                "welcomes": []
+            }
+
+            while (x < config.length){
+                eval(`tabs.${config[x].tab}.push("${config[x].names[0]}")`)
+                x++
+            }
+            x=0
+            while (x + 1 <= config.length){
+                if (!args[0]){
+                    const embed = new MessageEmbed()
+                        .setTitle('Keithos configs')
+                        .setColor('BLUE')
+                        .setThumbnail(`${message.member.user.displayAvatarURL({ dynamic: true })}`)
+                        .addField('Main', `\`${tabs.main.length} Settings\``, true)
+                        .addField('Logging', `\`${tabs.logging.length} Settings\``, true)
+                        .addField('Welcomes and farewells', `\`${tabs.welcomes.length} Settings\``, true)
+                        
+
+                    return message.channel.send({embeds: [embed]})
+                } 
+
+                if (args[0] && !args[1]) {
+
+                    let embed = new MessageEmbed()
+                        .setTitle(`Keithos ${args[0]}`)
+                        .setColor('BLUE')
+                        .setThumbnail(`${message.member.user.displayAvatarURL({ dynamic: true })}`)
+                        .setFooter('You cant use spaces in names. \nTry replacing spaces in setting names with _.\nExample: message_log_channel\n-')
+                        .setTimestamp(Date.now())
+                    let z=0;
+                    const len = config.length
+                    while(z < len){
+                        if (config[z].tab == args[0]){
+                            let value = eval(`data.${config[z].dbname}`) 
+                            const type = config[z].type
+                            if ( type == "string" ) {
+                                value = `\`${value || 'None'}\``
+                            } else
+                            if ( type == "channel" ){
+                                value = message.guild.channels.cache.get(value) || '`None`';
+                            } else
+                            if ( type == "role" ){
+                                value = message.guild.roles.cache.get(value) || '`None`';
+                            }
+
+                            embed.addField(`${config[z].title}`, `${value || '`None`'}`, true)
+                        }
+                        z++
+                    }
+                    return message.channel.send({embeds: [embed]})
+                }
+
+                if (config[x].tab == args[0] && config[x].names.includes(args[1])) {
+
+                    const Embed = new MessageEmbed()
+                    .setTitle(config[x].title)
+                    .setColor(this.client.config.embed.color)
+                    .setThumbnail(this.client.user.displayAvatarURL())
+                    .setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
+                    .setTimestamp();
+                    
+                    let value;
+                    let oldValue = eval(`data.${config[x].dbname}`);
+                    let type;
+
+                    if (!args[2]) {
+                        if(config[x].type === "string"){
+                            return message.channel.send({ embeds: [Embed.addField('Hey!', `The ${config[x].title} for this guild is \`${oldValue || "None"}\``)] });
+                        } else if(config[x].type === "channel") {
+                            const oldChannel = message.guild.channels.cache.get(oldValue) || '`None`';
+                            return message.channel.send({ embeds: [Embed.addField('Hey!', `The ${config[x].title} for this guild is ${oldChannel}`)] });
+                        } else if(config[x].type === "role") {
+                            const oldRole = message.guild.roles.cache.get(oldValue) || '`None`';
+                            return message.channel.send({ embeds: [Embed.addField('Hey!', `The ${config[x].title} for this guild is ${oldRole}`)] });
+                        }
+                    }
+        
+                    if (args[2] == 'none'){
+                        if (config[x].dbname == "prefix") {
+                            return this.utils.sendErrorMessage(message, this, 'The prefix cant be \'None\'');
+                        }
+                        if(config[x].type === "string"){
+                            oldValue = `\`${oldValue}\``
+                        } else if(config[x].type === "channel") {
+                            oldValue = message.guild.channels.cache.get(oldValue) || '`None`'
+                        } else if(config[x].type === "role") {
+                            oldValue = message.guild.roles.cache.get(oldValue) || '`None`'
+                        }
+                        return eval(`data.updateOne({ _id: message.guild.id, ${config[x].dbname}: undefined })`).then(() => {
+                            message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} ${config[x].title} has been changed from ${oldValue} to \`None\``)] });
+                        });
+                        }
+
+                    switch(config[x].type){
+                        case "string":{
+                            oldValue = `\`${ eval(`data.${config[x].dbname}`) }\``
+                            value = `\`${args[2]}\``;
+                            break;
+                        }
+                        case "channel":{
+                            oldValue = eval(`message.guild.channels.cache.get(data.${config[x].dbname})`) || '`None`';
+                            value =  message.mentions.channels.first() || message.guild.channels.cache.get(args[2]) || '`None`';
+                            if (value.type !== 'GUILD_TEXT') {
+                                message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Only guild text channels are allowed`)] });
+                                return;
+                            }
+                            break;
+                        }
+                        case "role": {
+                            oldValue = eval(`message.guild.roles.cache.get(data.${config[x].dbname})`) || '`None`';
+                            value =  message.mentions.roles.first() || message.guild.roles.cache.get(args[2]) || '`None`';
+                            break;
+                        }
+                    }
             
-			const Embed = new MessageEmbed()
-			.setTitle('Welcome Message')
-			.setColor(this.client.config.embed.color)
-			.setThumbnail(this.client.user.displayAvatarURL())
-			.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
-			.setTimestamp();
-			
-			//let jm = message.content.slice(message.content.indexOf(args[2]), message.content.length);
-            
-			let jm = args.slice(2).join(' ');
-            console.log('result: ' + jm)
-            console.log('Args: '+args)
-			const oldjm = `${data.joinMsg}` || 'None';
+                    if (oldValue === value) {
+                        message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} ${config[x].title} is already ${oldValue}`)] });
+                        return
+                    }
 
-			if (!args[2]) {
-				message.channel.send({ embeds: [Embed.addField('Hey!', `The Welcome message for this guild is \`${oldjm}\``)] });
-				return;
-			}
-
-			if (args[2] == 'none'){
-				return data.updateOne({ _id: message.guild.id, joinMsg: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Welcome message has been changed from \`${oldjm}\` to \`None\``)] });
-				});
-				}
-
-	
-			if (oldjm === jm) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Welcome message is already \`${jm}\``)] });
-				return
-			}
-
-			return data.updateOne({ _id: message.guild.id, joinMsg: jm  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Welcome Message has been changed from \`${oldjm}\` to \`${jm}\``)] });
-			});
-/**
- * --------------------------------------
- * leavemsg
- * --------------------------------------
- */
-		} else if (args[1] == 'farewellmessage' || args[1] == 'leavemessage' || args[1] == 'leavemsg' || args[1] == 'lm' || args[1] == 'lmsg') {
-
-			const Embed = new MessageEmbed()
-			.setTitle('Farewell Message')
-			.setColor(this.client.config.embed.color)
-			.setThumbnail(this.client.user.displayAvatarURL())
-			.setFooter(message.member.displayName, message.member.user.displayAvatarURL({ dynamic: true }))
-			.setTimestamp();
-			
-			//let lm = args.shift.shift.join(' ') || '`None`';
-            let lm = message.content.slice(message.content.indexOf(args[2]), message.content.length) || '`None`';
-			
-			const oldlm = data.leaveMsg || '`None`';
-
-			if (!args[2]) {
-				message.channel.send({ embeds: [Embed.addField('Hey!', `The Farewell message for this guild is \`${oldlm}\``)] });
-				return;
-			}
-
-			if (args[2] == 'none'){
-				return data.updateOne({ _id: message.guild.id, leaveMsg: undefined  }).then(() => {
-					message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Farewell message has been changed from \`${oldlm}\` to \`None\``)] });
-				});
-				}
-
-	
-			if (oldlm === lm) {
-				message.channel.send({ embeds: [Embed.addField('Error:', `${this.emoji.fail} Farewell message is already \`${lm}\``)] });
-				return
-			}
-
-			return data.updateOne({ _id: message.guild.id, leaveMsg: lm  }).then(() => {
-				message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} Farewell Message has been changed from \`${oldlm}\` to \`${lm}\``)] });
-			});
-		}
-		}
-
-			data.save();
-		});
-
-
-
+                    return eval(`data.updateOne({ _id: message.guild.id, ${config[x].dbname}: value  })`).then(() => {
+                    message.channel.send({ embeds: [Embed.addField('Success!', `${this.emoji.success} ${config[x].title} has been changed from ${oldValue} to ${value}`)] });
+                    });
+                    
+                } else {
+                    x++;
+                }
+                //--------
+            }
+        })
 	}
 };
