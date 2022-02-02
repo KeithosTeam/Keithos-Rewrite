@@ -9,14 +9,15 @@ const Schema = require('../models/config')
 			const embed = new MessageEmbed()
 				.setTitle(`${fail} Error: \`${command.name}\``)
 				.setDescription(`**Reason:**\`\`\`diff\n- ${errorType}\n+ ${reason}\`\`\``) /** `**Error Type:**\`\`\`\n- ${errorType}\`\`\`\ \n*/
-				.addField('Usage:', `\`\`\`${data.prefix}${command.example}\`\`\``)
+				.addField('Usage:', `\`${data.prefix}${command.usage}\``)
 				.setTimestamp()
 				.setThumbnail(message.member.displayAvatarURL())
 				.setFooter(message.member.displayName, message.author.displayAvatarURL({ dynamic: true }))
 				.setColor(message.guild.me.displayHexColor);
-	
-			if (errorMessage) embed.addField('Error Message:', `\`\`\`s${errorMessage}\`\`\``);
-	
+			
+			if (command.examples) embed.addField('Examples', command.examples.map(e => `\`${data.prefix}${e}\``).join('\n'));
+			if (errorMessage) embed.addField('Error Message:', `\`\`\`${errorMessage}\`\`\``);
+
 			message.channel.send({ embeds: [embed] });
 		});
 	};

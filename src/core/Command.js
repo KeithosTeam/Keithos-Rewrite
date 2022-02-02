@@ -9,7 +9,8 @@ module.exports = class Command {
 		name: '',
 		description: '',
 		aliases: [],
-		example: '',
+		examples: [],
+		usage: '',
 		cooldown: 0,
 		ownerOnly: false,
 		toggleCooldown: false,
@@ -22,7 +23,8 @@ module.exports = class Command {
 		this.name = option.name;
 		this.description = option.description || '';
 		this.aliases = option.aliases || [];
-		this.example = option.example || '';
+		this.examples = option.examples || [];
+		this.usage = option.usage || '';
 		this.cooldown = option.cooldown || 5;
 		this.emoji = require('../utils/emoji.json');
 		this.ownerOnly = option.ownerOnly || false;

@@ -15,91 +15,91 @@
             "dbname": "ip"
         },
         {
-            "names": ["modrole"],
+            "names": ["modrole","mod_role"],
             "tab": "main",
             "title": "Moderator Role",
             "type": "role",
             "dbname": "modRole"
         },
         {
-            "names": ["adminrole"],
+            "names": ["adminrole","admin_role"],
             "tab": "main",
             "title": "Admin Role",
             "type": "role",
             "dbname": "adminRole"
         },
         {
-            "names": ["autorole"],
+            "names": ["autorole","auto_role"],
             "tab": "main",
             "title": "Auto Role",
             "type": "role",
             "dbname": "autoRole"
         },
         {
-            "names": ["messagelog", "msg", "message", "msglog", "mlc"],
+            "names": ["messagelog", "msg", "message", "msglog", "mlc","message_log","message_log_channel"],
             "tab": "logging",
             "title": "Message Log Channel",
             "type": "channel",
             "dbname": "messageLog"
         },
         {
-            "names": ["joinlog", "join", "jl"],
+            "names": ["joinlog", "join", "jl","join_log","join_log_channel"],
             "tab": "logging",
             "title": "Join Log Channel",
             "type": "channel",
             "dbname": "joinLog"
         },
         {
-            "names": ["leavelog", "leave", "ll"],
+            "names": ["leavelog", "leave", "ll","leave_log","leave_log_channel"],
             "tab": "logging",
             "title": "Leave Log Channel",
             "type": "channel",
             "dbname": "leaveLog"
         },
         {
-            "names": ["nicklog", "nick", "nickl", "nlog", "nlc"],
+            "names": ["nicklog", "nick", "nickl", "nlog", "nlc","nick_log","nickname_log","nickname_log_channel"],
             "tab": "logging",
             "title": "Nick Log Channel",
             "type": "channel",
             "dbname": "nickLog"
         },
         {
-            "names": ["rolelog", "role", "rolel", "rlog", "rlc"],
+            "names": ["rolelog", "role", "rolel", "rlog", "rlc","role_log","role_log_channel"],
             "tab": "logging",
             "title": "Role Log Channel",
             "type": "channel",
             "dbname": "roleLog"
         },
         {
-            "names": ["modlog", "ml", "mod", "mlog", "mdlc"],
+            "names": ["modlog", "ml", "mod", "mlog", "mdlc","moderation_log","moderation_log_channel","mod_log","mod_log_channel"],
             "tab": "logging",
             "title": "Mod Log Channel",
             "type": "channel",
             "dbname": "modLog"
         },
         {
-            "names": ["welcomelog", "join", "joinlog", "joinchannel", "wc"],
+            "names": ["welcomelog", "join", "joinlog", "welcomechannel", "wc","welcome_channel"],
             "tab": "welcomes",
             "title": "Welcome Channel",
             "type": "channel",
             "dbname": "welcomeLog"
         },
         {
-            "names": ["farewelllog", "bye", "byelog", "leavechannel", "leavelog"],
+            "names": ["farewelllog", "bye", "byelog","farewell_channel","farewellchannel"],
             "tab": "welcomes",
             "title": "Farewell Channel",
             "type": "channel",
             "dbname": "farewellLog"
         },
         {
-            "names": ["welcomemsg", "joinmsg", "wmsg", "joinmsg", "wm"],
+            "names": ["welcomemsg", "joinmsg", "wmsg", "joinmsg", "wm","welcome_message","join_message","welcome_msg","join_msg","welcomemessage","joinmessage"],
             "tab": "welcomes",
             "title": "Welcome Message",
             "type": "string",
             "dbname": "welcomeMsg"
         },
         {
-            "names": ["farewellmsg", "byemsg", "bmsg", "leavemsg", "lm"],
+            "names": ["farewellmsg", "byemsg", "bmsg", "leavemsg", "lm","farewell_message","leave_message","farewell_msg","leave_msg","farewellmessage","leavemessage"],
             "tab": "welcomes",
             "title": "Farewell Message",
             "type": "string",
