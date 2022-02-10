@@ -15,7 +15,6 @@ const bodyParser = require('body-parser');
 
 const { auth, authenticate, newToken} = require("./utils/utils")
 
-const botStatsRoute = require('./routes/bot_stats')
 logger.info('Loading API ');
 
 app.use('/bot_stats', './routes/bot_stats')
