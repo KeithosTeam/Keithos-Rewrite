@@ -1,6 +1,7 @@
 const { Client: Discord, Collection, Message, version } = require("discord.js");
 const express = require('express')
-const app = express()
+// TODO: use csurf middleware for token validation
+const app = express().disable("x-powered-by")
 const fs = require('fs');
 const hash = require('pbkdf2-password')()
 const logger = require('../../utils/logger');
