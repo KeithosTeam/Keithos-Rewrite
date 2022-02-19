@@ -20,7 +20,7 @@ logger.info('Loading API ');
 app.use('/bot_stats', './routes/bot_stats')
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Origin', 'CORS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   next();
