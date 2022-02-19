@@ -33,7 +33,7 @@ fi
 if [ $force = 0 ]
 then
     echo "Clearing all logs! Are you sure? (yes or no): "
-    read conf
+    read -r conf
 fi
 
 if [ $force = 1 ] || [ $conf = "yes" ] 
