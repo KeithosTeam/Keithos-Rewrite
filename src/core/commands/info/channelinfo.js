@@ -9,7 +9,7 @@ module.exports = class channelinfo extends Command {
 			description: 'Fetches information about the provided channel. If no channel is given then the current channel info will be displayed.',
 			aliases: ['channel', 'ci'],
 			type: client.types.INFO,
-			example: 'channelinfo #name',
+			examples: ['channelinfo #name'],
 			type: client.types.INFO
 		});
 	}

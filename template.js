@@ -7,7 +7,7 @@ module.exports = class test extends Command {
 		super(client, {
 			name: '',
 			description: '',
-            example: '',
+            examples: [''],
 			aliases: ['', ''],
 			cooldown: 5,
 			toggleCooldown: false,

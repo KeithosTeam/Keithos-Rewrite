@@ -1,19 +1,21 @@
 const { Message, MessageEmbed} = require('discord.js');
 const Command = require('../../Command');
 const Schema = require('../../../models/config');
+const { oneLine } = require('common-tags');
 
 module.exports = class test extends Command {
 	constructor(client) {
 		super(client, {
-			name: 'addrole',
-			description: '',
-            example: '',
-			aliases: ['', ''],
-			cooldown: 5,
-			toggleCooldown: false,
-            clientPemissions: [],
-            userPermissions: [],
-			type: client.types.MOD //can be UTILITY, MINECRAFT, FUN, COLOR, INFO, POINTS, MISC, MOD, ADMIN, OWNER,
+			name: 'softban',
+			usage: 'softban <user mention/ID> [reason]',
+			description: oneLine`
+				Softbans a member from your server (bans then immediately unbans).
+				This wipes all messages from that member from your server.      
+			`,
+			type: client.types.MOD,
+			clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS', 'BAN_MEMBERS'],
+			userPermissions: ['BAN_MEMBERS'],
+			examples: ['softban @MCorange']
 		});
 	}
 	/**
@@ -22,7 +24,7 @@ module.exports = class test extends Command {
      */
 	async run(message, args) {
         Schema.findOne({ _id: message.guild.id }, async (e, data) => {
-            //code
+			return this.utils.sendErrorMessage(message, this, 'Im sorrry but the softban command is currently disabled');
         })
 	}
 };

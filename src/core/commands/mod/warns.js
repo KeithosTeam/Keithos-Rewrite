@@ -5,15 +5,13 @@ const Schema = require('../../../models/config');
 module.exports = class test extends Command {
 	constructor(client) {
 		super(client, {
-			name: 'addrole',
-			description: '',
-            example: '',
-			aliases: ['', ''],
-			cooldown: 5,
-			toggleCooldown: false,
-            clientPemissions: [],
-            userPermissions: [],
-			type: client.types.MOD //can be UTILITY, MINECRAFT, FUN, COLOR, INFO, POINTS, MISC, MOD, ADMIN, OWNER,
+			name: 'warns',
+			aliases: ['warnings'],
+			usage: 'warns <user mention/ID>',
+			description: 'Displays a member\'s current warnings. A max of 5 warnings can be displayed at one time.',
+			userPermissions: ['KICK_MEMBERS'],
+			examples: ['warns @MCorange'],
+			type: client.types.MOD
 		});
 	}
 	/**

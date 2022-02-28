@@ -7,7 +7,7 @@ module.exports = class colors extends Command {
 		super(client, {
 			name: 'colors',
 			description: 'asd',
-      example: 'colors',
+      examples: ['colors'],
 			cooldown: 5,
 			toggleCooldown: false,
 			type: client.types.COLOR,

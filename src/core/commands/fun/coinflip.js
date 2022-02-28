@@ -6,7 +6,7 @@ module.exports = class catfact extends Command {
 		super(client, {
 			name: 'coinflip',
 			description: 'Flips a coin',
-      example: 'coinflip',
+      examples: ['coinflip'],
 			aliases: ['cointoss', 'coin', 'flip'],
 			type: client.types.FUN 
 	    });

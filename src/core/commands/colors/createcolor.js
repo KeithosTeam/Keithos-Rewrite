@@ -8,7 +8,7 @@ module.exports = class createcolor extends Command {
 		super(client, {
 			name: 'createcolor',
 			description: 'asd',
-            example: 'createcolor #FF0000 Red',
+            examples: ['createcolor #FF0000 Red'],
 			cooldown: 5,
 			toggleCooldown: false,
 			clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS', 'MANAGE_ROLES'],

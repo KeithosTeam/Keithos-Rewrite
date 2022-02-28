@@ -7,7 +7,7 @@ module.exports = class oldconfig extends Command {
 		super(client, {
 			name: 'oconfig',
 			description: 'edit the settings',
-			example: 'config main prefix k.',
+			examples: ['config main prefix k.'],
 			type: client.types.ADMIN,
 			aliases: ['ocfg', 'osettings'],
 			cooldown: 8,

@@ -7,13 +7,13 @@ module.exports = class test extends Command {
 		super(client, {
 			name: 'addrole',
 			description: '',
-            example: '',
+            examples: [''],
 			aliases: ['', ''],
 			cooldown: 5,
 			toggleCooldown: false,
             clientPemissions: [],
             userPermissions: [],
-			type: client.types.MOD //can be UTILITY, MINECRAFT, FUN, COLOR, INFO, POINTS, MISC, MOD, ADMIN, OWNER,
+			type: client.types.MOD  
 		});
 	}
 	/**
@@ -22,7 +22,7 @@ module.exports = class test extends Command {
      */
 	async run(message, args) {
         Schema.findOne({ _id: message.guild.id }, async (e, data) => {
-            //code
+            return this.utils.sendErrorMessage(message, this, `Im sorrry but the ${this.name} command is currently disabled`);
         })
 	}
 };

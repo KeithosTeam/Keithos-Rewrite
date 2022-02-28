@@ -10,7 +10,7 @@ module.exports = class help extends Command {
 			name: 'help',
 			description: 'Displays the help dialog',
 			aliases: ['?', 'h'],
-			example: ['help'],
+			examples: ['help'],
 			type: client.types.INFO
 		});
 	}

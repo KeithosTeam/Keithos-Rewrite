@@ -32,6 +32,7 @@ API:
     - get database data with token (GET)
     - send data to database (POST)
     - for point system
+    - add an owner only command that adds a token to the database for the api
 
 using_discord_/_commands:
 
@@ -110,10 +111,10 @@ All commands:
                   + vote.js
 
                mod:
-                  - addrole.js
-                  - ban.js
+                  - addrole.js +
+                  - ban.js +
                   - clearwarns.js
-                  - kick.js
+                  - kick.js +
                   - mute.js
                   - poll.js
                   + purge.js

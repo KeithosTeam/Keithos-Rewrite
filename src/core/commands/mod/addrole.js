@@ -7,12 +7,10 @@ module.exports = class test extends Command {
 		super(client, {
 			name: 'addrole',
 			description: 'gives a role to a user',
-            example: 'addrole @MCorange @member',
+            examples: ['addrole @MCorange @member'],
 			cooldown: 5,
 			toggleCooldown: false,
-            clientPemissions: [],
-            userPermissions: [],
-			type: client.types.MOD //can be UTILITY, MINECRAFT, FUN, COLOR, INFO, POINTS, MISC, MOD, ADMIN, OWNER,
+			type: client.types.MOD  
 		});
 	}
 	/**

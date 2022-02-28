@@ -9,7 +9,7 @@ module.exports = class admins extends Command {
 		    usage: 'admins',
 		    description: 'Displays a list of all current admins.',
 		    type: client.types.INFO,
-		    clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS']//can be UTILITY, MINECRAFT, FUN, COLOR, INFO, POINTS, MISC, MOD, ADMIN, OWNER,
+		    clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS'] 
 		});
 	}
 	/**

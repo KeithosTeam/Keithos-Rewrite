@@ -29,14 +29,14 @@ module.exports = class eightball extends Command {
 		super(client, {
   			name: '8ball',
   			description: '',
-        example: '',
+        examples: [''],
   			aliases: ['', ''],
   			cooldown: 5,
   			toggleCooldown: false,
         ownerOnly: false,
         clientPemissions: [],
         userPermissions: [],
-  			type: client.types.FUN//can be UTILITY, MINECRAFT, FUN, COLOR, INFO, POINTS, MISC, MOD, ADMIN, OWNER,
+  			type: client.types.FUN 
 		});
 	}
 	/**

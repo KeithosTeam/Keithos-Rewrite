@@ -10,7 +10,7 @@ module.exports = class publiceval extends Command {
 			name: 'publiceval',
 			description: 'Literally run a whole code using this command',
 			aliases: ['publiccoderun', 'peval'],
-			example: 'peval js <code>',
+			examples: ['peval js <code>'],
 			type: client.types.INFO
 		});
 	}

@@ -7,7 +7,7 @@ module.exports = class bird extends Command {
 		super(client, {
 			name: 'bird',
 			description: 'Gets a random bird picture',
-      example: 'bird',
+      examples: ['bird'],
 			aliases: ['birb', 'chirp'],
 			type: client.types.FUN 
 		});

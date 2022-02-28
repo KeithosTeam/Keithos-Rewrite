@@ -7,7 +7,7 @@ module.exports = class randomcolor extends Command {
 		super(client, {
 			name: 'randomcolor',
 			description: 'asd',
-            example: 'colors',
+            examples: ['colors'],
 			cooldown: 5,
 			toggleCooldown: false,
 			clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS', 'MANAGE_ROLES'],

@@ -7,14 +7,14 @@ module.exports = class test extends Command {
 		super(client, {
 			name: 'member',
 			description: '',
-            example: '',
+            examples: [''],
 			aliases: ['', ''],
 			cooldown: 5,
 			toggleCooldown: false,
             ownerOnly: false,
             clientPemissions: [],
             userPermissions: [],
-			type: client.types.INFO //can be UTILITY, MINECRAFT, FUN, COLOR, INFO, POINTS, MISC, MOD, ADMIN, OWNER,
+			type: client.types.INFO  
 		});
 	}
 	/**

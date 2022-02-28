@@ -6,7 +6,7 @@ module.exports = class catfact extends Command {
 		super(client, {
 			name: 'rps',
 			description: 'plays rock paper scisors',
-      example: 'rps',
+      examples: ['rps',
 			type: client.types.FUN 
 	    });
     }

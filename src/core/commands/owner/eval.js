@@ -8,7 +8,7 @@ module.exports = class Eval extends Command {
 			name: 'eval',
 			description: 'Literally run a whole code using this command',
 			aliases: ['coderun'],
-			example: 'eval <code>',
+			examples: ['eval <code>',
 			ownerOnly: true,
 			type: client.types.OWNER
 		});

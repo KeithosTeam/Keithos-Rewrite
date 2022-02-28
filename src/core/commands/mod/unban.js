@@ -8,10 +8,12 @@ module.exports = class unban extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'unban',
-			description: 'Unbans the specified user',
-			cooldown: 8, 
-			toggleCooldown: false,
-			type: client.types.MOD
+      usage: 'unban <user ID> [reason]',
+      description: 'Unbans a member from your server.',
+      type: client.types.MOD,
+      clientPermissions: ['SEND_MESSAGES', 'EMBED_LINKS', 'BAN_MEMBERS'],
+      userPermissions: ['BAN_MEMBERS'],
+      examples: ['unban 134672335474130944', 'unban @MCorange']
 		});
 	}
 
