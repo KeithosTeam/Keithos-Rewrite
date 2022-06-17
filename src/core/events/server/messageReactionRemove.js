@@ -12,20 +12,20 @@ module.exports = class MessageDelete extends Event {
 
 	async run (message, messageReaction, user) {
 
-/** 						      /~\                               
- *		R2-D2!                   |oo )                              
- *	Where are you?         #     _\=/_    #                         
- *							\\  /  _  \  //                         
- *							 \\//|/.\|\\//                          
- *							  \/  \_/  \/                           
- *								 |\ /|                              
- *								 \_ _/                              
- *								 | | |                              
- *								 | | |                              
- *								 []|[]                              
- *								 | | |                              
- *_______________________________/_]_[_\_____________________________
-  */
+		/** 						      /~\                               
+		 *		R2-D2!                   |oo )                              
+ 		 *	Where are you?         #     _\=/_    #                         
+ 		 *							\\  /  _  \  //                         
+ 		 *							 \\//|/.\|\\//                          
+ 		 *							  \/  \_/  \/                           
+ 		 *								 |\ /|                              
+ 		 *								 \_ _/                              
+ 		 *								 | | |                              
+ 		 *								 | | |                              
+ 		 *								 []|[]                              
+ 		 *								 | | |                              
+ 		 *_______________________________/_]_[_\_____________________________
+  		*/
 		
 		// Schema.findOne({ _id: message.guild.id }, async (e, data) => {
 		// 	if (!data || data.messageLog === null) {

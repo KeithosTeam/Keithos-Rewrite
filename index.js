@@ -1,7 +1,7 @@
 const Client = require('./src/structures/Client');
 const client = new Client();
-const { exec } = require("child_process");
-const config = require('./config.json')
+const { exec } = require('child_process');
+const config = require('./config.json');
 
 const startupScripts = (check) => { 
 	if (check == true) {
@@ -21,12 +21,12 @@ const startupScripts = (check) => {
 				client.logger.info(`[DB] stdout: ${stdout}`);
 			});
 		} else {
-			exec('./startdb.sh')
+			exec('./startdb.sh');
 		}
 	}
-}
+};
 
-startupScripts(true);
+startupScripts(false);
 
 global.__basedir = __dirname;
 
@@ -40,20 +40,23 @@ process.on('unhandledRejection', (err) => {
 	client.logger.error(err);
 });
 
-// process.on("uncaughtExceptionMonitor", (err) => {
+// process.on('uncaughtExceptionMonitor', (err) => {
 //     client.logger.error(err)
 // });
 
-client.on("messageCreate", (message) => {
+client.on('messageCreate', (message) => {
 	//console.log(message.content)
 
-	const array = ["290545409481244672", "892091860586217522"]
-	var toggle = true
-	if (toggle == false) return
+	const array = ['290545409481244672', '892091860586217522'];
+	var toggle = true;
+	if (toggle == false) return;
 	if (!array.includes(message.author.id)) {
 		return;
-	};
+	}
 
+	if (message.content != '!emit') return;
+
+	client.emit('guildCreate', client.guilds.cache.get('857582338573205545'));
 
 });
 client.login(client.config.bot.token);

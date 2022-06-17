@@ -1,7 +1,7 @@
 const Event = require('../../Event');
 const Schema = require('../../../models/config');
 const { Message, Collection } = require('discord.js');
-const automod = require("../../automod/automod")
+const automod = require('../../automod/automod');
 
 module.exports = class msage extends Event {
 	constructor(client) {
@@ -12,6 +12,7 @@ module.exports = class msage extends Event {
 	/**
      * @param {Message} message 
      */
+
 	async run(message) {
 		if (!message.guild.me.permissions.has('SEND_MESSAGES')) {
 			return;
@@ -19,9 +20,17 @@ module.exports = class msage extends Event {
 		if (message.author.bot) {
 			return;
 		}
-		if (message.channel.type !== 'GUILD_TEXT') {
+		if (
+			message.channel.type !== 'GUILD_TEXT' &&
+			message.channel.type !== 'GUILD_VOICE' &&
+			message.channel.type !== 'GUILD_NEWS' &&
+			message.channel.type !== 'GUILD_NEWS_THREAD' &&
+			message.channel.type !== 'GUILD_PUBLIC_THREAD' &&
+			message.channel.type !== 'GUILD_PRIVATE_THREAD'
+		) {
 			return;
 		}
+
 		const schema = await Schema.findOne({ _id: message.guild.id });
 		/**
          * @type {string}
@@ -43,10 +52,11 @@ module.exports = class msage extends Event {
 			]});
 		}
 
-		automod.main(message, Schema)
+		automod.main(message, Schema);
 
 		const prefixRegex = new RegExp(`^(<@!?${this.client.user.id}>|${prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})\\s*`);
 		if (!prefixRegex.test(message.content)) {
+
 			return;
 		}
 		const [, match] = message.content.match(prefixRegex);

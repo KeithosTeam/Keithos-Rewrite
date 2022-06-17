@@ -50,7 +50,7 @@ All commands:
 
                fun:
                   + 8ball.js
-                  + annoy.js //to be removed
+                  X annoy.js //to be removed
                   + bird.js
                   + cat.js
                   + catfact.js
@@ -61,7 +61,7 @@ All commands:
                   + emojify.js
                   + fox.js
                   + meme.js
-                  + play.js // to be replaced with better version
+                  - play.js // to be replaced with better version
                   + roll.js
                   + rps.js
                   + say.js
@@ -69,30 +69,30 @@ All commands:
                   + solotrivia.js // to be removed
                   + thouart.js
                   + topic.js // to be removed
-                  + trivia.js // needs more topics UPDATE: to be removed
+                  X trivia.js // needs more topics. UPDATE: to be removed
                   + trumptweet.js
                   + yesno.js
                   + yomama.js
-                  + youtube.js // removed: Dead API
+                  X youtube.js // removed, cause: Dead API
 
               info:
-                  - admins.js
-                  - aliases.js
+                  + admins.js
+                  X aliases.js // deleted: not used
                   + avatar.js
-                  - botinfo.js
+                  + botinfo.js
                   + channelinfo.js
-                  - emojis.js
-                  - findid.js
-                  - gallery.js
+                  + emojis.js
+                  + findid.js
+                  X gallery.js // we dont rl have art
                   + github.js
                   - help.js //needs to be like a recursive thing that reads the commands name desc usage and aliases
                   + invite.js
-                  + ip.js
-                  - member.js
+                  + donate.js
+                  + members.js
                   - mods.js
                   - permissions.js
                   + ping.js
-                  + prefix.js //to be removed, reason: useless, use @ping
+                  X prefix.js //to be removed, reason: useless, use @ping
                   - roleinfo.js
                   - servercount.js
                   - servericon.js
@@ -103,7 +103,9 @@ All commands:
                   + uptime.js
                   - userinfo.js
                   + version.js
-
+         minecraft:
+                  + ip.js
+                  - mcserverstatus.js
               misc:
                   - feedback.js
                   - nickname.js

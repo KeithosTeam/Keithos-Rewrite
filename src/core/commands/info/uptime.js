@@ -17,8 +17,8 @@ module.exports = class uptime extends Command {
 
 	async run(message, args) {
 
-		if (args[0] = 'moo'){
-			message.channel.send({ content: '.               (__) \n                (oo) \n     /------\\\\/ \n  / |            ||   \n *  /\\\\-----/\\ \n    \~\~           \\~\\~   \n...."Have you mooed today?"...'})
+		if (args[0] == 'moo'){
+			message.channel.send({ content: '.               (__) \n                (oo) \n     /------\\\\/ \n  / |            ||   \n *  /\\\\-----/\\ \n    \\~\\~           \\~\\~   \n....\'Have you mooed today?\'...'});
 			return;
 		}
 

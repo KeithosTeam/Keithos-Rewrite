@@ -21,7 +21,7 @@
         "no-unsafe-negation": ["off"]
     },
     "globals": {
-        "__basedir": "false"
+        "__basedir": "off"
     }
 
 }

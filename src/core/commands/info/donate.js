@@ -5,10 +5,9 @@ const Schema = require('../../../models/config');
 module.exports = class test extends Command {
 	constructor(client) {
 		super(client, {
-			name: 'github',
-			description: '',
-			examples: [''],
-			aliases: ['', ''],
+			name: 'donate',
+			description: 'Returns a link to donate',
+			examples: ['donate'],
 			cooldown: 5,
 			toggleCooldown: false,
 			ownerOnly: false,
@@ -24,17 +23,17 @@ module.exports = class test extends Command {
 	async run(message, args) {
 		Schema.findOne({ _id: message.guild.id }, async (e, data) => {
 			const embed = new MessageEmbed()
-				.setTitle('GitHub repository for keithos')
+				.setTitle('Donate for keithos development')
 				.setColor(this.client.config.embed.color)
-				.addField('Hey!', 'We poured our hearts and souls into this project, if you dont mind, could you star the repository or even better, contribute!')
+				.addField('Hey!', 'We poured our hearts and souls into this project, We as the team behind keithos would greatly apretiate if you donated! Even if its 1$ it still helps!')
 				.setThumbnail(this.client.user.displayAvatarURL())
 				.setFooter({ text: `${message.member.displayName}`, iconURL: message.author.displayAvatarURL({ dynamic: true}) })
 				.setTimestamp();
 
 			const invite = new MessageButton()
 				.setStyle('LINK')
-				.setURL(this.client.config.links.github)
-				.setLabel('GitHub repository for Keithos');
+				.setURL(this.client.config.links.paypal)
+				.setLabel('paypal');
 
 
 			const row = new MessageActionRow()

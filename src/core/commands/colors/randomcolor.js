@@ -31,7 +31,7 @@ module.exports = class randomcolor extends Command {
 		      return this.utils.sendErrorMessage(message, this, 'There are currently no colors set on this server');
 		  	//idfk even have fun lmfao :KEKW:
 		  	//probbably the worst code ever lol
-		  	let arr = ""
+		  	let arr = ''
 		  	let toggle
 		  	colors.forEach((value, key) => {
 		  		if (!toggle) {

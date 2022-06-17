@@ -1,7 +1,7 @@
 async function main(message, Schema){
 
 	return
-	console.log("automod")
+	console.log('automod')
 
 	const data = await Schema.findOne({ _id: message.guild.id });
 
@@ -11,11 +11,11 @@ async function main(message, Schema){
         }
     const list = data.autoModList
     let i = 0
-    const test = ["nword", "bannedword"]
+    const test = ['nword', 'bannedword']
     while(test.length < i){
     	console.log(message.content)
     	if (message.content.toLowerCase.includes(list[i])){
-    		console.log("banned word")
+    		console.log('banned word')
     	}
     	i++
 	}

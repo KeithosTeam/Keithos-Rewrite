@@ -1,7 +1,7 @@
-const { Client: Discord, Collection, Message, version } = require("discord.js");
+const { Client: Discord, Collection, Message, version } = require('discord.js');
 const express = require('express')
 // TODO: use csurf middleware for token validation
-const app = express().disable("x-powered-by")
+const app = express().disable('x-powered-by')
 const fs = require('fs');
 const hash = require('pbkdf2-password')()
 const logger = require('../../utils/logger');
@@ -14,7 +14,7 @@ const { mem, cpu, os } = require('node-os-utils');
 const token = config.api.token
 const bodyParser = require('body-parser');
 
-const { auth, authenticate, newToken} = require("./utils/utils")
+const { auth, authenticate, newToken} = require('./utils/utils')
 
 logger.info('Loading API ');
 
@@ -31,8 +31,8 @@ app.get('/', (req, res) => {
   res.end('Hello World!');
 });
 
-app.get("/database", (req, res) => {
-  if (!auth(req) === 'OK') {return res.end("Auth failure\ncode 0")} else {
+app.get('/database', (req, res) => {
+  if (!auth(req) === 'OK') {return res.end('Auth failure\ncode 0')} else {
   res.end('hello')
 }
 })

@@ -24,7 +24,7 @@ module.exports = model(
 		modRole: { type: String, default: null},
 		adminRole: { type: String, default: null},
 		autoRole: { type: String, default: null},
-		muteRole: { type: String, default: null},,
+		muteRole: { type: String, default: null},
 		// automod
 		autoModList: { type: String, default: null},
 

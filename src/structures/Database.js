@@ -16,12 +16,7 @@ module.exports = class Database {
      * @param {boolean} log 
      */
 	connect(log) {
-		this.mongoose.connect(this.url, {
-			useCreateIndex: true,
-			useFindAndModify: false,
-			useNewUrlParser: true,
-			useUnifiedTopology: true
-		});
+		this.mongoose.connect(this.url);
 
 
 		this.mongoose.connection.on('connected', () => {
