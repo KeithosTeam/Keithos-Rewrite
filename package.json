@@ -8,7 +8,7 @@
 
   "dependencies": {
     "@ayanaware/logger": "^2.2.1",
-    "@discordjs/opus": "^0.7.0",
+    "@discordjs/opus": "^0.8.0",
     "@discordjs/voice": "^0.7.5",
     "@distube/soundcloud": "^1.0.0",
     "@distube/spotify": "^1.0.0",
