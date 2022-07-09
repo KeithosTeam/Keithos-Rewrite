@@ -42,8 +42,9 @@
     "mpath": "0.8.4"
   },
   "scripts": {
-    "devstart": "./startdb.sh 1> /dev/null & nodemon index.js",
-    "start": "node index.js",
+    "devstart": "./startdb.sh 1> /dev/null & nodemon .",
+    "start:server": "/home/ubuntu/node-v16.16.0-linux-arm64/bin/node .",
+    "start": "node .",
     "sc": "npx eslint ./",
     "scfix": "npx eslint ./ --fix",
     "sctofile": "npx eslint ./ --o ./dev/Style_Check.html --f html && start ./dev/Style_Check.html",
