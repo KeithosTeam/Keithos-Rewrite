@@ -28,30 +28,27 @@ module.exports = class admins extends Command {
 				if (m.roles.cache.find(r => r === adminRole)) return true;
 
 			}).sort((a, b) => (a.joinedAt > b.joinedAt) ? 1 : -1);
-			console.log("1");
+
 			const embed = new MessageEmbed()
 				.setTitle(`Admin List [${admins.size}]`)
 				.setThumbnail(message.guild.iconURL({ dynamic: true }))
 				.addField('Admin Role', `${adminRole}`)
 				.addField('Admin Count', `**${admins.size}** out of **${message.guild.members.cache.size}** members`)
-				.setFooter(message.member.displayName, message.author.displayAvatarURL({ dynamic: true }))
+				.setFooter({ text: message.member.displayName, iconURL: message.author.displayAvatarURL({ dynamic: true })})
 				.setTimestamp()
 				.setColor(message.guild.me.displayHexColor);
 
 			const interval = 24;
-			console.log("2");
-			console.log(admins.size)
+
 			if (admins.size === 0) {
 				message.channel.send({embeds: [embed.setDescription('No admins found.')] });
 				console.log("2.1");
 			}
 			else if (admins.size <= interval) {
-				console.log("2.2");
 				const range = (admins.size == 1) ? '[1]' : `[1 - ${admins.size}]`;
 
 				let str = "";
 				admins.forEach((value, key) => {
-					console.log(value.id)
 					str += `<@${value.id}>`;
 				});
 				

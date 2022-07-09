@@ -61,7 +61,7 @@ All commands:
                   + emojify.js
                   + fox.js
                   + meme.js
-                  - play.js // to be replaced with better version
+                  - play.js // to be replaced with better one later
                   + roll.js
                   + rps.js
                   + say.js
@@ -89,8 +89,8 @@ All commands:
                   + invite.js
                   + donate.js
                   + members.js
-                  - mods.js
-                  - permissions.js
+                  + mods.js
+                  + permissions.js
                   + ping.js
                   X prefix.js //to be removed, reason: useless, use @ping
                   - roleinfo.js
@@ -137,20 +137,20 @@ All commands:
                   - leaveguild.js
                   - members.js
                   - servers.js
-                  - wipeallpoints.js
-                  - wipealltotalpoints.js
-                  - wipepoints.js
-                  - wipetotalpoints.js
+                  - wipeallpoints.js // removed but may be added later
+                  - wipealltotalpoints.js // removed but may be added later
+                  - wipepoints.js // removed but may be added later 
+                  - wipetotalpoints.js // removed but may be added later
             
             points:
                   - crown.js  //to be removed
-                  - explainpoints.js
-                  - givepoints.js
-                  - leaderboard.js
-                  - points.js
-                  - pointsper.js
-                  - position.js
-                  - totalpoints.js
+                  - explainpoints.js // removed but may be added later
+                  - givepoints.js // removed but may be added later 
+                  - leaderboard.js // removed but may be added later
+                  - points.js // removed but may be added later
+                  - pointsper.js // removed but may be added later
+                  - position.js // removed but may be added later
+                  - totalpoints.js // removed but may be added later
 
 
 
